@@ -14,3 +14,4 @@ target/*
 *.vscode*
 *.profraw
 *.lcov
+*.pytest_cache*
