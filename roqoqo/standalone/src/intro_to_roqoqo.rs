@@ -6,13 +6,20 @@ use roqoqo::backends::{EvaluatingBackend, RegisterResult};
 use roqoqo::measurements::{BasisRotationInput, BasisRotation};
 use roqoqo::{operations::*, registers::*, Circuit, QuantumProgram};
 use roqoqo_quest::Backend;
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
+
+// Introduction examples for simple circuits and measurements.
+// For extended examples on "Fine control over decoherence", usage of "Symbolic parameters", 
+// or "Testing performance with qoqo_mock" backend, 
+// please refer to Intro examples in Jupiter notebooks.
+
 
 /// Example to entangle a circuit snippet.
 ///
 /// Similar to many other toolkits the unitary entangling circuit can be constructed by adding operations to a circuit.
 ///
 pub fn entangling_circuit_snippet() {
+    println!(">> Introduction example start.");
     // Create a new modifiable circuit
     let mut circuit = Circuit::new();
     // Prepare qubits 0 and 1 in a superposition state by adding the Hadamard gate
@@ -91,11 +98,12 @@ pub fn measuring_observables() {
 
     let mut measurement_input = BasisRotationInput::new(2, false);
     // From readout 'ro' measure two pauli products 0: < Z0 > and 1: < Z0 Z1 >
-    measurement_input.add_pauli_product("ro".to_string(), vec![0]);
-    measurement_input.add_pauli_product("ro".to_string(), vec![0, 1]);
+    measurement_input.add_pauli_product("ro".to_string(), vec![0]).unwrap();
+    measurement_input.add_pauli_product("ro".to_string(), vec![0, 1]).unwrap();
     // One expectation value: 3 * pauli_product0 + 1 * pauli_product1
     measurement_input
-        .add_linear_exp_val("example".to_string(), HashMap::from([(0, 3.0), (1, 1.0)]));
+        .add_linear_exp_val("example".to_string(), HashMap::from([(0, 3.0), (1, 1.0)]))
+        .unwrap();
     println!(
         "{} {:?}",
         ">> Measurement input defined: ", measurement_input,
@@ -135,11 +143,12 @@ pub fn serialization_quantum_program() {
     
     let mut measurement_input = BasisRotationInput::new(2, false);
     // From readout 'ro' measure two pauli products 0: < Z0 > and 1: < Z0 Z1 >
-    measurement_input.add_pauli_product("ro".to_string(), vec![0]);
-    measurement_input.add_pauli_product("ro".to_string(), vec![0, 1]);
+    measurement_input.add_pauli_product("ro".to_string(), vec![0]).unwrap();
+    measurement_input.add_pauli_product("ro".to_string(), vec![0, 1]).unwrap();
     // One expectation value: 3 * pauli_product0 + 1 * pauli_product1
     measurement_input
-        .add_linear_exp_val("example".to_string(), HashMap::from([(0, 3.0), (1, 1.0)]));
+        .add_linear_exp_val("example".to_string(), HashMap::from([(0, 3.0), (1, 1.0)]))
+        .unwrap();
     println!(
         "{} {:?}",
         ">> Measurement input defined: ", measurement_input,
@@ -150,7 +159,7 @@ pub fn serialization_quantum_program() {
         circuits: vec![circuit.clone()],
         constant_circuit: None,
     };
-    let backend = Backend::new(2);
+
     let program = QuantumProgram::BasisRotation {
         measurement: measurement.clone(),
         input_parameter_names: vec![],
@@ -167,4 +176,5 @@ pub fn serialization_quantum_program() {
     let program_new: QuantumProgram = serde_json::from_str(&program_json).unwrap();
     assert!(program == program_new.clone());
     println!(">> De/Serialization of QuantumProgram performed successfully.");
+    println!(">> Introduction example end.")
 }
