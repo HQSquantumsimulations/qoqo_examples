@@ -11,7 +11,7 @@ use std::collections::{HashMap, HashSet};
 // Introduction examples for simple circuits and measurements.
 // For extended examples on "Fine control over decoherence", usage of "Symbolic parameters", 
 // or "Testing performance with qoqo_mock" backend, 
-// please refer to Intro examples in Jupiter notebooks.
+// please refer to Intro examples in Jupyter notebooks.
 
 
 /// Example to entangle a circuit snippet.
