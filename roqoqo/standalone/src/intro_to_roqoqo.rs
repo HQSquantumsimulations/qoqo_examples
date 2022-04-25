@@ -98,8 +98,8 @@ pub fn measuring_observables() {
 
     let mut measurement_input = BasisRotationInput::new(2, false);
     // From readout 'ro' measure two pauli products 0: < Z0 > and 1: < Z0 Z1 >
-    measurement_input.add_pauli_product("ro".to_string(), vec![0]).unwrap();
-    measurement_input.add_pauli_product("ro".to_string(), vec![0, 1]).unwrap();
+    measurement_input.add_pauliz_product("ro".to_string(), vec![0]).unwrap();
+    measurement_input.add_pauliz_product("ro".to_string(), vec![0, 1]).unwrap();
     // One expectation value: 3 * pauli_product0 + 1 * pauli_product1
     measurement_input
         .add_linear_exp_val("example".to_string(), HashMap::from([(0, 3.0), (1, 1.0)]))
@@ -143,8 +143,8 @@ pub fn serialization_quantum_program() {
     
     let mut measurement_input = BasisRotationInput::new(2, false);
     // From readout 'ro' measure two pauli products 0: < Z0 > and 1: < Z0 Z1 >
-    measurement_input.add_pauli_product("ro".to_string(), vec![0]).unwrap();
-    measurement_input.add_pauli_product("ro".to_string(), vec![0, 1]).unwrap();
+    measurement_input.add_pauliz_product("ro".to_string(), vec![0]).unwrap();
+    measurement_input.add_pauliz_product("ro".to_string(), vec![0, 1]).unwrap();
     // One expectation value: 3 * pauli_product0 + 1 * pauli_product1
     measurement_input
         .add_linear_exp_val("example".to_string(), HashMap::from([(0, 3.0), (1, 1.0)]))
