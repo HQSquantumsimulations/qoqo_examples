@@ -1,7 +1,3 @@
-extern crate roqoqo;
-extern crate roqoqo_quest;
-extern crate serde_json;
-
 use roqoqo::backends::{EvaluatingBackend, RegisterResult};
 use roqoqo::measurements::{PauliZProduct, PauliZProductInput};
 use roqoqo::{operations::*, registers::*, Circuit, QuantumProgram};
