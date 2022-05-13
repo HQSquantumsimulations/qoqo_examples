@@ -5,11 +5,9 @@ extern crate ndarray;
 extern crate num_complex;
 
 use nalgebra as na;
-use na::DMatrix;
 use na::ComplexField;
 use ndarray::{array, Array2};
 use num_complex::Complex64;
-use std::vec::*;
 
 /// Example how to run a simple variational algorithm with roqoqo
 ///
@@ -54,36 +52,36 @@ pub fn run_simple_vha() {
     }
 
     let sigmax = convert_matrix(sigmax_array);
-    let sigmay = convert_matrix(sigmay_array);
+    let _sigmay = convert_matrix(sigmay_array);
     let sigmaz = convert_matrix(sigmaz_array);
     let identity = convert_matrix(identity_array);
 
     // hopping term for 3 qubits
     let hopping_factor = Complex64::new(3.0, 0.0);
-    let H_hopping = (
-        (sigmax.clone().kronecker(&sigmax)).kronecker(&identity)
+    let h_hopping = (
+        (sigmax.kronecker(&sigmax)).kronecker(&identity)
         + (identity.clone().kronecker(&sigmax)).kronecker(&sigmax)
         + (sigmax.clone().kronecker(&identity)).kronecker(&sigmax)
     ) * hopping_factor;
 
     // magnetic term for 3 qubits
     let magnetic_factor = Complex64::new(1.0, 0.0);
-    let H_magnetic = (
-        (sigmaz.clone().kronecker(&identity)).kronecker(&identity)
+    let h_magnetic = (
+        (sigmaz.kronecker(&identity)).kronecker(&identity)
         + (identity.clone().kronecker(&sigmaz)).kronecker(&identity)
         + (identity.clone().kronecker(&identity)).kronecker(&sigmaz)
     ) * magnetic_factor;
 
     // total Hamiltonian
-    let H_matrix: na::DMatrix<Complex64> = H_hopping + H_magnetic;
+    let h_matrix: na::DMatrix<Complex64> = h_hopping + h_magnetic;
 
     // get the exact eigenvalues
     let mut eigenvalues = vec![];
-    for k in &H_matrix.clone().eigenvalues().unwrap() {
-        eigenvalues.push(k.clone().real());
+    for k in &h_matrix.eigenvalues().unwrap() {
+        eigenvalues.push(k.real());
     }
     eigenvalues.sort_by(|a, b| a.partial_cmp(b).unwrap());
-    println!("{} {:?}", ">> Calculated exact eigenvalues: ", eigenvalues);
+    println!(">> Calculated exact eigenvalues:  {:?}", eigenvalues);
 
     // final print-out
     // let delta = final_result.fun - eigenvalues[0];
