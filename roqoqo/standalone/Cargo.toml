@@ -12,3 +12,4 @@ ndarray = { version = "0.15" }
 eigenvalues = "0.4"
 nalgebra = "0.30"
 optimize = "0.1.0"
+serde_json = "1.0"
