@@ -20,7 +20,11 @@ use na::ComplexField;
 use num_complex::Complex64;
 
 use argmin::prelude::*;
-use argmin::solver::conjugategradient::ConjugateGradient;
+use argmin::solver::linesearch::MoreThuenteLineSearch;
+use argmin::solver::conjugategradient::PolakRibiere;
+use argmin::solver::conjugategradient::NonlinearConjugateGradient;
+use finitediff::*;
+use std::f64::consts::PI;
 
 /// Example how to run a simple variational algorithm with roqoqo
 ///
@@ -184,7 +188,7 @@ pub fn run_simple_vha() {
     
         circuit_init += PragmaSetStateVector::new(initial_statevector);
     
-        println!("Step 1: Initialization circuit constructed.");
+        // println!("Step 1: Initialization circuit constructed.");
     
         // variables and parameters
         let number_qubits: usize = 3;
@@ -195,7 +199,7 @@ pub fn run_simple_vha() {
         // Construction the evolution circuit
         let circuit_evolution: Circuit = create_evolution_circuit(iter_evolution, number_qubits, hopping_parameter, magnetic_field);
     
-        println!("Step 2: Constructed evolution circuit.");
+        // println!("Step 2: Constructed evolution circuit.");
     
     
         // Setting up two basis rotation measurement circuits since we need to measure in two different bases.
@@ -236,9 +240,9 @@ pub fn run_simple_vha() {
         ]);
         measurement_input.add_linear_exp_val("energy".to_string(), linear_exp_val).unwrap();
     
-        println!("Step 3: Measurement circuits constructed. Measurement input prepared.");
-        println!("In z-basis: {:?}", circuit_z_basis_measurement);
-        println!("In x-basis: {:?}", circuit_x_basis_measurement);
+        // println!("Step 3: Measurement circuits constructed. Measurement input prepared.");
+        // println!("In z-basis: {:?}", circuit_z_basis_measurement);
+        // println!("In x-basis: {:?}", circuit_x_basis_measurement);
     
         // Construct basis rotation measurement to get the expectation values.
         let measurement = PauliZProduct {
@@ -263,7 +267,7 @@ pub fn run_simple_vha() {
             ],
         };
     
-        println!("Step 4: QuantumProgram constructed.");
+        // println!("Step 4: QuantumProgram constructed.");
     
         program.run(backend, theta).unwrap().unwrap()["energy"]
     }
@@ -282,49 +286,60 @@ pub fn run_simple_vha() {
     // http://opensource.org/licenses/MIT>, at your option. This file may not be
     // copied, modified, or distributed except according to those terms.
 
-    // Example for ConjugateGradient solver from Github
+    #[derive(Debug)]
     struct MyProblem {}
 
     impl ArgminOp for MyProblem {
         type Param = Vec<f64>;
-        type Output = Vec<f64>;
+        type Output = f64;
         type Hessian = ();
         type Jacobian = ();
         type Float = f64;
 
-        fn apply(&self, p: &Vec<f64>) -> Result<Vec<f64>, Error> {
-            Ok(vec![4.0 * p[0] + 1.0 * p[1], 1.0 * p[0] + 3.0 * p[1]])
+        fn apply(&self, p: &Self::Param) -> Result<Self::Output, Error> {
+            Ok(wrapper_function(&p))
+        }
+
+        fn gradient(&self, p: &Self::Param) -> Result<Self::Param, Error> {
+            Ok((*p).forward_diff(&|p| wrapper_function(&p.to_vec())))
         }
     }
 
-    fn run() -> Result<(), Error> {
+    fn run() -> Result<ArgminResult<MyProblem>, Error> {
         // Define inital parameter vector
-        let init_param: Vec<f64> = vec![2.0, 1.0];
+        let init_param: Vec<f64> = vec![0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 
-        // Define the right hand side `b` of `A * x = b`
-        let b = vec![1.0, 2.0];
+        // set up line search
+        let linesearch = MoreThuenteLineSearch::new();
+        // let linesearch = mtls.with_bounds(1e-6, 2.0 * PI).unwrap(); // does not work!
+        let beta_method = PolakRibiere::new();
 
-        // Set up operator
+        // Set up nonlinear conjugate gradient method
+        let solver = NonlinearConjugateGradient::new(linesearch, beta_method)?
+            .restart_iters(3)
+            .restart_orthogonality(0.1);
+
+        // Set up operator (e.g. define cost function, if any)
         let operator = MyProblem {};
-
-        // Set up the solver
-        let solver: ConjugateGradient<_, f64> = ConjugateGradient::new(b)?;
 
         // Run solver
         let res = Executor::new(operator, solver, init_param)
             .add_observer(ArgminSlogLogger::term(), ObserverMode::Always)
-            .max_iters(2)
+            .max_iters(10)
+            .target_cost(-10.0)
             .run()?;
 
         // Wait a second (lets the logger flush everything before printing to screen again)
         std::thread::sleep(std::time::Duration::from_secs(1));
 
         // Print result
-        println!("{}", res);
-        Ok(())
+        // println!("{}", res);
+        Ok(res)
     }
 
-    println!("{:?}", run());
+    let result = run().unwrap();
+    println!("Parameters {:?}", result.state.best_param);
+    println!("Energy {:?}", result.state.best_cost);
 
     //PART II: Compare the calculated (approximate) result to the exact classical solution
     //
