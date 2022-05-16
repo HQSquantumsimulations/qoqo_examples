@@ -1,3 +1,5 @@
+// Copyright © 2021 HQS Quantum Simulations GmbH.
+
 use roqoqo::backends::{EvaluatingBackend, RegisterResult};
 use roqoqo::measurements::{PauliZProduct, PauliZProductInput};
 use roqoqo::{operations::*, registers::*, Circuit, QuantumProgram};

@@ -1,3 +1,5 @@
+// Copyright © 2021 HQS Quantum Simulations GmbH.
+
 mod measurement_example;
 use measurement_example::measurement_main;
 

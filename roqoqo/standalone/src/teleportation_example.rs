@@ -1,3 +1,5 @@
+// Copyright © 2021 HQS Quantum Simulations GmbH.
+
 use core::f64::consts::PI as Pi;
 use qoqo_calculator::CalculatorFloat;
 use roqoqo::backends::EvaluatingBackend;
