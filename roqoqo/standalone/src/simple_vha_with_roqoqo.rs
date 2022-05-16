@@ -276,15 +276,6 @@ pub fn run_simple_vha() {
     // Minimiization routine to optimize the free parameters.
     // The wrapper_function consisting of the quantum program has 12 free parameters:
     // theta_even, theta_odd and theta_z for each of the 4 iterations of evolution.
-    let theta = vec![0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-    println!("{:?}", wrapper_function(&theta));
-
-    // Copyright 2018-2020 argmin developers
-    //
-    // Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
-    // http://apache.org/licenses/LICENSE-2.0> or the MIT license <LICENSE-MIT or
-    // http://opensource.org/licenses/MIT>, at your option. This file may not be
-    // copied, modified, or distributed except according to those terms.
 
     #[derive(Debug)]
     struct MyProblem {}
@@ -325,21 +316,19 @@ pub fn run_simple_vha() {
         // Run solver
         let res = Executor::new(operator, solver, init_param)
             .add_observer(ArgminSlogLogger::term(), ObserverMode::Always)
-            .max_iters(10)
+            .max_iters(100)
             .target_cost(-10.0)
             .run()?;
 
         // Wait a second (lets the logger flush everything before printing to screen again)
-        std::thread::sleep(std::time::Duration::from_secs(1));
-
-        // Print result
-        // println!("{}", res);
+        //std::thread::sleep(std::time::Duration::from_secs(1));
         Ok(res)
     }
 
+    // print result
     let result = run().unwrap();
-    println!("Parameters {:?}", result.state.best_param);
-    println!("Energy {:?}", result.state.best_cost);
+    println!(">> Optimized parameters theta:  {:?}", result.state.best_param);
+    println!(">> Calculated approximate Energy value:  {:?}", result.state.best_cost);
 
     //PART II: Compare the calculated (approximate) result to the exact classical solution
     //
@@ -406,6 +395,6 @@ pub fn run_simple_vha() {
     println!(">> Calculated exact eigenvalues:  {:?}", eigenvalues);
 
     // final print-out
-    // let delta = final_result.fun - eigenvalues[0];
-    // println!("{}{}", ">> Difference between VHA result and exact result: ", delta);
+    let delta = result.state.best_cost - eigenvalues[0];
+    println!("{}{}", ">> Difference between VHA result and exact result: ", delta);
 }
