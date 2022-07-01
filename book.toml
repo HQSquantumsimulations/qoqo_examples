@@ -1,0 +1,25 @@
+[book]
+title = "qoqo/roqoqo User Guide"
+author = "HQS Quantum Simulations GmbH"
+description = "User guide for the qoqo/roqoqo quantum computing toolkit."
+src = "documentation/src"
+
+[rust]
+edition = "2021"
+
+[build]
+build-dir = "documentation/book"
+create-missing = true
+
+[preprocessor.index]
+
+[preprocessor.links]
+
+[output.html]
+mathjax-support = true
+
+[output.html.search]
+limit-results = 15
+
+[output.html.playground]
+runnable = false
