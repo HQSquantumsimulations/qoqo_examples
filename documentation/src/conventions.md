@@ -7,16 +7,16 @@ For the two basis states of a single qubit we define
 
 \\[
  \left|0 \right>  =  \left|\textrm{false} \right> =  \left| \downarrow \right> = \begin{pmatrix}
- 1 \\
+ 1 \\\\
  0
- \end{pmatrix}
- \\\\]
+ \end{pmatrix} \\\\
+ \\]
 
  \\[
  \left|1 \right>  =  \left|\textrm{true} \right> =  \left| \uparrow \right> = \begin{pmatrix}
- 0 \\
+ 0 \\\\
  1
- \end{pmatrix}
+ \end{pmatrix} \\\\
  \\]
 
 Whenever a new Circuit is created all qubits are initialized in the state |0> which can be changed by the application of single qubits gates. 
