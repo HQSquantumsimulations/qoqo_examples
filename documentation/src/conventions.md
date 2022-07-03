@@ -5,19 +5,19 @@ This section should give a quick overview of some of the conventions used in qoq
 ## Qubit states
 For the two basis states of a single qubit we define
 
-\\[
+\\\\[
  \left|0 \right>  =  \left|\textrm{false} \right> =  \left| \downarrow \right> = \begin{pmatrix}
  1 \\\\
  0
  \end{pmatrix} \\\\
- \\]
+ \\\\]
 
- \\[
+ \\\\[
  \left|1 \right>  =  \left|\textrm{true} \right> =  \left| \uparrow \right> = \begin{pmatrix}
  0 \\\\
  1
  \end{pmatrix} \\\\
- \\]
+ \\\\]
 
 Whenever a new Circuit is created all qubits are initialized in the state |0> which can be changed by the application of single qubits gates. 
 For example the user can apply the PauliX gate to flip the qubit from state |0> into state |1> and vice versa.
