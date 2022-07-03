@@ -1,6 +1,6 @@
 # Conventions
 
-This section should give a quit overview of some of the conventions used in qoqo/roqoqo.
+This section should give a quick overview of some of the conventions used in qoqo/roqoqo.
 
 ## Qubit states
 For the two basis states of a single qubit we define
@@ -18,6 +18,25 @@ For the two basis states of a single qubit we define
  1
  \end{pmatrix} \\\\
  \\]
+
+Whenever a new Circuit is created all qubits are initialized in the state |0> which can be changed by the application of single qubits gates. 
+For example the user can apply the PauliX gate to flip the qubit from state |0> into state |1> and vice versa.
+
+Python code snippet example:
+
+    from qoqo import operations, Circuit
+
+    circuit = Circuit()
+    circuit += operations.PauliX(qubit=0)   # qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
+
+Rust code snippet example:
+
+    use roqoqo::{Circuit, operations::PauliX};
+
+    let mut circuit = Circuit::new();
+    circuit += PauliX::new(0);      // qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
+
+
 
 ## Endianness
 
