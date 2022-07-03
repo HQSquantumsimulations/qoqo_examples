@@ -2,6 +2,15 @@
 
 This section should give a quick overview of some of the conventions used in qoqo/roqoqo.
 
+## Definitions
+
+qoqo syntax is independent of the underlying hardware of the quantum computer. However, it is modelled for the so-called gate-based quantum computation.
+
+* `gate`: an `operation` that can be applied on a qubit to carry out a specific computational task, for example an operation given by a rotation gate (e.g. `RotateZ`). Mathematically speaking, a gate can be represented by a matrix. Sometimes we might use gate, operation and gate operation interchangeably throughout the documentation.
+* `qubit`: the smallest unit of data that a quantum computer can process and store. If referring to a mathematical representation, a qubit can be written in form of a vector.
+* `Circuit`: is a an element that includes a sequence of gate operations applied on the involved qubits. A Circuit can be interpreted as a helper object (in qoqo: an array) without a physical manifistation. It can be used as a schematic representation of the system.
+
+
 ## Qubit states
 For the two basis states of a single qubit we define
 
@@ -37,12 +46,11 @@ Rust code snippet example:
     circuit += PauliX::new(0);      // qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
 
 
-
 ## Endianness
 
-qoqo and roqoqo use little endian encoding, the least significant qubit is at the smallest index.
+To define the convention referring to the sequence of qubits, qoqo and roqoqo use the so-called little endian encoding, that is the least significant qubit is at the smallest index. This information might be especially relevant if it comes to two-qubit gates, for example.
 
-For a two-qubit state space we have:
+For a two-qubit state space we have the following ordering of qubit states:
 
  \\[
  \left|00 \right>  =  \textrm{state} 0 \\\\
@@ -51,7 +59,7 @@ For a two-qubit state space we have:
  \left|11 \right>  =  \textrm{state} 3 \\\\
  \\]
 
-Therefore if we combine two single-qubit gates in Matrix form it follows
+Therefore if we combine two single-qubit gates in Matrix form it follows:
 
 \\[
  \textrm{PauliX}(0) \  \textrm{PauliZ}(1)  = \begin{pmatrix}
@@ -62,6 +70,7 @@ Therefore if we combine two single-qubit gates in Matrix form it follows
  1 & 0
  \end{pmatrix}
  \\]
+
 
 ## Operation order
 
@@ -79,12 +88,16 @@ Therefore if we combine two single-qubit gates in Matrix form it follows
 
 ## Qubit names
 
-Qoqo distinguishes between single qubit gates, two qubit gates and multi qubit gates. In single qubit gates the qubit is always referred to as `qubit`, in two qubit gates, the two gates are referred to as `control` and `target` and in multi qubit gates the qubits are given as a vector of qubits.
+Qoqo distinguishes between single qubit gates, two qubit gates and multi qubit gates.
+* In single qubit gates the qubit is always referred to as `qubit`, 
+* in two qubit gates the two qubits are referred to as `control` and `target`,
+* and in multi qubit gates the `qubits` are given as a vector of all involved qubits.
+
 When initializing two qubit gates, the `control` is always the first and `target` the second argument.
 
 ## Unitary Matrix
 
 To help determine the type of the gate, the unitary qoqo/roqoqo operations support the function `unitary_matrix()` that returns the definition of the gate in matrix form. This definition ignores the qubits of the gate to fit in the smallest possible matrix dimension.
-For single qubit gates the created matrix always corresponds to `qubit=0`
-For two qubit gates the created matrix always corresponds to `control=1`, `target=0`
-For multi qubit gates it always corresponds to `qubits=[0..N]` where `N` is the number of qubits in the qubit vector of the multi qubit gate.
+* For single qubit gates the created matrix always corresponds to `qubit=0` and has a 2x2-dimension.
+* For two qubit gates the created matrix always corresponds to `control=1`, `target=0` and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding described above.
+* For multi qubit gates it always corresponds to `qubits=[0..N]` where `N` is the number of qubits in the qubit vector of the multi qubit gate.
