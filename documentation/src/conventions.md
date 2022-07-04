@@ -36,14 +36,16 @@ Python code snippet example:
     from qoqo import operations, Circuit
 
     circuit = Circuit()
-    circuit += operations.PauliX(qubit=0)   # qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
+    # qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
+    circuit += operations.PauliX(qubit=0)
 
 Rust code snippet example:
 
     use roqoqo::{Circuit, operations::PauliX};
 
     let mut circuit = Circuit::new();
-    circuit += PauliX::new(0);      // qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
+    // qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
+    circuit += PauliX::new(0);
 
 
 ## Endianness
@@ -77,7 +79,7 @@ Therefore if we combine two single-qubit gates in Matrix form it follows:
  When adding qoqo operations to circuits and reading them written out. The first operation added to the circuit, the first operation from the left will be executed first. This leads to an inversion of the order when transcribing to matrix form where the matrix to the right acts first.
 
  \\[
- \textrm{PauliX}(0) \  \textrm{PauliZ}(0)  =  \textrm{PauliZ}(0).unitary_matrix() *  \textrm{PauliX}(0).unitary_matrix() = \begin{pmatrix}
+ \textrm{PauliX}(0) \  \textrm{PauliZ}(0)  =  \textrm{PauliZ(0).unitary_matrix()} *  \textrm{PauliX(0).unitary_matrix()} = \begin{pmatrix}
  1 & 0 \\\\
  0 & -1
  \end{pmatrix}  \begin{pmatrix}
