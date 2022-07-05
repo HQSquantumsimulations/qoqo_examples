@@ -37,5 +37,17 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 
 ## [Two-qubit gates](two_qubit_gates.md)
 
+| Gate | Short Description |
+|---------|---------|
+| CNOT    |  The controlled not gate, e.g. to entangle two qubits. |
+| ControlledPhaseShift    |  Controlled phase shift gate. |
+| FSwap   |  The fermionic swap gate. |
+| InvSqrtISwap    |  The inverse square root of the ISwap gate. |
+| ISwap    |  The complex swap gate. |
+| SqrtISwap    |  The square root of the ISwap gate. |
+| SWAP    |  The swap gate, to switch the positions of two qubits. |
+| XY    |  The XY gate. |
+
+
 ## [Multi-qubit gates](multi_qubit_gates.md)
 
