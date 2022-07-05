@@ -1,6 +1,6 @@
 # Conventions
 
-This section should give a quick overview of some of the conventions used in qoqo/roqoqo.
+This section gives a quick overview of some of the conventions used in qoqo/roqoqo.
 
 ## Definitions
 
@@ -15,14 +15,14 @@ qoqo syntax is independent of the underlying hardware of the quantum computer. H
 For the two basis states of a single qubit we define
 
 \\[
- \left|0 \right>  =  \left|\textrm{false} \right> =  \left| \downarrow \right> = \begin{pmatrix}
+ \left\| 0 \right>  =  \left|\textrm{false} \right> =  \left| \downarrow \right> = \begin{pmatrix}
  1 \\\\
  0
  \end{pmatrix} \\\\
  \\]
 
  \\[
- \left|1 \right>  =  \left|\textrm{true} \right> =  \left| \uparrow \right> = \begin{pmatrix}
+ \left \|1 \right>  =  \left|\textrm{true} \right> =  \left| \uparrow \right> = \begin{pmatrix}
  0 \\\\
  1
  \end{pmatrix} \\\\

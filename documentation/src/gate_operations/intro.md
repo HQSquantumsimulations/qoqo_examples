@@ -2,18 +2,19 @@
 
 Operations are the atomic instructions in any quantum program that can be represented by roqoqo. Gate operations are single-, two- or multi-qubit gate operations that act on a set of qubits and can be executed on a quantum computing device. Mathematically speaking, a gate can be represented by a matrix.
 
-A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section.
+A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section. For the full matrix form on the gates please refer to the underlying gate documentation. We differentiate between [single-qubit gates](single_qubit_gates.md) acting on a single qubit, [two-qubit gates](two_qubit_gates.md) applied on a pair of qubits and [multi-qubit gates](multi_qubit_gates.md) affecting a series of qubits.
 
 ### Nomenclature
 
 * A rotation angle is usually annotated with \\( \theta \\) and the according argument being `theta`.
-* For the phase angle the symbol \\( \phi \\) is used, with the argument name `phi`.
+* For the phase angle the symbol \\( \varphi \\) is used.
+* The rotation angle  \\( \phi \\)  in the x-y plane is addressed by the argument name `phi`.
 * \\( \sigma_x \\), \\( \sigma_y \\), \\( \sigma_z \\) are the Pauli matrices X, Y, Z
 \\[
     \sigma_x = \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix} := X, \quad \sigma_y = \begin{pmatrix} 0 & -i \\\\ i & 0 \end{pmatrix} := Y,  \quad \sigma_z = \begin{pmatrix} 1 & 0 \\\\ 0 & -1 \end{pmatrix} := Z
 \\]
 
-## Single-qubit gates
+## [Single-qubit gates](single_qubit_gates.md)
 
 | Gate | Short Description |
 |---------|---------|
@@ -22,8 +23,8 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 | PauliX     | The Pauli X gate, rotation with a fixed angle \\( \frac{\pi}{2} \\) corresponds to a "flip" on x-axis.  |
 | PauliY     | The Pauli Y gate, rotation with a fixed angle \\( \frac{\pi}{2} \\) corresponds to a "flip" on y-axis.  |
 | PauliZ     | The Pauli Z gate, rotation with a fixed angle \\( \frac{\pi}{2} \\) corresponds to a "flip" on z-axis.  |
-| PhaseShiftState0     | Rotation around z-axis by angle \\(\theta\\) applied on state \\( \|0> \\) results in a phase shift compared to RotateZ gate. |
-| PhaseShiftState1     | Rotation around z-axis by angle \\(\theta\\) applied on state \\( \|1> \\) results in phase shift compared to RotateZ gate. |
+| PhaseShiftState0     | Rotation around z-axis by angle \\(\theta\\) applied on state \\( \left \|0 \right> \\) results in a phase shift compared to RotateZ gate. |
+| PhaseShiftState1     | Rotation around z-axis by angle \\(\theta\\) applied on state \\( \left\|1 \right> \\) results in phase shift compared to RotateZ gate. |
 | RotateAroundSphericalAxis     | Implements a rotation around an axis in spherical coordinates.  |
 | RotateX     | The rotation gate around x-axis \\( e^{-i \frac{\theta}{2} \sigma_x} \\).  |
 | RotateXY     | Implements a rotation around an x- and y-axis in spherical coordinates.  |
@@ -34,4 +35,7 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 | TGate     | The T gate.  |
 
 
-## Two-qubit gates
+## [Two-qubit gates](two_qubit_gates.md)
+
+## [Multi-qubit gates](multi_qubit_gates.md)
+

@@ -1,31 +1,187 @@
 # Single-qubit gates
 
+[< Back to overview](intro.md)
+
+Single-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum computer that act on a single qubit. In single qubit gates the qubit is always referred to as `qubit`.  The unitary matrices of single-qubit gates are 2x2-dimensional matrices applied on single-qubit states  \\( \left \|0 \right> \\) and  \\( \left \|1 \right> \\), as defined in the chapter [conventions](../conventions.md). 
+
+The most general unitary operation acting on one qubit is of the form 
+\\[ 
+ U =e^{i \phi}\begin{pmatrix}
+ \alpha_r+i \alpha_i & -\beta_r+i \beta_i \\\\
+ \beta_r+i \beta_i & \alpha_r-i\alpha_i
+ \end{pmatrix}
+ \\]
+
+The parameters \\( \alpha_r \\), \\( \alpha_i \\) and  \\( \beta_r \\), \\( \beta_i \\) can be accessed by the functions `alpha_r()`, `alpha_i()`, `beta_r()` and `beta_i()` applied on the particular single-qubit gate. The full matrix form of the single-qubit gates available in qoqo/roqoqo are documented in this chapter.
+
 ## Hadamard
+
+The Hadamard gate when applied creates a superposition of states, and so it can be used to change the basis if required. The definition of the gate in matrix form is given by
+
+\\[
+ U = \frac{1}{\sqrt{2}} \begin{pmatrix}
+ 1 & 1 \\\\
+  1 & -1
+ \end{pmatrix}
+\\]
 
 ## InvSqrtPauliX
 
+The inverse square root of the PauliX gate  \\( e^{i \frac{\theta}{4} \sigma_x} \\) corresponds to a unitary matrix defined as
+
+\\[
+ U = \frac{1}{\sqrt{2}} \begin{pmatrix}
+ 1 & i \\\\
+  i & 1
+ \end{pmatrix}
+\\]
+
 ## PauliX
+
+The Pauli X gate implements a rotation around x-axis with a fixed angle \\( \frac{\pi}{2} \\) that can be used e.g. to flip the qubit state. The full matrix form is given by 
+
+\\[
+ U = \begin{pmatrix}
+ 0 & 1 \\\\
+ 1 & 0
+ \end{pmatrix}
+\\]
 
 ## PauliY
 
+The Pauli Y gate implements a rotation around y-axis with a fixed angle \\( \frac{\pi}{2} \\) that can be used e.g. to flip the qubit state. The unitary matrix is defined as
+
+\\[
+ U = \begin{pmatrix}
+ 0 & -i\\\\
+ i & 0
+ \end{pmatrix}
+\\]
+
 ## PauliZ
+
+The Pauli Z gate implements a rotation around z-axis with a fixed angle \\( \frac{\pi}{2} \\) that can be used e.g. to flip the qubit state. The full matrix form is given by
+
+\\[
+ U = \begin{pmatrix}
+ 1 & 0 \\\\
+ 0 & -1
+ \end{pmatrix}
+\\]
 
 ## PhaseShiftState0
 
+This gate operation corresponds to the phase shift gate applied on state \\( \left \|0 \right> \\) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \\(\theta\\), also known as AC Stark shift of the state \\( \left \|0 \right> \\). The unitary matrix is given by
+
+\\[
+ U = \begin{pmatrix}
+ e^{i \theta} & 0\\\\
+  0 & 1
+ \end{pmatrix}
+\\]
+
 ## PhaseShiftState1
+
+This gate operation corresponds to the phase shift gate applied on state \\( \left \|1 \right> \\) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \\(\theta\\), also known as AC Stark shift of the state \\( \left \|1 \right> \\). The unitary matrix is given by
+
+\\[
+ U = \begin{pmatrix}
+  1 & 0\\\\
+  0 & e^{i \theta}
+ \end{pmatrix}
+\\]
 
 ## RotateAroundSphericalAxis
 
+Implements a rotation around an axis in the x-y plane in spherical coordinates. The definition of the gate in matrix form is given by
+
+\\[
+ U = \begin{pmatrix}
+ \cos\left(\frac{\theta}{2}\right) & 0\\\\
+ 0 & \cos\left(\frac{\theta}{2}\right)
+ \end{pmatrix}
+ \+ \begin{pmatrix}
+ -i \sin\left(\frac{\theta}{2}\right) v_z  &  \sin\left(\frac{\theta}{2}\right) \left(-i v_x - v_y \right)\\\\
+ \sin\left(\frac{\theta}{2}\right) \left(-i v_x + v_y \right) & i \sin\left(\frac{\theta}{2}\right) v_z
+ \end{pmatrix}
+\\]
+
+
+with \\[ v_x = \sin\left(\theta_{sph}\right) \cdot \cos\left(\phi_{sph}\right), \quad v_y = \sin\left(\theta_{sph}\right)\cdot\sin\left(\phi_{sph}\right), \quad v_z = \cos\left(\theta_{sph}\right). \\]
+
 ## RotateX
+
+The rotation gate around x-axis \\( e^{-i \frac{\theta}{2} \sigma_x} \\). The definition of the unitary matrix is as follows
+
+\\[
+ U = \begin{pmatrix}
+ \cos(\frac{\theta}{2}) & -i \sin(\frac{\theta}{2})\\\\
+ -i \sin(\frac{\theta}{2}) & \cos(\frac{\theta}{2})
+ \end{pmatrix}
+\\]
 
 ## RotateXY
 
+Implements a rotation around an x- and y-axis in spherical coordinates. The unitary matrix representing the gate is given by
+
+\\[
+ U  = \begin{pmatrix}
+ \cos \left(\frac{\theta}{2} \right) & -i e^{-i \phi} \sin \left(\frac{\theta}{2} \right) \\\\
+ -i e^{i \phi} \sin \left( \frac{\theta}{2} \right) & \cos\left( \frac{\theta}{2} \right)
+ \end{pmatrix}
+ \\]
+
 ## RotateY
+
+The rotation gate around y-axis \\( e^{-i \frac{\theta}{2} \sigma_y} \\). The full matrix form is given by
+
+\\[
+ U = \begin{pmatrix}
+ \cos(\frac{\theta}{2}) &  - \sin(\frac{\theta}{2})\\\\
+ \sin(\frac{\theta}{2})  & \cos(\frac{\theta}{2})
+ \end{pmatrix}
+\\]
 
 ## RotateZ
 
+The rotation gate around z-axis \\( e^{-i \frac{\theta}{2} \sigma_z} \\). The unitary matrix reads
+
+\\[
+ U = \begin{pmatrix}sigma_x = \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix}, sigma_x = \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix}, 
+ \cos(\frac{\theta}{2})  -i \sin(\frac{\theta}{2}) & 0\\\\
+ 0 & \cos(\frac{\theta}{2}) + i \sin(\frac{\theta}{2})
+ \end{pmatrix}
+\\]
+
 ## SGate
+
+The unitary matrix of the S gate reads
+
+\\[
+ U = \frac{1}{\sqrt{2}} \begin{pmatrix}
+ 1 & 0 \\\\
+  0 & i
+ \end{pmatrix}
+\\]
 
 ## SqrtPauliX
 
+The square root of the PauliX gate \\( e^{-i \frac{\theta}{4} \sigma_x} \\). The full matrix form is given by
+
+\\[
+ U = \frac{1}{\sqrt(2)}\begin{pmatrix}
+ 1 & -i \\\\
+ -i & 1
+ \end{pmatrix}
+\\]
+
 ## TGate
+
+The unitary matrix of the T gate is defined as follows
+
+\\[
+ U = \frac{1}{\sqrt{2}} \begin{pmatrix}
+ 1 & 0 \\\\
+  0 & e^{i \frac{\pi}{4}}
+ \end{pmatrix}
+\\]
