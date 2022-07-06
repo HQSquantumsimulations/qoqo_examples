@@ -1,3 +1,5 @@
+// Copyright © 2021 HQS Quantum Simulations GmbH.
+
 use roqoqo::backends::EvaluatingBackend;
 use roqoqo::{operations, Circuit};
 
