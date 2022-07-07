@@ -30,13 +30,13 @@ pub fn half_adder_main() {
     half_adder_main_block += ops::CNOT::new(0, 3);
     half_adder_main_block += ops::RotateY::new(3, -CalculatorFloat::Float(Pi) / 4.0);
 
-    // Let's add everything together. We add a complex classical register to store the state vector of the qubits after our calculation.
-    // Other types of registers available in qoqo are `DefinitionBit` for bit registers used to store actual measurement results
-    // of a quantum computer and `DefinitionFloat` to store real valued results.
+    // Let's add everything together. We add a complex classical register, called 'DefinitionComplex', to store the state vector
+    // of the qubits after our calculation. Other types of registers available in qoqo are `DefinitionBit` for bit registers 
+    // used to store actual measurement results of a quantum computer and `DefinitionFloat` to store real valued results.
 
     // We use the `GetStateVector` pragma operation. A Pragma operation is information for the compiler / qoqo only and will not
     // be sent to the actual quantum computer. We will encounter other important Pragmas later on. The `GetStateVector`
-    // pragma operation obtains the state vector of the qubits and stores it in the defined output register ('ro').
+    // pragma operation obtains the state vector of the qubits and stores it in the defined output register ("ro").
     // It accepts an additional measurement circuit that would be added to the circuit before measuring.
     // The state vector can only be obtained in simulations on conventional computers, never from the real device.
 
@@ -46,7 +46,7 @@ pub fn half_adder_main() {
     half_adder += ops::PauliX::new(0);
     half_adder += ops::PauliY::new(1);
     //  Addition of the main block
-    half_adder += half_adder_main_block;
+    half_adder += half_adder_main_block.clone();
     //  Measurement
     half_adder += ops::PragmaGetStateVector::new("ro".to_string(), Some(Circuit::new()));
 
@@ -61,7 +61,7 @@ pub fn half_adder_main() {
 
     let backend = Backend::new(4);
     let result_of_run = backend.run_circuit(&half_adder);
-    let (result_bit_registers, _result_float_registers, result_complex_registers) =
+    let (_result_bit_registers, _result_float_registers, result_complex_registers) =
         result_of_run.unwrap();
 
     println!(
@@ -71,12 +71,32 @@ pub fn half_adder_main() {
 
     // Simulating an experiment
 
-    // How would the result that we would get from a real quantum computer look? Let's try it out!
+    // How would the result that we would get from a real quantum computer look?
 
     // We define a number of measurements, i.e., repetitions and measurements of the circuit and add a bit register to store
     // the measured values for each run.
     // We add `MeasureQubit` operations for the two output qubits.
     // To make this more interesting we initialize the input qubits in a superposition of all possible states using Hadamard gates `H`.
+
+    let number_of_measurements: usize = 1000;
+    half_adder = Circuit::new();
+    half_adder += ops::DefinitionBit::new("ro".to_string(), 2, true);
+    //  Input
+    half_adder += ops::Hadamard::new(0);
+    half_adder += ops::Hadamard::new(1);
+    //  Main
+    half_adder += half_adder_main_block;
+    //  Measurement
+    half_adder += ops::MeasureQubit::new(2, "ro".to_string(), 0);
+    half_adder += ops::MeasureQubit::new(3, "ro".to_string(), 1);
+    half_adder += ops::PragmaSetNumberOfMeasurements::new(number_of_measurements, "ro".to_string());
+
+    let backend = Backend::new(4);
+    let result_of_run = backend.run_circuit(&half_adder);
+    let (result_bit_registers, _result_float_registers, _result_complex_registers) =
+        result_of_run.unwrap();
+
+    println!("Result bit registers :{:?}", result_bit_registers["ro"]);
 
     println!(">> Half adder example end.");
 }
