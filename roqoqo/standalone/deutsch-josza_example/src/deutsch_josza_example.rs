@@ -26,7 +26,7 @@ pub fn deutsch_josza_main() {
     // can be composed by a single NOT operation on the output qubit, leaving the two input qubits unaltered.
 
     //  IMPLEMENTATION
-    // Required is the first step of the circuit: Flip the 3rd qubit from `0 ` to `1` and apply a Hadamard gate to all 3 qubits.
+    // Required is the first step of the circuit: flip the 3rd qubit from `0 ` to `1` and apply a Hadamard gate to all 3 qubits.
     // We use the qoqo toolkit to represent quantum circuits.
 
     // A `Circuit` is the main class to represent quantum circuits. The `qoqo.operations` module contains one- and two-qubit operations

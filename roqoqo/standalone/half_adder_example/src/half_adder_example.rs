@@ -7,29 +7,36 @@ use roqoqo_quest::Backend;
 // In this example we write a quantum algorithm to perform an add operation between two qubits and store the result in two qubits
 // that act as output registers.
 
+// Please note that for simplicity we implement a half adder that picks up an additional phase. This circuit only works as a half adder 
+// if the result is measured immediately. A half adder implementation without an extra phase would require a decomposition of the Toffoli gate 
+// which requires more than three CNOT gates.
+
 pub fn half_adder_main() {
     println!(">> Half adder example start.");
 
     // We define a circuit that generates the main block of the algorithm
 
-    let mut half_adder_main_block = Circuit::new();
-    //  Least relevant bit
-    half_adder_main_block += ops::CNOT::new(0, 2);
-    half_adder_main_block += ops::CNOT::new(1, 2);
-    //  Most relevant bit
-    //  -Controlled H
-    half_adder_main_block += ops::RotateY::new(3, CalculatorFloat::Float(Pi) / 4.0);
-    half_adder_main_block += ops::CNOT::new(0, 3);
-    half_adder_main_block += ops::RotateY::new(3, -CalculatorFloat::Float(Pi) / 4.0);
-    //  -Controlled Z
-    half_adder_main_block += ops::Hadamard::new(3);
-    half_adder_main_block += ops::CNOT::new(1, 3);
-    half_adder_main_block += ops::Hadamard::new(3);
-    //  -Controlled H
-    half_adder_main_block += ops::RotateY::new(3, CalculatorFloat::Float(Pi) / 4.0);
-    half_adder_main_block += ops::CNOT::new(0, 3);
-    half_adder_main_block += ops::RotateY::new(3, -CalculatorFloat::Float(Pi) / 4.0);
-
+    fn half_adder_main_block() -> Circuit {
+        let mut circuit = Circuit::new();
+        //  Least relevant bit
+        circuit += ops::CNOT::new(0, 2);
+        circuit += ops::CNOT::new(1, 2);
+        //  Most relevant bit
+        //  -Controlled H
+        circuit += ops::RotateY::new(3, CalculatorFloat::Float(Pi) / 4.0);
+        circuit += ops::CNOT::new(0, 3);
+        circuit += ops::RotateY::new(3, -CalculatorFloat::Float(Pi) / 4.0);
+        //  -Controlled Z
+        circuit += ops::Hadamard::new(3);
+        circuit += ops::CNOT::new(1, 3);
+        circuit += ops::Hadamard::new(3);
+        //  -Controlled H
+        circuit += ops::RotateY::new(3, CalculatorFloat::Float(Pi) / 4.0);
+        circuit += ops::CNOT::new(0, 3);
+        circuit += ops::RotateY::new(3, -CalculatorFloat::Float(Pi) / 4.0);
+        circuit
+    }
+    
     // Let's add everything together. We add a complex classical register, called 'DefinitionComplex', to store the state vector
     // of the qubits after our calculation. Other types of registers available in qoqo are `DefinitionBit` for bit registers 
     // used to store actual measurement results of a quantum computer and `DefinitionFloat` to store real valued results.
@@ -44,14 +51,17 @@ pub fn half_adder_main() {
     half_adder += ops::DefinitionComplex::new("ro".to_string(), 2_usize.pow(4), true);
     //  Initialization
     half_adder += ops::PauliX::new(0);
-    half_adder += ops::PauliY::new(1);
+    half_adder += ops::PauliX::new(1);
     //  Addition of the main block
-    half_adder += half_adder_main_block.clone();
+    half_adder += half_adder_main_block();
     //  Measurement
     half_adder += ops::PragmaGetStateVector::new("ro".to_string(), Some(Circuit::new()));
 
     println!("Prepared circuit: {:?}", half_adder);
 
+    // The two `X` operations at the beginning are used to generate the input, in this case both input qubits are set to `1`.
+
+    
     // We simulate the half adder using `qoqo_quest`. Running the circuit in the backend returns a tuple with entries
     // for all registers of the three different types.
 
@@ -69,7 +79,7 @@ pub fn half_adder_main() {
         result_complex_registers["ro"]
     );
 
-    // Simulating an experiment
+    //  SIMULATING AN EXPERIMENT
 
     // How would the result that we would get from a real quantum computer look?
 
@@ -85,7 +95,7 @@ pub fn half_adder_main() {
     half_adder += ops::Hadamard::new(0);
     half_adder += ops::Hadamard::new(1);
     //  Main
-    half_adder += half_adder_main_block;
+    half_adder += half_adder_main_block();
     //  Measurement
     half_adder += ops::MeasureQubit::new(2, "ro".to_string(), 0);
     half_adder += ops::MeasureQubit::new(3, "ro".to_string(), 1);
