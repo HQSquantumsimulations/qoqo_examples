@@ -39,13 +39,26 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 
 | Gate | Short Description |
 |---------|---------|
+| Bogoliubov    |  The Bogoliubov DeGennes interaction gate. |
 | CNOT    |  The controlled not gate, e.g. to entangle two qubits. |
-| ControlledPhaseShift    |  Controlled phase shift gate. |
-| FSwap   |  The fermionic swap gate. |
+| ComplexPMInteraction    |  The complex hopping gate. |
+| ControlledPauliY    |  The controlled PauliY gate. |
+| ControlledPauliZ    |  The controlled PauliZ gate. |
+| ControlledPhaseShift    |  The controlled phase shift gate. |
+| Fsim   |  The fermionic qubit simulation gate. |
+| FSwap   |  The fermionic SWAP gate. |
+| GivensRotation   |  The Givens rotation interaction gate in big endian notation: \\(e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-i \phi Z_t/2} \\). |
+| GivensRotationLittleEndian   |  The Givens rotation interaction gate in little endian notation: \\(e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-i \phi Z_c/2} \\). |
 | InvSqrtISwap    |  The inverse square root of the ISwap gate. |
 | ISwap    |  The complex swap gate. |
+| MolmerSorensenXX    |  The fixed-phase MolmerSorensen XX gate. |
+| PhaseShiftedControlledZ    |  The phased-shifted controlled-Z gate. |
+| PMInteraction    |  The transversal interaction gate. |
+| Qsim    |  The qubit simulation gate. |
+| SpinInteraction    |  The generalized, anisotropic XYZ Heisenberg interaction between spins. |
 | SqrtISwap    |  The square root of the ISwap gate. |
 | SWAP    |  The swap gate, to switch the positions of two qubits. |
+| VariablesMSXX    |  The variable-angle MolmerSorensen XX gate. |
 | XY    |  The XY gate. |
 
 

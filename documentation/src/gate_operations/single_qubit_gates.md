@@ -6,9 +6,9 @@ Single-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum c
 
 The most general unitary operation acting on one qubit is of the form 
 \\[ 
- U =e^{i \phi}\begin{pmatrix}
- \alpha_r+i \alpha_i & -\beta_r+i \beta_i \\\\
- \beta_r+i \beta_i & \alpha_r-i\alpha_i
+ U =e^{\mathrm{i} \phi}\begin{pmatrix}
+ \alpha_r+\mathrm{i} \alpha_i & -\beta_r+\mathrm{i} \beta_i \\\\
+ \beta_r+\mathrm{i} \beta_i & \alpha_r-\mathrm{i}\alpha_i
  \end{pmatrix}
  \\]
 
@@ -27,12 +27,12 @@ The Hadamard gate when applied creates a superposition of states, and so it can 
 
 ## InvSqrtPauliX
 
-The inverse square root of the PauliX gate  \\( e^{i \frac{\theta}{4} \sigma_x} \\) corresponds to a unitary matrix defined as
+The inverse square root of the PauliX gate  \\( e^{\mathrm{i} \frac{\theta}{4} \sigma_x} \\) corresponds to a unitary matrix defined as
 
 \\[
  U = \frac{1}{\sqrt{2}} \begin{pmatrix}
- 1 & i \\\\
-  i & 1
+ 1 & \mathrm{i} \\\\
+  \mathrm{i} & 1
  \end{pmatrix}
 \\]
 
@@ -53,8 +53,8 @@ The Pauli Y gate implements a rotation around y-axis with a fixed angle \\( \fra
 
 \\[
  U = \begin{pmatrix}
- 0 & -i\\\\
- i & 0
+ 0 & -\mathrm{i} \\\\
+ \mathrm{i} & 0
  \end{pmatrix}
 \\]
 
@@ -75,7 +75,7 @@ This gate operation corresponds to the phase shift gate applied on state \\( \le
 
 \\[
  U = \begin{pmatrix}
- e^{i \theta} & 0\\\\
+ e^{\mathrm{i} \theta} & 0\\\\
   0 & 1
  \end{pmatrix}
 \\]
@@ -87,7 +87,7 @@ This gate operation corresponds to the phase shift gate applied on state \\( \le
 \\[
  U = \begin{pmatrix}
   1 & 0\\\\
-  0 & e^{i \theta}
+  0 & e^{\mathrm{i} \theta}
  \end{pmatrix}
 \\]
 
@@ -101,8 +101,8 @@ Implements a rotation around an axis in the x-y plane in spherical coordinates. 
  0 & \cos\left(\frac{\theta}{2}\right)
  \end{pmatrix}
  \+ \begin{pmatrix}
- -i \sin\left(\frac{\theta}{2}\right) v_z  &  \sin\left(\frac{\theta}{2}\right) \left(-i v_x - v_y \right)\\\\
- \sin\left(\frac{\theta}{2}\right) \left(-i v_x + v_y \right) & i \sin\left(\frac{\theta}{2}\right) v_z
+ -\mathrm{i} \sin\left(\frac{\theta}{2}\right) v_z  &  \sin\left(\frac{\theta}{2}\right) \left(-i v_x - v_y \right)\\\\
+ \sin\left(\frac{\theta}{2}\right) \left(-\mathrm{i} v_x + v_y \right) & \mathrm{i} \sin\left(\frac{\theta}{2}\right) v_z
  \end{pmatrix}
 \\]
 
@@ -111,12 +111,12 @@ with \\[ v_x = \sin\left(\theta_{sph}\right) \cdot \cos\left(\phi_{sph}\right), 
 
 ## RotateX
 
-The rotation gate around x-axis \\( e^{-i \frac{\theta}{2} \sigma_x} \\). The definition of the unitary matrix is as follows
+The rotation gate around x-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_x} \\). The definition of the unitary matrix is as follows
 
 \\[
  U = \begin{pmatrix}
- \cos(\frac{\theta}{2}) & -i \sin(\frac{\theta}{2})\\\\
- -i \sin(\frac{\theta}{2}) & \cos(\frac{\theta}{2})
+ \cos(\frac{\theta}{2}) & -\mathrm{i} \sin(\frac{\theta}{2})\\\\
+ -\mathrm{i}\sin(\frac{\theta}{2}) & \cos(\frac{\theta}{2})
  \end{pmatrix}
 \\]
 
@@ -126,14 +126,14 @@ Implements a rotation around an x- and y-axis in spherical coordinates. The unit
 
 \\[
  U  = \begin{pmatrix}
- \cos \left(\frac{\theta}{2} \right) & -i e^{-i \phi} \sin \left(\frac{\theta}{2} \right) \\\\
- -i e^{i \phi} \sin \left( \frac{\theta}{2} \right) & \cos\left( \frac{\theta}{2} \right)
+ \cos \left(\frac{\theta}{2} \right) & -\mathrm{i} e^{-\mathrm{i} \phi} \sin \left(\frac{\theta}{2} \right) \\\\
+ -\mathrm{i} e^{\mathrm{i} \phi} \sin \left( \frac{\theta}{2} \right) & \cos\left( \frac{\theta}{2} \right)
  \end{pmatrix}
  \\]
 
 ## RotateY
 
-The rotation gate around y-axis \\( e^{-i \frac{\theta}{2} \sigma_y} \\). The full matrix form is given by
+The rotation gate around y-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_y} \\). The full matrix form is given by
 
 \\[
  U = \begin{pmatrix}
@@ -144,12 +144,12 @@ The rotation gate around y-axis \\( e^{-i \frac{\theta}{2} \sigma_y} \\). The fu
 
 ## RotateZ
 
-The rotation gate around z-axis \\( e^{-i \frac{\theta}{2} \sigma_z} \\). The unitary matrix reads
+The rotation gate around z-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_z} \\). The unitary matrix reads
 
 \\[
- U = \begin{pmatrix}sigma_x = \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix}, sigma_x = \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix}, 
- \cos(\frac{\theta}{2})  -i \sin(\frac{\theta}{2}) & 0\\\\
- 0 & \cos(\frac{\theta}{2}) + i \sin(\frac{\theta}{2})
+ U = \begin{pmatrix} \\\ 
+ \cos(\frac{\theta}{2})  -\mathrm{i} \sin(\frac{\theta}{2}) & 0\\\\
+ 0 & \cos(\frac{\theta}{2}) + \mathrm{i} \sin(\frac{\theta}{2})
  \end{pmatrix}
 \\]
 
@@ -160,18 +160,18 @@ The unitary matrix of the S gate reads
 \\[
  U = \frac{1}{\sqrt{2}} \begin{pmatrix}
  1 & 0 \\\\
-  0 & i
+  0 & \mathrm{i}
  \end{pmatrix}
 \\]
 
 ## SqrtPauliX
 
-The square root of the PauliX gate \\( e^{-i \frac{\theta}{4} \sigma_x} \\). The full matrix form is given by
+The square root of the PauliX gate \\( e^{-\mathrm{i} \frac{\theta}{4} \sigma_x} \\). The full matrix form is given by
 
 \\[
  U = \frac{1}{\sqrt(2)}\begin{pmatrix}
- 1 & -i \\\\
- -i & 1
+ 1 & -\mathrm{i} \\\\
+ -\mathrm{i} & 1
  \end{pmatrix}
 \\]
 
@@ -182,6 +182,6 @@ The unitary matrix of the T gate is defined as follows
 \\[
  U = \frac{1}{\sqrt{2}} \begin{pmatrix}
  1 & 0 \\\\
-  0 & e^{i \frac{\pi}{4}}
+  0 & e^{\mathrm{i} \frac{\pi}{4}}
  \end{pmatrix}
 \\]
