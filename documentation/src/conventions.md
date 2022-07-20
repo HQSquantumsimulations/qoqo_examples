@@ -33,22 +33,26 @@ For example the user can apply the PauliX gate to flip the qubit from state |0> 
 
 Python code snippet example:
 
-    from qoqo import operations, Circuit
+```python
+from qoqo import operations, Circuit
 
-    circuit = Circuit()
-    # qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
-    circuit += operations.PauliX(qubit=0)
+circuit = Circuit()
+# qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
+circuit += operations.PauliX(qubit=0)
+```
 
 Rust code snippet example:
 
-    :dep roqoqo = "1.0.0-alpha.3"
-    extern crate roqoqo;
-    
-    use roqoqo::{Circuit, operations::PauliX};
+```rust
+:dep roqoqo = "1.0.0-alpha.3"
+extern crate roqoqo;
 
-    let mut circuit = Circuit::new();
-    // qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
-    circuit += PauliX::new(0);
+use roqoqo::{Circuit, operations::PauliX};
+
+let mut circuit = Circuit::new();
+// qubit 0 is initialized in state |0> and flipped into state |1> by PauliX gate.
+circuit += PauliX::new(0);
+```
 
 
 ## Endianness

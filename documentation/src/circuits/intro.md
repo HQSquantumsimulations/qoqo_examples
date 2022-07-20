@@ -11,28 +11,32 @@ All these three types of items are treated the same way, i.e. as `operations`. F
 
 A sample code snippet with qoqo in python is provided here:
 
-    from qoqo import Circuit
-    from qoqo import operations as ops
-    # create a new circuit
-    circuit = Circuit()
-    # Rotation around Z axis by pi/2 on qubit 0
-    circuit += ops.RotateZ(qubit=0, theta=1.57)
-    # Entangling qubits 0 and 1 with CNOT gate
-    circuit += ops.CNOT(control=0, target=1)
+```python
+from qoqo import Circuit
+from qoqo import operations as ops
+# create a new circuit
+circuit = Circuit()
+# Rotation around Z axis by pi/2 on qubit 0
+circuit += ops.RotateZ(qubit=0, theta=1.57)
+# Entangling qubits 0 and 1 with CNOT gate
+circuit += ops.CNOT(control=0, target=1)
+```
 
 The same sample code snippet with roqoqo in Rust is given here:
 
-    :dep roqoqo = "1.0.0-alpha.3"
-    extern crate roqoqo;
-    
-    use roqoqo::{Circuit, operations::*};
+```rust
+:dep roqoqo = "1.0.0-alpha.3"
+extern crate roqoqo;
 
-    // Create a new _modifiable_ circuit
-    let mut circuit = Circuit::new();
-    // Apply rotation around Z axis by pi/2 on qubit 0
-    circuit += RotateZ::new(0, 1.57.into());
-    // Establish entanglement between qubits 0 and 1
-    circuit += CNOT::new(0, 1);
+use roqoqo::{Circuit, operations::*};
+
+// Create a new _modifiable_ circuit
+let mut circuit = Circuit::new();
+// Apply rotation around Z axis by pi/2 on qubit 0
+circuit += RotateZ::new(0, 1.57.into());
+// Establish entanglement between qubits 0 and 1
+circuit += CNOT::new(0, 1);
+```
 
 
 Besides the simple example qoqo provides a variety of operations, i.e.
