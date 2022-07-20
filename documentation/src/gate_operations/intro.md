@@ -1,6 +1,6 @@
 # List of Gate Operations
 
-Operations are the atomic instructions in any quantum program that can be represented by roqoqo. Gate operations are single-, two- or multi-qubit gate operations that act on a set of qubits and can be executed on a quantum computing device. Mathematically speaking, a gate can be represented by a matrix.
+Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit gate operations that act on a set of qubits and can be executed on a quantum computing device. Mathematically speaking, a gate can be represented by a matrix.
 
 A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section. For the full matrix form on the gates please refer to the underlying gate documentation. We differentiate between [single-qubit gates](single_qubit_gates.md) acting on a single qubit, [two-qubit gates](two_qubit_gates.md) applied on a pair of qubits and [multi-qubit gates](multi_qubit_gates.md) affecting a series of qubits.
 

@@ -8,7 +8,7 @@ Each register is declared in a Circuit with its special operation tag, the given
 A code snippet example in Rust:
 
 ```rust
-:dep roqoqo = "1.0.0-alpha.3"
+:dep roqoqo = "1.0.0-alpha.4"
 extern crate roqoqo;
 
 use roqoqo::Circuit;

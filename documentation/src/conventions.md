@@ -44,7 +44,7 @@ circuit += operations.PauliX(qubit=0)
 Rust code snippet example:
 
 ```rust
-:dep roqoqo = "1.0.0-alpha.3"
+:dep roqoqo = "1.0.0-alpha.4"
 extern crate roqoqo;
 
 use roqoqo::{Circuit, operations::PauliX};
