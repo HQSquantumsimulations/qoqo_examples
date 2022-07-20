@@ -8,7 +8,7 @@ qoqo syntax is independent of the underlying hardware of the quantum computer. H
 
 * `gate`: an `operation` that can be applied on a qubit to carry out a specific computational task, for example an operation given by a rotation gate (e.g. `RotateZ`). Mathematically speaking, a gate can be represented by a matrix. Sometimes we might use gate, operation and gate operation interchangeably throughout the documentation.
 * `qubit`: the smallest unit of data that a quantum computer can process and store. If referring to a mathematical representation, a qubit can be written in form of a vector.
-* `Circuit`: is a an element that includes a sequence of gate operations applied on the involved qubits. A Circuit can be interpreted as a helper object (in qoqo: an array) without a physical manifistation. It can be used as a schematic representation of the system.
+* `Circuit`: is a an element that includes a sequence of gate operations applied on the involved qubits. A Circuit can be interpreted as an iterable helper object without a physical manifistation. It can be used as a schematic representation of the system.
 
 
 ## Qubit states
@@ -41,6 +41,9 @@ Python code snippet example:
 
 Rust code snippet example:
 
+    :dep roqoqo = "1.0.0-alpha.3"
+    extern crate roqoqo;
+    
     use roqoqo::{Circuit, operations::PauliX};
 
     let mut circuit = Circuit::new();
