@@ -61,6 +61,5 @@ where the coefficients correspond to the following summands expanded from the fi
 
 with \\( L_0 = \sigma^{+} \\), \\( L_1 = \sigma^{-} \\) and \\( L_3 = \sigma_{z} \\).
 
-<!-- yielding result{sigma_z, sigma_minus} = sigma_z (x) sigma_minus.T - 1/2 * (sigma_minus.T * sigma_z) (x) 1 - 1/2 * 1 (x) (sigma_minus.T * sigma_z).T -->
 
 Applying the Pragma with a given `gate_time` corresponds to applying the full time-evolution under the Lindblad equation for `gate_time` time.

@@ -34,3 +34,14 @@ QuantumPrograms accept floating point inputs, can be serialized and only need qo
 
 roqoqo is the core implementation of the toolkit. It is written in Rust.
 qoqo is the Python interface to roqoqo and implements 
+
+## Components
+
+The schematic overview below shows the interplay of different components in qoqo/roqoqo which are described in the chapters of this documentation.
+
+* A [Circuit](circuits/intro.md) is a an element that includes a sequence of [gate operations](gate_operations.md) applied on the involved qubits.
+* A [QuantumProgram](high-level/intro.md) is an object that contains Circuits, Measurements (e.g. [PauliZProduct](high-level/pauliz.md)) and can run on a Backend.
+* For each individual hardware or simulator a [Backend](backends.md) can be created, that is either an `EvaluatingBackend` (like `qoqo-quest`) or a non-evaluating backend (like `qoqo_qasm`).
+* [Devices](devices.md) can be abstract devices or actual hardware devices.
+
+![Different components in qoqo](images/components.png)

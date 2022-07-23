@@ -15,6 +15,7 @@
     - [Cheated Measurement](high-level/cheated.md)
     - [CheatedPauliZProduct Measurement](high-level/pauliz_cheated.md)
     - [QuantumProgram and Variable-Replacement](high-level/program.md)
+- [Devices](devices.md)
 - [Conventions](conventions.md)
 - [List of Gate Operations](gate_operations/intro.md)
     - [Single-Qubit Gates](gate_operations/single_qubit_gates.md)

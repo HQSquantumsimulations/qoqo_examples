@@ -1,18 +1,6 @@
 # Backends
 
-To obtain results based on a Circuit, Measurement or a QuantumProgram defined in qoqo/roqoqo, the calculation needs to be performed on real quantum computing hardware or on a simulator. For each individual hardware or simulator a Backend can be created that implements qoqo's 'EvaluatingBackend' functionality and executes QuantumPrograms. An overview of different logical layers to establish a full connectivity chain between the qoqo/roqoqo toolkit and the quantum computing hardware or simulator is shown below.
-
-<!-- QOQO <-> BACKEND <-> DEVICE <-> INTERFACE <-> QUANTUM COMPUTER (??) -->
-
-| Logical Layers |
-|-----------| 
-|QuantumProgram | 
-| Backend | 
-| Device | 
-| Interface | 
-| Quantum Computer | 
-
-A backend in qoqo/roqoqo is meant to represent a quantum computing hardware, a quantum computing simulator or other software packages. A backend in qoqo/roqoqo is always implemented for a certain end-point that produces measurement results that can be evaluated to expectation values.
+To obtain results based on a Circuit, Measurement or a QuantumProgram defined in qoqo/roqoqo, the calculation needs to be performed on real quantum computing hardware or on a simulator. For each individual hardware or simulator a Backend can be created that implements qoqo's 'EvaluatingBackend' functionality and executes QuantumPrograms. A backend in qoqo/roqoqo is meant to represent a quantum computing hardware, a quantum computing simulator or other software packages. 
 
 The following backends are implemented in qoqo/roqoqo and supported by HQS Quantum Simulations GmbH.
 * [qoqo_aqt](https://github.com/HQSquantumsimulations/qoqo_aqt)

@@ -2,6 +2,8 @@
 
 A QuantumProgram in qoqo/roqoqo is an object that contains Circuits, Measurements and can run on a Backend. Qoqo supports symbolic parameters inside the Circuits, for example the rotation angles \\( \theta \\) in a variational algorithm. However,  a Circuit with symbolic parameters can not be simulated or executed on real hardware. The symbolic parameters need to be replaced with real floating point numbers first. A QuantumProgram contains a list of the free parameters (`input_parameter_names`) and can automatically replace the parameters with its `run` methods and return the result. Thus, the QuantumProgram could be interpreted as an equivalent to a multi-parameter function in classical computing that can be called with a set of parameters and returns a result.
 
+The QuantumProgram can be used as a convenient high level interface since it can be serialized and transmitted to run on real quantum computer hardware.
+
 A sample code snippet using a QuantumProgram is given here. To see a full executable example, please refer to the individual subsections.
 
 In python:

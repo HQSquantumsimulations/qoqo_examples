@@ -68,7 +68,7 @@ from qoqo import operations as ops
 
 circuit = Circuit()
 # Add a Bit register to the circuit for the qubit readout
-circuit += ops.DefinitionBit("bit_register", 2, is_output= True)
+circuit += ops.DefinitionBit("bit_register", 2, is_output = True)
 # Add measurement instructions for each qubit, when using hardware
 circuit += ops.MeasureQubit(0,"bit_register",0)
 circuit += ops.MeasureQubit(1,"bit_register",1)
