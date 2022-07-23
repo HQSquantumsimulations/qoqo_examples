@@ -86,7 +86,7 @@ Therefore if we combine two single-qubit gates in Matrix form it follows:
  When adding qoqo operations to circuits and reading them written out. The first operation added to the circuit, the first operation from the left will be executed first. This leads to an inversion of the order when transcribing to matrix form where the matrix to the right acts first.
 
  \\[
- \textrm{PauliX}(0) \  \textrm{PauliZ}(0)  =  \textrm{PauliZ(0).unitary_matrix()} *  \textrm{PauliX(0).unitary_matrix()} = \begin{pmatrix}
+ \textrm{PauliX}(0) \cdot  \textrm{PauliZ}(0)  =  \textrm{PauliZ(0).unitary_matrix()} \cdot  \textrm{PauliX(0).unitary_matrix()} = \begin{pmatrix}
  1 & 0 \\\\
  0 & -1
  \end{pmatrix}  \begin{pmatrix}
