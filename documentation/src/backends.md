@@ -2,19 +2,21 @@
 
 To obtain results based on a Circuit, Measurement or a QuantumProgram defined in qoqo/roqoqo, the calculation needs to be performed on real quantum computing hardware or on a simulator. For each individual hardware or simulator a Backend can be created that implements qoqo's 'EvaluatingBackend' functionality and executes QuantumPrograms. A backend in qoqo/roqoqo is meant to represent a quantum computing hardware, a quantum computing simulator or other software packages. 
 
-The following backends are implemented in qoqo/roqoqo and supported by HQS Quantum Simulations GmbH.
+The following evaluating backends are implemented in qoqo/roqoqo and supported by HQS Quantum Simulations GmbH.
 * [qoqo_aqt](https://github.com/HQSquantumsimulations/qoqo_aqt)
 * [qoqo_mock](https://github.com/HQSquantumsimulations/qoqo_aqt)
 * [qoqo_qryd](https://github.com/HQSquantumsimulations/qoqo_qryd)
 * [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest)
 
-The above backends are so-called _evaluating_ backends, that means that one can execute a circuit or a quantum program and process the results returned by the actual backend.
+The implementation of individual backend is provided not in qoqo itself, but in other packages (as listed above) to make the software modular. The above backends are so-called _evaluating_ backends, that means that one can execute a circuit or a quantum program and process the results returned by the actual backend.
 
 An EvaluatingBackend provides the functionality to run:
 
 * A _single_ circuit. The backend will execute just the circuit and return the measurement results of all registers in a tuple (bit-registers, float-registers, complex-registers). More details on registers can be found in section [readout](circuits/readout.md). All the postprocessing of the bare results needs to be done manually.
 * A measurement. _All_ circuits collected in the measurement are executed and the post-processed expectation values are returned.
 * A quantum program. A qoqo QuantumProgram also handles replacement of symbolic variables. It provides its own `run()` method and calls the given backend internally.
+
+That is, all evaluating backends provide the same functions: `run_circuit()`, `run_measurement()` or `run_measurement_registers()`, and `run()`.
 
 Other backends implemented in qoqo/roqoqo are
 * [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm)
