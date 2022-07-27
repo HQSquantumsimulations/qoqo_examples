@@ -70,11 +70,17 @@ circuit = Circuit()
 # Add a Bit register to the circuit for the qubit readout
 circuit += ops.DefinitionBit("bit_register", 2, is_output = True)
 # Add measurement instructions for each qubit, when using hardware
-circuit += ops.MeasureQubit(0,"bit_register",0)
-circuit += ops.MeasureQubit(1,"bit_register",1)
+circuit += ops.MeasureQubit(qubit=0, readout="bit_register", readout_index=0)
+circuit += ops.MeasureQubit(qubit=1, readout="bit_register", readout_index=1)
 
 # Alternatively, define a Complex register to readout the state vector
 circuit += ops.DefinitionComplex("complex_register", 3, is_output = False)
 # Measure the state vector when running the circuit on a simulator
 circuit += ops.PragmaGetStateVector("complex_register")
 ```
+
+As shown in the example above, the operation **MeasureQubit** can be used to provide measurement instructions for each individual qubit when using real quantum computing hardware. The input parameter `qubit` specifies the qubit to be measured, whereas the parameter `readout_index` defines the position in the classical register `readout` where the measurement value of the `qubit` is stored. The explicit assignment of a qubit measurement to a readout register index is necessary to handle any remapping, that might be introduced by a quantum algorithms, properly.
+
+If the measurement is performed on a simulator or if the quantum computer hardware device supports the operation **PragmaRepeatedMeasurement**, it can be used instead of `MeasureQubit` command to provide the measurement instruction for all qubits in `qubit_mapping` that needs to be repeated N times (`number_measurements`). 
+
+For further available pragma measurement instructions please refer to the section [pragma operations](pragma.md).
