@@ -16,7 +16,7 @@ whereas \\(\theta\\) is the angle parameter of the multi-qubit Molmer-Sorensen g
 
 ## MultiQubitZZ
 
-The multi qubit PauliZ-product gate. he gate applies the rotation under the product of PauliZ operators on multiple qubits.
+The multi-qubit PauliZ-product gate. he gate applies the rotation under the product of PauliZ operators on multiple qubits.
 
 \\[
     e^{-i * \theta/2 * Z_i0 * Z_i1 * ... * Z_in},

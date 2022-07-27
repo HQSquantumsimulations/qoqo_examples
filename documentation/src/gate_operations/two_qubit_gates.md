@@ -2,7 +2,7 @@
 
 [< Back to overview](intro.md)
 
-Two-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum computer that act on a pair of qubits. In two qubit gates the two qubits are referred to as `control` and `target`. When initializing two qubit gates, the `control` is always the first and `target` the second argument. For two qubit gates the created matrix always corresponds to `control=1`, `target=0` and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding as described in chapter [conventions](../conventions.md). The full matrix form of the two-qubit gates implemented in qoqo/roqoqo is documented in this chapter.
+Two-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum computer that act on a pair of qubits. In two-qubit gates the two qubits are referred to as `control` and `target`. When initializing two-qubit gates, the `control` is always the first and `target` the second argument. For two-qubit gates the created matrix always corresponds to `control=1`, `target=0` and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding as described in chapter [conventions](../conventions.md). The full matrix form of the two-qubit gates implemented in qoqo/roqoqo is documented in this chapter.
 
 The given form of the unitary matrix is consistent with  the following ordering of qubit states in a two-qubit state space:
 
@@ -221,7 +221,7 @@ The phase-shifted controlled-Z gate, modified, i.e. phase-shifted ControlledPaul
  \end{pmatrix}
 \\]
 
-with the single qubit phase \\( \phi \\).
+with the single-qubit phase \\( \phi \\).
 
 ## PMInteraction
 
@@ -235,7 +235,7 @@ where \\(X_c\\) is the Pauli matrix \\(\sigma_x\\) acting on the control qubit, 
 
 ## Qsim
 
-The definition of the Qsim gate in matrix form is given by
+The Qsim gate implements a `SWAP` between two spins and a `SpinInteraction` simultaniously. In this context, spins are meant to be localized and therefore distinguishable degrees of freedom. The definition of the Qsim gate in matrix form is given by
 
 \\[
  U = \begin{pmatrix}
@@ -246,6 +246,8 @@ The definition of the Qsim gate in matrix form is given by
  \end{pmatrix}
 \\]
 
+where x, y, z are the prefactors of the products of Pauli matrices \\(X_c X_t\\), \\(Y_c Y_t\\), \\(Z_c Z_t\\) acting on control (`c`) and target (`t`) qubit, that are part of the spin interaction.
+
 ## SpinInteraction
 
 The gate represents the generalized, anisotropic XYZ Heisenberg interaction between spins of the form
@@ -255,7 +257,9 @@ The gate represents the generalized, anisotropic XYZ Heisenberg interaction betw
 \\]
 
 where x, y, z are the prefactors of the products of Pauli matrices \\(X_c X_t\\), \\(Y_c Y_t\\), \\(Z_c Z_t\\) acting on control (`c`) and target (`t`) qubit,
-with the underlying definition \\(XX \equiv \sigma_x \sigma_x\\), \\(YY \equiv \sigma_y \sigma_y\\) and \\(ZZ \equiv \sigma_z \sigma_z\\).
+with the underlying definition \\(XX \equiv \sigma_x \sigma_x\\), \\(YY \equiv \sigma_y \sigma_y\\) and \\(ZZ \equiv \sigma_z \sigma_z\\). 
+
+In this context, spins are meant to be localized and therefore distinguishable degrees of freedom.
 
 ## SqrtISwap
 
@@ -310,3 +314,5 @@ The definition of the XY gate in matrix form is given by
  0 & 0 & 0 & 1
  \end{pmatrix}
 \\]
+
+It implements the same interaction as described by the `PMInteraction` gate but with a different prefactor.

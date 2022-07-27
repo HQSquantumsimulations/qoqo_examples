@@ -67,4 +67,4 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 | Gate | Short Description |
 |---------|---------|
 | MultiQubitMS    |  The Molmer-Sorensen gate between multiple qubits. |
-| MultiQubitZZ    |  The multi qubit PauliZ-product gate. |
+| MultiQubitZZ    |  The multi-qubit PauliZ-product gate. |

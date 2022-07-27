@@ -28,11 +28,11 @@ from qoqo import Circuit
 from qoqo import operations as ops
 
 circuit = Circuit()
-circuit += ops.DefinitionBit("bit_register", 2, is_output= True)
-circuit += ops.DefinitionComplex("complex_register", 3, is_output = False)
+circuit += ops.DefinitionBit("bit_register", 2, is_output=True)
+circuit += ops.DefinitionComplex("complex_register", 3, is_output=False)
 ```
 
-The content of one register is a list/vector of the corresponding type. Since quantum circuits are typically executed many times on quantum computing hardware, to account for the probabilistic nature of quantum mechanics, registers that are marked as output are returned as a list of lists from a qoqo/roqoqo [backend](src/backend).
+The content of one register is a list/vector of the corresponding type. Since quantum circuits are typically executed many times on quantum computing hardware, to account for the probabilistic nature of quantum mechanics, registers that are marked as output (`is_output=True`) are returned as a list of lists from a qoqo/roqoqo [backend](src/backend). In some use cases, e.g. for conditional processing within a circuit, the readout does not need to be returned. In that case the user needs to set the parameter to `is_output=False`.
 
 Registers are filled in the circuits by applying measurement operations with the correct register set as output in a quantum circuit.
 On quantum computing hardware only projective measurements into a bit register are available. On simulators one can also read out the full state vector into a complex register.
