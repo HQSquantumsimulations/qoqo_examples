@@ -4,6 +4,8 @@ Qoqo/roqoqo enables the user to construct finely controlled noise models. Noise 
 
 The noise operations can be directly added to a quantum circuit and can be simulated by compatible backends. Since noise operations can _not_ run on all universal quantum computers, they are defined as [Pragma](pragma.md) operations in qoqo/roqoqo. The strength of the noise is determined by defining a `gate_time` and a `rate`. The noise pragma operation affects the system like Lindblad type noise acting on the system with the rate `rate` for the time `gate_time`.
 
+_Note_: as long as gate times and rates are scaled inversely any kind of units can be used. However, we recommend using nanoseconds and inverse nanoseconds as units for gate times and decoherence rates.
+
 ## Example
 
 For example to add dephasing noise to qubit 0, damping noise to qubit 1 and depolarising noise to qubit 2 acting on the system after a `CNOT` gate has been applied we implement
@@ -81,7 +83,7 @@ where the coefficients correspond to the following summands expanded from the fi
 
 with \\( L_0 = \sigma^{+} \\), \\( L_1 = \sigma^{-} \\) and \\( L_3 = \sigma_{z} \\).
 
-Applying the Pragma with a given `gate_time` corresponds to applying the full time-evolution under the Lindblad equation for `gate_time` time.
+Applying a pragma noise operation with a given `gate_time` corresponds to applying the full time-evolution under the Lindblad equation.
 
 ### PragmaOverrotation
 
