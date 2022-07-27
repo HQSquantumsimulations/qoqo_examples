@@ -41,6 +41,19 @@ circuit += operations::PragmaDepolarising::new(3, 1.0, 5e-3);
 
 ```
 
+The single noise operations shown in the example above are:
+
+* `PragmaDamping` that applies a pure damping error corresponding to _zero_ temperature environments.
+* `PragmaDepolarising` which applies a depolarising error corresponding to _infinite_ temperature environments.
+* `PragmaDephasing` representing a pure dephasing error.
+
+For a stochastically unravelled combination of dephasing and depolarising the user can choose to use the `PragmaRandomNoise`. The error rate of the depolaristion (`depolarising_rate`) and the error rate of the dephasing (`dephasing_rate`) are provided as input parameters for this random noise operation. Further information on advanced noise operations available in qoqo/roqoqo is provided in the sections below. 
+
+However, common to all pragma noise operations are the following functions:
+* `superoperator()` can be called to obtain the superoperator representation of the noise operation in form of a (4x4)-matrix.
+* `probability()` returns the probability of noise gate affecting the qubit.
+* `powercf(power)` returns the gate to the power of `power`. The input parameter `power` needs to be of type CalculatorFloat as provided by the software module [qoqo_calculator](https://github.com/HQSquantumsimulations/qoqo_calculator).
+
 
 ## PragmaGeneralNoise
 
@@ -61,5 +74,24 @@ where the coefficients correspond to the following summands expanded from the fi
 
 with \\( L_0 = \sigma^{+} \\), \\( L_1 = \sigma^{-} \\) and \\( L_3 = \sigma_{z} \\).
 
-
 Applying the Pragma with a given `gate_time` corresponds to applying the full time-evolution under the Lindblad equation for `gate_time` time.
+
+## PragmaOverrotation
+
+This noise operation applies a statistical overrotation to the next rotation gate in the circuit, which matches the name given in the `gate` parameter of `PragmaOverrotation` and the involved qubits provided in `qubits`. The applied overrotation corresponds to adding a random number to the rotation angle.
+The random number is drawn from a normal distribution with mean `0` and standard deviation given by the input parameter `variance` that is multiplied by the `amplitude` parameter.
+
+## PragmaBoostNoise
+
+This operation boosts noise and overrotations in the circuit. The input parameter `noise_coefficient` defines the coefficient by which the noise is boosted, i.e. the number by which the `gate_time` is multiplied.
+
+## PragmaSleep
+
+This operation makes the quantum computer hardware wait a given amount of time (`sleep_time`). This pragma operation can be used for error mitigation reasons, for instance. It can be used to boost the noise on the qubits since it gets worse with time.
+
+
+
+
+
+
+
