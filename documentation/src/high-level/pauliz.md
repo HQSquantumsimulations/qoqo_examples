@@ -75,5 +75,70 @@ program = QuantumProgram(
 The same example in Rust:
 
 ```Rust
-// TO DO
+:dep roqoqo = "1.0.0-alpha.5"
+
+extern crate roqoqo;
+
+use roqoqo::{Circuit, operations::*, QuantumProgram};
+use roqoqo::measurements::{PauliZProduct, PauliZProductInput};
+use roqoqo::backends::{EvaluatingBackend, RegisterResult};
+use std::collections::HashMap;
+
+// initialize |psi>
+let mut init_circuit = Circuit::new();
+init_circuit.add_operation(Hadamard::new(0));
+
+// Z-basis measurement circuit with 1000 shots
+let mut z_circuit = Circuit::new();
+z_circuit.add_operation(DefinitionBit::new("ro_z".to_string(), 1, true));
+z_circuit.add_operation(
+    PragmaRepeatedMeasurement::new("ro_z".to_string(), 1000, None),
+);
+
+// X-basis measurement circuit with 1000 shots
+let mut x_circuit = Circuit::new();
+x_circuit.add_operation(DefinitionBit::new("ro_x".to_string(), 1, true));
+// Changing to the X-basis with a Hadamard gate
+x_circuit.add_operation(Hadamard::new(0));
+x_circuit.add_operation(
+    PragmaRepeatedMeasurement::new("ro_x".to_string(), 1000, None),
+);
+
+// Preparing the measurement input for one qubit
+// The PauliZProductInput starts with just the number of qubtis
+// and if to use a flipped measurements set.
+let mut measurement_input = PauliZProductInput::new(1, false);
+// Next, pauli products are added to the PauliZProductInput
+// Read out product of Z on site 0 for register ro_z (no basis change)
+measurement_input
+    .add_pauliz_product("ro_z".to_string(), vec![0])
+    .unwrap();
+// Read out product of Z on site 0 for register ro_x
+// (after basis change effectively a <X> measurement)
+measurement_input
+    .add_pauliz_product("ro_x".to_string(), vec![0])
+    .unwrap();
+
+// Last, instructions how to combine the single expectation values
+// into the total result are provided.
+// Add a result (the expectation value of H) that is a combination
+// of the PauliProduct expectation values.
+measurement_input
+    .add_linear_exp_val(
+        "<H>".to_string(), HashMap::from([(0, 0.1), (1, 0.2)]),
+    )
+    .unwrap();
+
+let measurement = PauliZProduct {
+    input: measurement_input,
+    circuits: vec![z_circuit.clone(), x_circuit.clone()],
+    constant_circuit: Some(init_circuit.clone()),
+};
+
+// Now, the `PauliZProduct` measurement is prepared to be used
+// in a QuantumProgram just like:
+let program = QuantumProgram::PauliZProduct {
+    measurement,
+    input_parameter_names: vec![],
+};
 ```
