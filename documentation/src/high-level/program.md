@@ -11,7 +11,7 @@ from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import PauliZProduct, PauliZProductInput
 from qoqo import QuantumProgram
-from qoqo_quest import SimulatorBackend
+from qoqo_quest import Backend
 
 # initialize |psi>
 init_circuit = Circuit()
@@ -52,11 +52,12 @@ measurement = PauliZProduct(
    input=measurement_input,
 )
 
-# A quantum program is created from the measurement and "angle" is registered as
-# a free input parameter.
-# The QuantumProgram now has one free parameter that needs to set when executing it.
-# The symbolic value angle in the circuits will be replaced by that free parameter
-# during execution.
+# A quantum program is created from the measurement
+# and "angle" is registered as a free input parameter.
+# The QuantumProgram now has one free parameter
+# that needs to set when executing it.
+# The symbolic value angle in the circuits will be replaced
+# by that free parameter during execution.
 program = QuantumProgram(
    measurement=measurement,
    input_parameter_names=["angle"],
@@ -64,7 +65,7 @@ program = QuantumProgram(
 
 # To execute a QuantumProgram a backend needs to be defined.
 # Create a backend simulating one qubit.
-backend = SimulatorBackend(1)
+backend = Backend(1)
 
 # Run QuantumProgram on the backend by setting the parameter value.
 expectation_values = program.run(backend, [0.785])
@@ -73,5 +74,79 @@ expectation_values = program.run(backend, [0.785])
 The same example in Rust:
 
 ```Rust
-// TO DO
+:dep roqoqo = "1.0.0-alpha.5"
+:dep roqoqo-quest = "0.7.0"
+
+extern crate roqoqo;
+extern crate roqoqo_quest;
+
+use roqoqo::{Circuit, operations::*, QuantumProgram};
+use roqoqo::measurements::{PauliZProduct, PauliZProductInput};
+use roqoqo::backends::{EvaluatingBackend, RegisterResult};
+use roqoqo_quest::Backend;
+use std::collections::HashMap;
+
+// initialize |psi>
+let mut init_circuit = Circuit::new();
+init_circuit.add_operation(RotateX::new(0, "angle".into()));
+
+// Z-basis measurement circuit with 1000 shots
+let mut z_circuit = Circuit::new();
+z_circuit.add_operation(DefinitionBit::new("ro_z".to_string(), 1, true));
+z_circuit.add_operation(
+    PragmaRepeatedMeasurement::new("ro_z".to_string(), 1000, None),
+);
+
+// X-basis measurement circuit with 1000 shots
+let mut x_circuit = Circuit::new();
+x_circuit.add_operation(DefinitionBit::new("ro_x".to_string(), 1, true));
+// Changing to the X-basis with a Hadamard gate
+x_circuit.add_operation(Hadamard::new(0));
+x_circuit.add_operation(
+    PragmaRepeatedMeasurement::new("ro_x".to_string(), 1000, None),
+);
+
+// Preparing the measurement input for one qubit
+let mut measurement_input = PauliZProductInput::new(1, false);
+// Read out product of Z on site 0 for register ro_z (no basis change)
+measurement_input
+    .add_pauliz_product("ro_z".to_string(), vec![0])
+    .unwrap();
+// Read out product of Z on site 0 for register ro_x
+// (after basis change effectively a <X> measurement)
+measurement_input
+    .add_pauliz_product("ro_x".to_string(), vec![0])
+    .unwrap();
+
+// Add a result (the expectation value of H) that is a combination
+// of the PauliProduct expectation values.
+measurement_input
+    .add_linear_exp_val(
+        "<H>".to_string(), HashMap::from([(0, 0.1), (1, 0.2)]),
+    )
+    .unwrap();
+
+let measurement = PauliZProduct {
+    input: measurement_input,
+    circuits: vec![z_circuit.clone(), x_circuit.clone()],
+    constant_circuit: Some(init_circuit.clone()),
+};
+
+// A quantum program is created from the measurement
+// and "angle" is registered as a free input parameter.
+// The QuantumProgram now has one free parameter
+// that needs to set when executing it.
+// The symbolic value angle in the circuits will be replaced
+// by that free parameter during execution.
+let program = QuantumProgram::PauliZProduct {
+    measurement,
+    input_parameter_names: vec!["angle".to_string()],
+};
+
+// To execute a QuantumProgram a backend needs to be defined.
+// Create a backend simulating one qubit.
+let backend = Backend::new(1);
+
+// Run QuantumProgram on the backend by setting the parameter value.
+let expectation_values = program.run(backend, &[0.785]).unwrap();
 ```
