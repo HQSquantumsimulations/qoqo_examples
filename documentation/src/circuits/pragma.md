@@ -1,6 +1,6 @@
 # Pragma Operations
 
-Pragma operations in qoqo/roqoqo are operations that are not part of the set of operations that can run on all universal quantum computers.
+Pragma operations in qoqo/roqoqo are operations that are _not_ part of the set of operations that can run on all universal quantum computers.
 
 Pragma operations can be used to:
 
@@ -9,5 +9,5 @@ Pragma operations can be used to:
 * Place operations that are only available on specific hardware (e.g. `PragmaChangeDevice`, `PragmaSleep`)
 * Place operations that are only available on simulator (e.g. `PragmaSetStateVector`, `PragmaGetStateVector`)
 
-For a full list of available Pragma operations see the API documentation of[roqoqo](https://docs.rs/roqoqo/latest/roqoqo/operations/index.html)
- and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.operations.html#module-qoqo.operations).
+For a full list of available Pragma operations see the API documentation of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/operations/index.html) (Rust core)
+ and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.operations.html#module-qoqo.operations) (python interface).
