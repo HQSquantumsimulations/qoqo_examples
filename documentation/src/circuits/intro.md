@@ -25,7 +25,7 @@ circuit += ops.CNOT(control=0, target=1)
 The same sample code snippet with roqoqo in Rust is given here:
 
 ```rust
-:dep roqoqo = "1.0.0-alpha.4"
+:dep roqoqo = "1.0.0-alpha.5"
 extern crate roqoqo;
 
 use roqoqo::{Circuit, operations::*};

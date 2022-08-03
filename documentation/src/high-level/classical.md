@@ -9,7 +9,7 @@ from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import ClassicalRegister
 from qoqo import QuantumProgram
-from qoqo_quest import SimulatorBackend
+from qoqo_quest import Backend
 
 # initialize |psi>
 init_circuit = Circuit()
@@ -36,7 +36,7 @@ measurement = ClassicalRegister(
 program = QuantumProgram(measurement=measurement, input_parameter_names=[])
 
 # Create a backend simulating one qubit.
-backend = SimulatorBackend(1)
+backend = Backend(1)
 
 (bit_registers, float_registers, complex_registers) = program.run_registers(backend, [])
 ```
@@ -44,5 +44,56 @@ backend = SimulatorBackend(1)
 The same example in Rust:
 
 ```Rust
-// TO DO
+:dep roqoqo = "1.0.0-alpha.5"
+:dep roqoqo-quest = "0.7.0"
+
+extern crate roqoqo;
+extern crate roqoqo_quest;
+
+use roqoqo::{Circuit, operations::*, registers::*, QuantumProgram};
+use roqoqo::measurements::ClassicalRegister;
+use roqoqo::backends::{EvaluatingBackend, RegisterResult};
+use roqoqo_quest::Backend;
+use std::collections::{HashMap, HashSet};
+
+// initialize |psi>
+let mut init_circuit = Circuit::new();
+init_circuit.add_operation(Hadamard::new(0));
+
+// Z-basis measurement circuit with 1000 shots
+let mut z_circuit = Circuit::new();
+z_circuit.add_operation(DefinitionBit::new("ro_z".to_string(), 1, true));
+z_circuit.add_operation(
+    PragmaRepeatedMeasurement::new("ro_z".to_string(), 1000, None),
+);
+
+// X-basis measurement circuit with 1000 shots
+let mut x_circuit = Circuit::new();
+x_circuit.add_operation(DefinitionBit::new("ro_x".to_string(), 1, true));
+// Changing to the X-basis with a Hadamard gate
+x_circuit.add_operation(Hadamard::new(0));
+x_circuit.add_operation(
+    PragmaRepeatedMeasurement::new("ro_x".to_string(), 1000, None),
+);
+
+let measurement = ClassicalRegister {
+    circuits: vec![z_circuit.clone(), x_circuit.clone()],
+    constant_circuit: Some(init_circuit.clone()),
+};
+
+// A quantum program is created from the measurement
+let program = QuantumProgram::ClassicalRegister {
+    measurement,
+    input_parameter_names: vec![],
+};
+
+// Create a backend simulating one qubit
+let backend = Backend::new(1);
+
+let result: RegisterResult = program.run_registers(backend.clone(), &[]);
+let result_registers: (
+    HashMap<String, BitOutputRegister>,
+    HashMap<String, FloatOutputRegister>,
+    HashMap<String, ComplexOutputRegister>,
+) = result.unwrap();
 ```
