@@ -29,3 +29,8 @@ Currently the available examples include:
 * An example how to perform expectation value measurements with qoqo/roqoqo ([Python](./qoqo/Measurement_Example.ipynb) | [Rust Program](./roqoqo/) | [Rust Jupyter](./roqoqo/))
 * A simple Variational Quantum Eigensolver (VQE) using the Variation Hamiltonian Ansatz (VHA) ([Python](./qoqo/Simple_VHA_with_qoqo.ipynb) | [Rust Program](./roqoqo/) | [Rust Jupyter](./roqoqo/))
 * A quantum teleportation example ([Python](./qoqo/Teleportation_Example.ipynb) | [Rust Program](./roqoqo/) | [Rust Jupyter](./roqoqo/))
+
+
+## General Notes
+
+This project is partly supported by [PlanQK](https://planqk.de).
