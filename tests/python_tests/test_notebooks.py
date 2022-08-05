@@ -9,10 +9,12 @@ from nbconvert.preprocessors import ExecutePreprocessor
 from pathlib import Path
 
 @pytest.mark.parametrize("name", [
-   "Intro_to_qoqo",
-   "Measurement_Example",
-   "Simple_VHA_with_qoqo",
-   "Teleportation_Example"
+   "1_Intro_to_qoqo",
+   "2_Measurement_example",
+   "3_Teleportation_example",
+    "4_Half_adder_example",
+    "5_Simple_VHA_with_qoqo",
+   "6_Deutsch-Josza_example",
 ])
 def test_running_notebook(name):
     src_path = Path(__file__)
