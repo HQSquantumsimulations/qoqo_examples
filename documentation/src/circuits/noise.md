@@ -2,7 +2,7 @@
 
 Qoqo/roqoqo enables the user to construct finely controlled noise models. Noise acting on the quantum commputer is modeled as a single noise operation affecting all gates applied on the given qubit on a quantum computer.
 
-The noise operations can be directly added to a quantum circuit and can be simulated by compatible backends. Since noise operations can _not_ run on all universal quantum computers, they are defined as [Pragma](pragma.md) operations in qoqo/roqoqo. The strength of the noise is determined by defining a `gate_time` and a `rate`. The noise pragma operation affects the system like Lindblad type noise acting on the system with the rate `rate` for the time `gate_time`.
+The noise operations can be directly added to a quantum circuit and can be simulated by compatible backends. Since noise _cannot_ be actively controlled on a quantum computer normally, the noise operations are defined as [Pragma](pragma.md) operations in qoqo/roqoqo. The strength of the noise is determined by defining a `gate_time` and a `rate`. The noise pragma operation affects the system as a Lindblad type noise acting on the system with the rate `rate` for the time `gate_time`.
 
 _Note_: as long as gate times and rates are scaled inversely any kind of units can be used. However, we recommend using nanoseconds and inverse nanoseconds as units for gate times and decoherence rates.
 
@@ -10,7 +10,7 @@ _Note_: as long as gate times and rates are scaled inversely any kind of units c
 
 For example to add dephasing noise to qubit 0, damping noise to qubit 1 and depolarising noise to qubit 2 acting on the system after a `CNOT` gate has been applied we implement
 
-in python: 
+In python: 
 
 ```python
 
@@ -26,7 +26,7 @@ circuit += operations.PragmaDepolarising(3, 1.0, 5e-3)
 
 ```
 
-in Rust:
+In Rust:
 
 ```rust
 
@@ -96,7 +96,8 @@ This operation boosts noise and overrotations in the circuit. The input paramete
 
 ### PragmaSleep
 
-This operation makes the quantum computer hardware wait a given amount of time (`sleep_time`). This pragma operation can be used for error mitigation reasons, for instance. It can be used to boost the noise on the qubits since it gets worse with time.
+This operation makes the quantum computer hardware, that provides this functionality, wait a given amount of time (`sleep_time`). Waiting for a given time can increase the effect of continuous noise on the result of running a quantum circuit. This is sometimes used in noise-extrapolation error mitigation techniques.
+
 
 
 

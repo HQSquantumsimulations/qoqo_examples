@@ -45,38 +45,4 @@ Besides the simple example qoqo provides a variety of operations, i.e.
 * [Pragma operations](pragma.md): that are specific operations that can _not_ run on all universal quantum computers.
 
 
-## Available functions
-
-An overview of available functions that can be applied on a Circuit is provided in the table below. For further details on input and output parameter please see the API documentation of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html) and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.Circuit.html).
-
-For Circuit the following functions are defined in qoqo:
-
-| Function | Description | Only in |
-|---------|---------|---------| 
-| `+` and `+=` | Add two circuits or an operation to the Circuit. | |
-| `add(operation)` | Adds an Operation to the Circuit. | Python|
-| `add_operation(operation)` | Adds the specified operation to the Circuit. | Rust|
-| `count_occurences("operation")` | Returns the number of operations in the Circuit with the specified operation name. | |
-| `default()` | Creates an empty Circuit. | Rust|
-| `definitions()` | Returns the definitions in the Circuit. | |
-| `extend(iterator)` | Adds the operations in the specified iterator to the Circuit. | Rust|
-| `filter_by_tag` | Returns a list of operations with given name. | Python|
-| `from_bincode` | Converts the bincode representation of the Circuit to a qoqo Circuit. | Python|
-| `from_iter(iterator)` | Creates a Circuit from the items in the specified iterator. |  Rust|
-| `from_json` | Converts the json representation of the Circuit to a qoqo Circuit. | Python|
-| `get(index)` | Returns the operation at the specified index in the Circuit. | |
-| `get_mut(index)` | Returns mutable reference to the operation at the specified index in the Circuit. | Rust|
-| `get_operation_types()` | Returns a list of all of the operations (names) in the Circuit. | |
-| `get_slice` | Returns copy of a slice of the Circuit. | Python|
-| `[...]` | Gets a slice of the Circuit (returned as a vector). | Rust |
-| `iter()` | Creates an iterator of the Circuit. | Rust|
-| `len()` | Returns the length of the Circuit. | |
-| `is_empty()` | Returns a boolean of whether the Circuit contains any definitions and operations or not. | |
-| `involved_qubits()` | Returns the qubits invovlved in the whole Circuit. | |
-| `new()` | Creates an empty Circuit. | Rust|
-| `operations()` | Returns the operations in the Circuit. | |
-| `overrotate()` | Returns clone of the Circuit with all overrotation Pragmas applied. | |
-| `remap_qubits(mapping)` | Remaps the qubits in (a copy of) the Circuit according to the specified mapping. | |
-| `substitute_parameters(calculator)` | Substitutes any symbolic parameters in (a copy of) the Circuit according to the specified input parameter (type: Calculator of [qoqo_calculator](https://github.com/HQSquantumsimulations/qoqo_calculator)). | |
-| `to_bincode` | Returns the bincode representation of the Circuit. | Python|
-| `to_json` | Returns the json representation of the Circuit. | Python|
+For details on the **available functions** that can be applied on a Circuit please refer to the **API documentation** of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html) and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.Circuit.html).
