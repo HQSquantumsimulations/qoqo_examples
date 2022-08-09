@@ -2,7 +2,7 @@
 
 The `PauliZProduct` measurement can be executed on a simulator and on real quantum computer hardware. It returns the expectation values measured in the `z`-basis. A qoqo Measurement combines one `constant_circuit` that is always executed first and a list of `circuits` that are executed after the constant circuit. `PauliZProduct` also contains a `measurement_input` that encodes the post-processing of the obtained results.
 
-As an **example** let us consider the measurement of a Hamiltonian 
+As an **example** let us consider the measurement of a Hamiltonian
 \\[
     \hat{H} = 0.1\cdot X + 0.2\cdot Z
 \\] where `X` and `Z` are Pauli operators. The target is to measure \\(\hat{H} \\) with respect to a state
@@ -10,10 +10,12 @@ As an **example** let us consider the measurement of a Hamiltonian
     |\psi> = (|0> + |1>)/\sqrt{2}.
 \\]
 The `constant_circuit` will be used to prepare the state \\( |\psi> \\) by applying the Hadamard gate on the initialized Circuit. The given Hamiltonian includes `X` and `Z` terms that can not be measured at the same time since they belong to different bases. Thus, the `circuits` list will include one quantum circuit that does not apply any additional gate and one circuit that rotates the qubit basis into the X-basis so that the expectation value `<X>` is equivalent to the measurement of `<Z>` in the new basis. This kind of measurement is referred to as a `PauliZProduct` measurement because each qubit needs to be rotated into the correct basis for the readout. For the post-processing of the measured results the `PauliZProduct` measurement needs two more inputs provided by the object `PauliZProductInput`:
+
 * which qubits to combine into expectation values (`add_pauliz_product()`),
 * and which weight to use for each result (`add_linear_exp_val()`).
 
-In general one can measure the expectation values of the products of local Z operators, e.g. `<Z0>`, `<Z1>`, `<Z0*Z1>`, `<Z0*Z3>`, etc. The `PauliZProductInput` needs to define all of these products that are measured. In the given example we will measure two products `<Z0>` after a rotation in the X basis and `<Z0>` _without_ an additional rotation. The `PauliZProductInput` also defines the weights of the products in the final result. In the example below, 0.1 is the coefficient for the first product and 0.2 for the second.
+In general one can measure the expectation values of the products of local Z operators, e.g. `<Z0>`, `<Z1>`, `<Z0*Z1>`, `<Z0*Z3>`, etc. The `PauliZProductInput` needs to define all of the products that are measured. In the given example we will measure two products `<Z0>` after a rotation in the X basis (corresponding to `<X0>`) and `<Z0>` _without_ a rotation before the measurement.
+The `PauliZProductInput` also defines the weights of the products in the final result. In the example below, 0.1 is the coefficient for the first product and 0.2 for the second.
 
 ```python
 from qoqo import Circuit
@@ -63,22 +65,9 @@ measurement = PauliZProduct(
 )
 ```
 
-Now, the `PauliZProduct` measurement is prepared to be used in a [QuantumProgram](program.md) just like
-
-```python
-program = QuantumProgram(
-    measurement=measurement,
-    input_parameter_names=[],
-)
-```
-
 The same example in Rust:
 
-```Rust
-:dep roqoqo = "1.0.0-alpha.5"
-
-extern crate roqoqo;
-
+```rust
 use roqoqo::{Circuit, operations::*, QuantumProgram};
 use roqoqo::measurements::{PauliZProduct, PauliZProductInput};
 use roqoqo::backends::{EvaluatingBackend, RegisterResult};
@@ -133,12 +122,5 @@ let measurement = PauliZProduct {
     input: measurement_input,
     circuits: vec![z_circuit.clone(), x_circuit.clone()],
     constant_circuit: Some(init_circuit.clone()),
-};
-
-// Now, the `PauliZProduct` measurement is prepared to be used
-// in a QuantumProgram just like:
-let program = QuantumProgram::PauliZProduct {
-    measurement,
-    input_parameter_names: vec![],
 };
 ```

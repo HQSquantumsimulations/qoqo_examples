@@ -95,18 +95,19 @@ Therefore if we combine two single-qubit gates in Matrix form it follows:
  \end{pmatrix}
  \\]
 
-## Qubit names
+## Qubit nameing
 
-Qoqo distinguishes between single-qubit gates, tw- qubit gates and multi-qubit gates.
-* In single-qubit gates the qubit is always referred to as `qubit`, 
-* in two-qubit gates the two qubits are referred to as `control` and `target`,
-* and in multi-qubit gates the `qubits` are given as a vector of all involved qubits.
+Qoqo uses a unified naming scheme for qubits in operations
+* In single-qubit opterations the qubit is always referred to as `qubit`, 
+* In two-qubit gates the two qubits are referred to as `control` and `target`,
+* In multi-qubit gates the ordered list/ vector of qubits the gates acts on is reffered to as `qubits`.
 
 When initializing two-qubit gates, the `control` is always the first and `target` the second argument.
 
 ## Unitary Matrix
 
-To help determine the type of the gate, the unitary qoqo/roqoqo operations support the function `unitary_matrix()` that returns the definition of the gate in matrix form. This definition ignores the qubits of the gate to fit in the smallest possible matrix dimension.
+Unitary operations in qoqo/roqoqo provide a  `unitary_matrix()` method that returns the definition of the gate in matrix form. This definition ignores the qubits of the gate to fit in the smallest possible matrix dimension.
+
 * For single-qubit gates the created matrix always corresponds to `qubit=0` and has a 2x2-dimension.
 * For two-qubit gates the created matrix always corresponds to `control=1`, `target=0` and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding described above.
-* For multi-qubit gates it always corresponds to `qubits=[0..N]` where `N` is the number of qubits in the qubit vector of the multi-qubit gate.
+* For multi-qubit gates the created matrix always corresponds to `qubits=[0..N]` where `N` is the number of qubits in the qubit vector of the multi-qubit gate.

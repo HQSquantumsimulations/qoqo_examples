@@ -1,8 +1,9 @@
 # QuantumProgram and Variable-Replacement
 
-The main use of QuantumProgram is to contain a Measurement that treats expectation values or output registers of quantum circuits that contain symbolic parameters. Circuit with symbolic parameters can not be simulated or executed on real hardware. The symbolic parameters need to be replaced with real floating point numbers first. Thus, a QuantumProgram contains a list of the free parameters (`input_parameter_names`) and can automatically replace the parameters when it is executed. It replaces the parameters by its `run` methods and returns the result.
+A `QuantumProgram` allows the user to call it with a list of free `float` parameters.
+It contains a `measurement` with quantum circuits that  treats expectation values or output registers of quantum circuits that contain symbolic parameters. Circuits with symbolic parameters can not be simulated or executed on real hardware. The symbolic parameters need to be replaced with real floating point numbers first. Thus, a QuantumProgram contains a list of the free parameters (`input_parameter_names`) and can automatically replace the parameters when it is executed. It replaces the parameters by its `run` methods and returns the result.
 
-To demonstrate the replacement of variables the example discussed in [PauliZProduct](pauliz.md) is modified to use a state \\( |\psi> \\) with a free angle between `|0>` and `|1>`. Such a state can be prepared by the application of `RotateX` gate (instead of `Hadamard` gate).
+To demonstrate the replacement of variables the example discussed in [PauliZProduct](pauliz.md) is modified to use a state `|psi>` with a free angle between `|0>` and `|1>`. Such a state can be prepared by the application of `RotateX` gate (instead of `Hadamard` gate).
 
 In python:
 
@@ -73,13 +74,7 @@ expectation_values = program.run(backend, [0.785])
 
 The same example in Rust:
 
-```Rust
-:dep roqoqo = "1.0.0-alpha.5"
-:dep roqoqo-quest = "0.7.0"
-
-extern crate roqoqo;
-extern crate roqoqo_quest;
-
+```rust
 use roqoqo::{Circuit, operations::*, QuantumProgram};
 use roqoqo::measurements::{PauliZProduct, PauliZProductInput};
 use roqoqo::backends::{EvaluatingBackend, RegisterResult};

@@ -44,12 +44,6 @@ backend = Backend(1)
 The same example in Rust:
 
 ```Rust
-:dep roqoqo = "1.0.0-alpha.5"
-:dep roqoqo-quest = "0.7.0"
-
-extern crate roqoqo;
-extern crate roqoqo_quest;
-
 use roqoqo::{Circuit, operations::*, registers::*, QuantumProgram};
 use roqoqo::measurements::ClassicalRegister;
 use roqoqo::backends::{EvaluatingBackend, RegisterResult};
