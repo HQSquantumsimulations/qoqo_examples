@@ -8,7 +8,7 @@ qoqo/roqoqo distinguishes between:
 * Gate Operations: Unitary operations that can be executed on every unitary quantum computer (but might need to be decomposed into a sequence of native operations) ([see also here](unitarty.md))
 * Pargma operations that are not generally available on all universal quantum computers (see [pragma operations](pragma.md) and [noise operations](noise.md) )
 
-In order to create a useful result a Circuit in qoqo/roqoqo needs to contain:
+In order to create a useful result a Circuit in qoqo/roqoqo must contain:
 
 * A definition of a classical register for readout
 * Operations to change the state of the quantum computer, for example `RotateZ` or `CNOT` gate operations.
