@@ -48,7 +48,7 @@ jobs:
           cd 4_Half_adder_example
           cargo run
           cd ..
-          cd 1_Into_to_roqoqo
+          cd 1_Intro_to_roqoqo
           cargo run
           cd ..
           cd 2_Measurement_example
