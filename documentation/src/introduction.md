@@ -9,22 +9,21 @@ This user documentation gives a general overview of the design principles and in
 
 The packages qoqo and roqoqo are a pair of quantum computing toolkits  by [HQS Quantum Simulations](https://quantumsimulations.de).
 
-Like many quantum toolkits qoqo and roqoqo are at the core circuit based toolkits. A sequence of operations to be run on a quantum computer are grouped into a quantum circuit.
+Like many quantum toolkits qoqo and roqoqo are at the core circuit based toolkits. A sequence of operations to be run on a quantum computer is grouped into a [quantum circuit](circuits/intro.md).
 
 In the majority of quantum computing applications the output of several quantum circuits needs to be collected and processed using additional classical measurement input to construct a usable measurement result (e.g. when using a quantum computer to simulate physical quantum systems).
 
-qoqo and roqoqo also provide tools to group quantum circuits and measurement input into a QuantumProgram. QuantumPrograms are designed as a high-level interface to quantum computations that can be used similar to standard function calls.
+qoqo and roqoqo also provide tools to group quantum circuits and measurement input into a [QuantumProgram](high-level/intro.md). QuantumPrograms are designed as a high-level interface to quantum computations that can be used similar to standard function calls.
 QuantumPrograms accept floating point inputs, can be serialized and only need qoqo/roqoqo and a simulator or hardware backend to be executed.
 
-
-### What roqoqo/qoqo is:
+### What roqoqo/qoqo is
 
 * A toolkit to represent quantum operations and circuits
-* A tool to package quantum circuits and classical information into Quantum Programs
+* A tool to package quantum circuits and classical information into quantum programs
 * A way to serialize quantum programs
 * A set of optional interfaces to devices, simulators and toolkits (e.g. [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest), [qoqo_mock](https://github.com/HQSquantumsimulations/qoqo_mock), [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm))
 
-### What roqoqo/qoqo is **not**:
+### What roqoqo/qoqo is **not**
 
 * A decomposer translating circuits to a specific set of gates
 * A quantum circuit optimizer
@@ -33,15 +32,32 @@ QuantumPrograms accept floating point inputs, can be serialized and only need qo
 ### qoqo vs roqoqo
 
 roqoqo is the core implementation of the toolkit. It is written in Rust.
-qoqo is the Python interface to roqoqo and implements 
+qoqo is the Python interface to roqoqo and provides operations, Circuit, measurements and QuantumProgram from roqoqo in the Python environment.
 
-## Components
+## Architecture
 
-The schematic overview below shows the interplay of different components in qoqo/roqoqo which are described in the chapters of this documentation.
+roqoqo has several components:
 
-* A [Circuit](circuits/intro.md) is a an element that includes a sequence of [gate operations](gate_operations.md) applied on the involved qubits.
-* A [QuantumProgram](high-level/intro.md) is an object that contains Circuits, Measurements (e.g. [PauliZProduct](high-level/pauliz.md)) and can run on a Backend.
-* For each individual hardware or simulator a [Backend](backends.md) can be created, that is either an `EvaluatingBackend` (like `qoqo-quest`) or a non-evaluating backend (like `qoqo_qasm`).
-* [Devices](devices.md) can be abstract devices or actual hardware devices.
+* Operations and Circuit (see [Quantum Circuits](circuits/intro.md))
+* Measurements and QuantumProgram (see [High-Level Interface: Quantum Programs](high-level/intro.md))
+* Backends (see [Backends](backends.md))
+* Devices (see [Devices](devices.md))
 
-![Different components in qoqo](images/components.png)
+Operations and Circuit can be used to represent single quantum circuits that run on quantum hardware.
+
+Measurements and QuantumProgram combine several circuits with classical information to provide a high level interface for running quantum programs that yield an immediately usable result.
+
+To execute quantum circuits or quantum programs a backend connecting to quantum hardware or a simulator is required.
+qoqo/roqoqo does not directly implement these backends. To minimize dependencies backends are implemented in separate packages (e.g. `qoqo-quest`).
+In the `backends` module roqoqo provides an interface description for backends with the `EvaluatingBackend` Rust trait.
+
+When compiling quantum circuits it is often necessary to know the topology of a targeted quantum device. Device properties can also be used by backends, for example to accurately simulate a given quantum device.
+At the moment qoqo/roqoqo does not implement generic devices but defines an interface for obtaining the device topology and the noise properties. The interface is defined by roqoqos `Device` trait.
+
+The following schematic shows how the different components are related when running a quantum program:
+
+![Relation between qoqo/roqoqo components](images/qoqo_program_schematics.png)
+
+The circuit compilation use cases can be visualized in a similar way:
+
+![Compilation use case](images/qoqo_compilation_schematics.png)

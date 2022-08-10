@@ -1,0 +1,13 @@
+[package]
+name = "Teleportation_example"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+roqoqo = {version="1.0.0-alpha.5"}
+roqoqo-quest = {version="0.7"}
+num-complex = "0.4"
+qoqo_calculator = "0.8.3"
+nalgebra = "0.31"

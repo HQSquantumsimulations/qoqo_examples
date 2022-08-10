@@ -16,7 +16,7 @@ use roqoqo::backends::EvaluatingBackend;
 use roqoqo::{operations as ops, Circuit};
 use roqoqo_quest::Backend;
 
-pub fn teleportation_main() {
+pub fn main() {
     println!(">> Teleportation example start.");
 
     fn prep_psi(angle_thet: CalculatorFloat, angle_phi: CalculatorFloat) -> Circuit {

@@ -30,3 +30,30 @@ jobs:
           python -m pip install -r qoqo/requirements.txt
           python -m pip install -r tests/python_tests/requirements.txt
           python -m pytest tests/python_tests
+
+  standalone_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+      - uses: Swatinem/rust-cache@v2.0.0
+      - run: |
+          cd roqoqo/standalone
+          cd 6_Deutsch-Josza_example
+          cargo run
+          cd ..
+          cd 4_Half_adder_example
+          cargo run
+          cd ..
+          cd 1_Intro_to_roqoqo
+          cargo run
+          cd ..
+          cd 2_Measurement_example
+          cargo run
+          cd ..
+          cd 3_Teleportation_example
+          cargo run
+          cd ..

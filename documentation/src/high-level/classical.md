@@ -1,8 +1,19 @@
 # ClassicalRegister Measurement
 
-`ClassicalRegister` measurement can be used in a QuantumProgram to return unprocessed measurements. There are many use cases where end users want to receive the full measurement output without post-processing. For example when working with external tools that expect full measurement records or when implementing custom post-processing. For these use cases the `ClassicalRegister` measurement can be used to create three dictionaries: one for registers with bit values, one for registers with float values and one for registers with complex values. Compared to other measurement types in qoqo/roqoqo this measurement does _not_ need a separate `measurement_input` since no post-processing takes place.
+A `ClassicalRegister` measurement returns the unprocessed register readouts of `Circuits`.  
+A `ClassicalRegister` measurement can be used when end users want to perform their own post-processing. For example when working with external tools that expect full measurement records. 
+ 
+The registers are returned  as a tuple of three dictionaries/HashMaps: 
 
-To distinguish between a command returning expectation values and a program returning register the command `run_registers()` is used in the fulllowing example.
+* The collection of bit registers
+* The collection of float registers
+* The collection of complex registers
+
+A `ClassicalRegister` measurement does _not_ need a separate `measurement_input` since no post-processing takes place.
+
+To distinguish between a method returning expectation values and a method  returning registers the method `run_registers()` is used when executing a `ClassicalRegister` measurement.
+
+An example for running a `ClassicalRegister` measurement:
 
 ```python
 from qoqo import Circuit
@@ -44,12 +55,6 @@ backend = Backend(1)
 The same example in Rust:
 
 ```Rust
-:dep roqoqo = "1.0.0-alpha.5"
-:dep roqoqo-quest = "0.7.0"
-
-extern crate roqoqo;
-extern crate roqoqo_quest;
-
 use roqoqo::{Circuit, operations::*, registers::*, QuantumProgram};
 use roqoqo::measurements::ClassicalRegister;
 use roqoqo::backends::{EvaluatingBackend, RegisterResult};
