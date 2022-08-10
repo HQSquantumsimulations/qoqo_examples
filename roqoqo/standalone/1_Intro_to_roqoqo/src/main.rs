@@ -53,7 +53,7 @@ pub fn entangling_circuit_snippet() {
 
 /// Example for measuring qubits.
 ///
-/// Qoqo uses classical registers for the readout. We need to add a classical register definition to the circuit and a measurement statement.
+/// roqoqo uses classical registers for the readout. We need to add a classical register definition to the circuit and a measurement statement.
 /// The number of projective measurements can be directly set in the circuit.  
 /// The simulation and measurement of the circuit is handled by the roqoqo_quest interface (in this example).
 ///
@@ -89,7 +89,7 @@ pub fn measuring_qubits() {
 
 /// Example for measuring observables.
 ///
-/// Qoqo includes the direct evaluation of projective measurements to an observable measurement e.g. 3 * < Z0 > + < Z0 Z1 >.
+/// roqoqo includes the direct evaluation of projective measurements to an observable measurement e.g. 3 * < Z0 > + < Z0 Z1 >.
 /// The measurement is defined by a set of expectation values of a product of pauli operators and a matrix that combines the expectation values.
 ///
 pub fn measuring_observables() {
@@ -182,4 +182,12 @@ pub fn serialization_quantum_program() {
     assert!(program == program_new);
     println!(">> De/Serialization of QuantumProgram performed successfully.");
     println!(">> Introduction example end.")
+}
+
+
+fn main() {
+    entangling_circuit_snippet();
+    measuring_qubits();
+    measuring_observables();
+    serialization_quantum_program();
 }

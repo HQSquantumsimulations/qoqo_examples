@@ -1,10 +1,10 @@
-# Gate Operations
+# List of Gate Operations
 
-Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit gate operations that act on a set of qubits and can be executed on a quantum computing device. Mathematically speaking, a gate can be represented by a matrix.
+Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit unitary operations that apply a unitary transformation and can be executed on a any universal quantum computer. Mathematically, a gate can be represented by a unitary matrix.
 
 A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section.  We differentiate between [single-qubit gates](single_qubit_gates.md) acting on a single qubit, [two-qubit gates](two_qubit_gates.md) applied on a pair of qubits and [multi-qubit gates](multi_qubit_gates.md) affecting a series of qubits.
 
-### Nomenclature
+### Notation
 
 * A rotation angle is usually annotated with \\( \theta \\) and the according argument being `theta`.
 * For the phase angle the symbol \\( \varphi \\) is used.
@@ -34,7 +34,6 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 | SqrtPauliX     | The square root of the PauliX gate \\( e^{-i \frac{\theta}{4} \sigma_x} \\).  |
 | TGate     | The T gate.  |
 
-
 ## [Two-qubit gates](two_qubit_gates.md)
 
 | Gate | Short Description |
@@ -60,7 +59,6 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 | SWAP    |  The swap gate, to switch the positions of two qubits. |
 | VariablesMSXX    |  The variable-angle MolmerSorensen XX gate. |
 | XY    |  The XY gate. |
-
 
 ## [Multi-qubit gates](multi_qubit_gates.md)
 

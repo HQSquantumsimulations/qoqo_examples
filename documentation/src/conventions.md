@@ -59,7 +59,7 @@ For a two-qubit state space we write the states of the qubits in the following o
 
 ## Qubit naming
 
-Qoqo uses a unified naming scheme for qubits in operations
+qoqo uses a unified naming scheme for qubits in operations
 
 * In single-qubit operations the qubit is always referred to as `qubit`,
 * In two-qubit gates the two qubits are referred to as `control` and `target`,

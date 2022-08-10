@@ -1,22 +1,28 @@
 # Devices
 
-Devices in qoqo can be abstract devices or actual hardware devices.
+When working with quantum circuits it is often necessary to know the topology of a targeted quantum device. Device properties can also be used by backends, for example to accurately simulate a given quantum device.
+At the moment qoqo/roqoqo does not implement devices but defines an interface for obtaining the device topology and the noise properties. The interface is defined by roqoqos `Device` trait.
 
-**Actual hardware devices** that are supported by roqoqo [backends](backends.md) and contain the necessary information for accessing the quantum computing hardware. The devices also encode a connectivity model.
+Devices based on the roqoqo `Device` trait  can be abstract devices or backend devices.
 
-**Abstract devices** contain abstract information for the model of a quantum computer and its parameters.
+**Abstract devices** contain abstract information about the device topology, the available gates and the noise model..
 
-The abstract devices can be used to determine which gate operations are available on a specific device model A typical example for abstract devices are linear chains of square lattices in which two-qubit gate operations are only available between the neighbouring qubits.
+**Backend devices** are devices that are implemented by a roqoqo [backend](backends.md). They can specify additional information for accessing the device on the backend and can contain additional information. The devices also contain all the information of the abstract devices.
 
-The abstract devices can also encode a noise model. The [noise operations](circuits/noise.md) in qoqo/roqoqo are in general based on a (pseudo) time needed to execute a quantum operation and Lindblad rates for the qubits in the device. Specifically in the noise model each qubit undergoes a continuous Lindblad-type decoherence time evolution of the form
+A typical example for abstract devices are linear chains of square lattices in which two-qubit gate operations are only available between the neighboring qubits.
 
+The noise model of the `Device` trait is based on the continuous time Lindblad equation:
 \\[
  \frac{d}{dt}\rho = \sum_{i,j=0}^{2} M_{i,j} L_{i} \rho L_{j}^{\dagger} - \frac{1}{2} \{ L_{j}^{\dagger} L_i \rho \},
 \\]
 
 with \\( L_0 = \sigma^{+}\\), \\( L_1 = \sigma^{-}\\) and \\(L_3 = \sigma^{z}\\).
 
-The matrix representation of the decoherence rates of the Lindblad equation can be obtained by calling the function `qubit_decoherence_rates()` on the implemented device.
+It is defined by the decoherence rates `M` and the (pseudo) time needed to execute a quantum operation.
 
-For further functions implemented for the devices in qoqo/roqoqo please refer to the API documentation of [roqoqo::devices](https://docs.rs/roqoqo/latest/roqoqo/devices/index.html) (Rust core)
- and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/qoqo.html) (python interface).
+The matrix representation of the decoherence rates of the Lindblad equation can be obtained by calling the method `qubit_decoherence_rates()` of a device.
+
+The time required for a gate operation can be obtained from the methods `single_qubit_gate_time()`, `two_qubit_gate_time()`, and `multi_qubit_gate_time()` for a specific type of gate (defined by its name) and the qubits the gate should act on.  
+The gate time method can also be used to querry to topology and available gate operations on a device. If a gate operation of a specific type is not available on the given qubits the gate time method will return `None`.
+
+For further details of the `Device` trait please refer to the API documentation of [roqoqo::devices](https://docs.rs/roqoqo/latest/roqoqo/devices/index.html) (Rust core)

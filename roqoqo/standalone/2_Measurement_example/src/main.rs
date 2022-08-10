@@ -13,7 +13,7 @@
 use roqoqo::backends::EvaluatingBackend;
 use roqoqo::{operations, Circuit};
 
-pub fn measurement_main() {
+pub fn main() {
     println!(">> Measurement example start.");
 
     // #Measuring a single qubit

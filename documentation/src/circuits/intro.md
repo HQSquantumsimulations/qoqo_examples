@@ -1,20 +1,20 @@
 # Quantum circuit
 
-A quantum circuit refers to a linear sequence of operations that can be executed on a general quantum computer. Like most quantum computing toolkits qoqo/roqoqo provides a `Circuit` object and a set of operations that can be part of that object.
+A quantum circuit refers to a linear sequence of operations that can be executed on a quantum computer. Like most quantum computing toolkits qoqo/roqoqo provides a `Circuit` object and a set of `Operations` that can be added to a `Circuit`.
 
 qoqo/roqoqo distinguishes between:
 
 * Definitions: Operations that declare (and initialize) classical register values ([see also here](readout.md) )
-* Gate Operations: Unitary operations that can be executed on every unitary quantum computer (but might need to be decomposed into a sequence of native operations) ([see also here](unitarty.md))
+* Gate Operations: Unitary operations that can be executed on every unitary quantum computer (but might need to be decomposed into a sequence of native operations) ([see also here](unitary.md))
 * Pargma operations that are not generally available on all universal quantum computers (see [pragma operations](pragma.md) and [noise operations](noise.md) )
 
 In order to create a useful result a Circuit in qoqo/roqoqo must contain:
 
 * A definition of a classical register for readout
 * Operations to change the state of the quantum computer, for example `RotateZ` or `CNOT` gate operations.
-* A measurement to return classical information based on the quantum state of the quantum computer.
+* A measurement to return classical information based on the state of the quantum computer.
 
-A sample code snippet with qoqo in python is provided here:
+With qoqo a `Circuit` can be constructed like this:
 
 ```python
 from qoqo import Circuit
@@ -32,7 +32,7 @@ circuit += ops.MeasureQubit(qubit=0, readout="ro", readout_index=0)
 circuit += ops.MeasureQubit(qubit=1, readout="ro", readout_index=1)
 ```
 
-The same sample code snippet with roqoqo in Rust is given here:
+And with roqoqo like this:
 
 ```rust
 use roqoqo::{Circuit, operations::*};
@@ -50,4 +50,4 @@ circuit += MeasureQubit::new(0, "ro".to_string(), 0);
 circuit += MeasureQubit::new(1, "ro".to_string(), 1);
 ```
 
-For details on the **available functions** that can be applied on a Circuit please refer to the **API documentation** of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html) and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.Circuit.html).
+For details on the **available methods** of a `Circuit` please refer to the **API documentation** of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html) and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.Circuit.html).

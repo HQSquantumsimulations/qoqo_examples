@@ -7,7 +7,7 @@ Backends in qoqo/roqoqo are used for two things:
 
 ## Running quantum programs
 
-To obtain results based on a quantum program (or quantum circuit) defined in qoqo/roqoqo, the program needs to be run on a simulator or real quantum computing hardware.
+To obtain results based on a quantum program (or quantum circuit) defined in qoqo/roqoqo, the program must run on a simulator or real quantum computing hardware.
 
 For an individual simulator or hardware a backend can be created that implements roqoqo's `EvaluatingBackend` trait and executes quantum circuits.
 The implementation of individual backends is provided not in qoqo itself, but in other packages.
@@ -25,7 +25,7 @@ An EvaluatingBackend provides the functionality to run:
 * A measurement. _All_ circuits collected in the measurement are executed and the post-processed expectation values are returned.
 * A quantum program. A qoqo QuantumProgram also handles replacement of symbolic variables. It provides its own `run()` method and calls the given backend internally.
 
-All evaluating backends provide the same functions: `run_circuit()`, `run_measurement()` or `run_measurement_registers()`, and `run()`.
+All evaluating backends provide the same methods: `run_circuit()`, `run_measurement()` or `run_measurement_registers()`, and `run()`.
 
 ### Example
 
@@ -46,7 +46,7 @@ from qoqo_quest import SimulatorBackend
 # initialize |psi>
 init_circuit = Circuit()
 # Apply a RotateY gate with a symbolic angle
-# To execute the circuit this symbolic parameter needs to be replaced
+# To execute the circuit this symbolic parameter must replaced
 # with a real number with the help of a QuantumProgram
 init_circuit += ops.RotateX(0, "angle")
 # Z-basis measurement circuit with 1000 shots
@@ -93,7 +93,7 @@ expecation_values = backend.run_measurement(executable_measurement)
 print(expecation_values)
 
 # c) Run a quantum program
-# The QuantumProgram now has one free parameter that needs to bet set when executing it.
+# The QuantumProgram now has one free parameter that must be set when executing it.
 # The symbolic value "angle" in the circuits will be replaced by that free parameter
 # during execution.
 program = QuantumProgram(measurement=measurement, input_parameter_names=["angle"])
@@ -167,7 +167,7 @@ let expecation_values = backend.run_measurement(&executable_measurement).unwrap(
 println!("{:?}", expecation_values);
 
 // c) Run a quantum program
-// The QuantumProgram now has one free parameter that needs to bet set when executing it.
+// The QuantumProgram now has one free parameter that must be set when executing it.
 // The symbolic value "angle" in the circuits will be replaced by that free parameter
 // during execution.
 let program = QuantumProgram::PauliZProduct{ measurement, input_parameter_names: vec!["angle".to_string()]};
@@ -178,4 +178,4 @@ let expecation_values = program.run(backend, &[0.1]).unwrap();
 ## Translating to other frameworks
 
 Backends that translate qoqo/roqoqo objects (for example Circuits) to other frameworks or representations do not implement the `EvaluatingBackend`.
-At the moment qoqo/roqoqo provide a backend to translate qoqo/roqoqo `Circuits` to qasm: [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm).
+At the moment a backend to translate qoqo/roqoqo `Circuits` to qasm is implemented: [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm).

@@ -41,9 +41,9 @@ fn main() {
     // of the qubits after our calculation. Other types of registers available in qoqo are `DefinitionBit` for bit registers
     // used to store actual measurement results of a quantum computer and `DefinitionFloat` to store real valued results.
 
-    // We use the `GetStateVector` pragma operation. A Pragma operation is information for the compiler / qoqo only and will not
+    // We use the `GetStateVector` Pragma operation. A Pragma operation is information for the compiler / qoqo only and will not
     // be sent to the actual quantum computer. We will encounter other important Pragmas later on. The `GetStateVector`
-    // pragma operation obtains the state vector of the qubits and stores it in the defined output register ("ro").
+    // Pragma operation obtains the state vector of the qubits and stores it in the defined output register ("ro").
     // It accepts an additional measurement circuit that would be added to the circuit before measuring.
     // The state vector can only be obtained in simulations on conventional computers, never from the real device.
 

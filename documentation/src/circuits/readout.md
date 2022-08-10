@@ -1,8 +1,13 @@
 # Readout
 
 To obtain results from running a quantum circuit the quantum computer needs to return classical information.
-qoqo/roqoqo uses register based readouts where all classical information is returned from the quantum circuit using classical registers declared at the start of the circuit.
-Classical registers can contain three types of classical data: Bit (or bool), Float (f64/double) and Complex.
+qoqo/roqoqo uses register based readouts where all classical information is returned from the quantum circuit using classical registers declared at the start of the circuit.  
+Classical registers can contain three types of classical data:
+
+* Bit (or bool)
+* Float (f64/double)
+* Complex.
+
 Each register is declared in a `Circuit` with a Pragma operation setting the register name and a length. The Pragma operation also declares whether the register is an output or not.
 After being declared at the start of the circuit, information is written to the registers in the `Circuit` by `Measurement` or `Pragma` operations.
 If the register is declared as an output register it is returned after the execution of the circuit.
@@ -15,13 +20,14 @@ from qoqo import operations as ops
 
 circuit = Circuit()
 # A bit register that is not returned
-circuit += ops.DefinitionBit("bit_register", 2, is_output=False)
+circuit += ops.DefinitionBit("bit_register", length=2, is_output=False)
 # A float register that is returned
-circuit += ops.DefinitionFloat("float_register", 2, is_output=True)
-circuit += ops.DefinitionComplex("complex_register", 3, is_output=False)
+circuit += ops.DefinitionFloat("float_register", length=2, is_output=True)
+# A complex register that is not returned
+circuit += ops.DefinitionComplex("complex_register", length=3, is_output=False)
 ```
 
-A code snippet example in Rust:
+A Rust example:
 
 ```rust
 use roqoqo::Circuit;
@@ -43,15 +49,16 @@ circuit += operations::DefinitionComplex::new("complex_register".to_string(), 3,
 Information is written to registers by the `MeasureQubit` operation or Pragma operations in a quantum circuit.
 
 * On quantum computing _hardware_ only _projective_ measurements into a bit register are available, that is a measurement in the `Z`-basis yielding `0` or `1`.
-* On _simulators_ one can also read out the full state vector into a complex register.
+* On _simulators_ one can also read out the full state vector or density matrix into a complex register.
 
-`MeasureQubit` corresponds directly to a _projectivce_ measurement and needs to be available on all general quantum computers. `PragmaRepeatedMeasurement` is shorthand for repeatedly running the circuit and apply a projective measurement each time. While it is not necessarily available with every [backend](backends.md) it is compatible with hardware qunatum computers.
+`MeasureQubit` corresponds directly to a _projectivce_ measurement.  By definition projective measurements are available on universal quantum computers.  
+`PragmaRepeatedMeasurement` is shorthand for repeatedly running the circuit and apply a projective measurement each time. While it is not necessarily available on every [backend](backends.md) it is compatible with hardware quantum computers.
 
-As shown in the example below, the operation `MeasureQubit` can be used to provide measurement instructions for each individual qubit. The input parameter `qubit` specifies the qubit to be measured, whereas the parameter `readout_index` defines the position in the classical register `readout` where the measurement value of the `qubit` is stored. The explicit assignment of a qubit measurement to a readout register index is necessary to handle any remapping, that might be introduced by a quantum algorithms, properly.
+As shown in the example below, the operation `MeasureQubit` can be used to provide measurement instructions for each individual qubit. The input parameter `qubit` specifies the qubit to be measured, whereas the parameter `readout_index` defines the position in the classical register `readout` where the measurement value of the `qubit` is stored. The explicit assignment of a qubit measurement to a readout register index can be used to handle qubit  remapping in a quantum circuit.
 
-If the measurement is performed on a simulator or if the quantum computer hardware device supports the operation `PragmaRepeatedMeasurement`, it can be used instead of `MeasureQubit` command to provide the measurement instruction for all qubits in `qubit_mapping` that needs to be repeated N times (`number_measurements`).  For further available pragma measurement instructions please refer to the section [pragma operations](pragma.md).
+When supported by the backend, `PragmaRepeatedMeasurement` can be used instead of `MeasureQubit` command to provide the measurement instruction for all qubits in `qubit_mapping` that needs to be repeated N times (`number_measurements`).  For further available Pragma measurement instructions please refer to the section [Pragma operations](pragma.md).
 
-A code snippet example in python:
+Setting up readouts in Python:
 
 ```python
 from qoqo import Circuit
@@ -70,7 +77,7 @@ circuit += ops.DefinitionComplex("complex_register", 3, is_output = False)
 circuit += ops.PragmaGetStateVector("complex_register")
 ```
 
-A code snippet example in Rust:
+Setting up readouts in Rust:
 
 ```rust
 use roqoqo::Circuit;

@@ -42,11 +42,18 @@ jobs:
       - uses: Swatinem/rust-cache@v2.0.0
       - run: |
           cd roqoqo/standalone
-          cd detsch-josza_example
+          cd 6_Deutsch-Josza_example
           cargo run
           cd ..
-          cd half_adder_example
+          cd 4_Half_adder_example
           cargo run
           cd ..
-          cd intro_examples
+          cd 1_Into_to_roqoqo
           cargo run
+          cd ..
+          cd 2_Measurement_example
+          cargo run
+          cd ..
+          cd 3_Teleportation_example
+          cargo run
+          cd ..
