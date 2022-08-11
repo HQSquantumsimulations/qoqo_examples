@@ -2,7 +2,7 @@
 
 # Examples for qoqo
 
-This repository contains the [user documentation]() and  a set of introductory examples for the [qoqo/roqoqo](https://github.com/HQSquantumsimulations/qoqo) quantum computing toolkit by [HQS Quantum Simulations GmbH](https://quantumsimulations.de).
+This repository contains the [user documentation](https://hqsquantumsimulations.github.io/qoqo_examples/) and  a set of introductory examples for the [qoqo/roqoqo](https://github.com/HQSquantumsimulations/qoqo) quantum computing toolkit by [HQS Quantum Simulations GmbH](https://quantumsimulations.de).
 
 roqoqo is a Rust library to represent quantum circuits and qoqo is the python interface to roqoqo.
 
