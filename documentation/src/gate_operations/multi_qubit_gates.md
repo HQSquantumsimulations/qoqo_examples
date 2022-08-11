@@ -4,7 +4,7 @@ Multi-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum co
 
 ## MultiQubitMS
 
-The Molmer-Sorensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms the gate applies
+The Molmer-Sorensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms, the gate applies
 
 \\[
     e^{-i * \theta/2 * X_{i0} * X_{i1} * ... * X_{in}},

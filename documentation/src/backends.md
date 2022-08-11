@@ -9,10 +9,10 @@ Backends in qoqo/roqoqo are used for two things:
 
 To obtain results based on a quantum program (or quantum circuit) defined in qoqo/roqoqo, the program must run on a simulator or real quantum computing hardware.
 
-For an individual simulator or hardware a backend can be created that implements roqoqo's `EvaluatingBackend` trait and executes quantum circuits.
+For an individual simulator or hardware, a backend can be created that implements roqoqo's `EvaluatingBackend` trait and executes quantum circuits.
 The implementation of individual backends is provided not in qoqo itself, but in other packages.
 
-At the moment the following evaluating backends are implemented for qoqo/roqoqo:
+At the moment the following EvaluatingBackends are implemented for qoqo/roqoqo:
 
 * [qoqo_aqt](https://github.com/HQSquantumsimulations/qoqo_aqt)
 * [qoqo_mock](https://github.com/HQSquantumsimulations/qoqo_aqt)
@@ -29,7 +29,7 @@ All evaluating backends provide the same methods: `run_circuit()`, `run_measurem
 
 ### Example
 
-In this subsection an example is provided.  A [QuantumProgram](hight-level/program.md) is created to be executed on the [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest) simulator backend. Here, all three options supported by an `EvaluatingBackend` are presented:
+In this subsection, an example is provided. A [QuantumProgram](hight-level/program.md) is created to be executed on the [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest) simulator backend. Here, all three options supported by an `EvaluatingBackend` are presented:
 
 * to run a single circuit,
 * to run a measurement, and
@@ -97,7 +97,7 @@ print(expecation_values)
 # The symbolic value "angle" in the circuits will be replaced by that free parameter
 # during execution.
 program = QuantumProgram(measurement=measurement, input_parameter_names=["angle"])
-# Run the program with  0.1 substituting `angle`
+# Run the program with 0.1 substituting `angle`
 expecation_values = program.run(backend, [0.1])
 ```
 
@@ -171,7 +171,7 @@ println!("{:?}", expecation_values);
 // The symbolic value "angle" in the circuits will be replaced by that free parameter
 // during execution.
 let program = QuantumProgram::PauliZProduct{ measurement, input_parameter_names: vec!["angle".to_string()]};
-// Run the program with  0.1 substituting `angle`
+// Run the program with 0.1 substituting `angle`
 let expecation_values = program.run(backend, &[0.1]).unwrap();
 ```
 

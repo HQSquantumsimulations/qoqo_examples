@@ -6,8 +6,8 @@ Pragma operations can be used to:
 
 * Annotate a quantum circuit with additional information that is not necessary for execution (e.g `PragmaGlobalPhase`, `PragmaStartDecompositionBlock`)
 * Apply operations that lead to a repeated execution of a circuit (`PragmaRepeatedMeasurement`, `PragmaSetNumberOfMeasurements`)
-* Appy operations that are only available on specific hardware (e.g. `PragmaChangeDevice`, `PragmaSleep`)
-* Apply operations that are only available on simulator (e.g. `PragmaSetStateVector`, `PragmaGetStateVector`)
+* Apply operations that are only available on specific hardware (e.g. `PragmaChangeDevice`, `PragmaSleep`)
+* Apply operations that are only available on a simulator (e.g. `PragmaSetStateVector`, `PragmaGetStateVector`)
 * Model noise ([see also](noise.md))
 * Model error sources (`PragmaOverrotation`)
 

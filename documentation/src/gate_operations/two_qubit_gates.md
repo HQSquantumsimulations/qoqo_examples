@@ -1,8 +1,8 @@
 # Two-qubit gates
 
-Two-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum computer that act on a pair of qubits. In two-qubit gates the two qubits are referred to as `control` and `target`. When initializing two-qubit gates, the `control` is always the first and `target` the second argument. For two-qubit gates the created matrix always corresponds to `control=1`, `target=0` and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding as described in chapter [conventions](../conventions.md). The full matrix form of the two-qubit gates implemented in qoqo/roqoqo is documented in this chapter.
+Two-qubit gates in qoqo/roqoqo represent atomic instructions of any quantum computer that act on a pair of qubits. In two-qubit gates the two qubits are referred to as `control` and `target`. When initializing two-qubit gates, the `control` is always the first argument and `target` the second argument. For two-qubit gates, the created matrix always corresponds to `control=1`, `target=0`, and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding as described in chapter [conventions](../conventions.md). The full matrix form of the two-qubit gates implemented in qoqo/roqoqo is documented in this chapter.
 
-The given form of the unitary matrix is consistent with  the following ordering of qubit states in a two-qubit state space:
+The given form of the unitary matrix is consistent with the following ordering of qubit states in a two-qubit state space:
 
  \\[
  \left|00 \right>  =  \textrm{state} 0 \\\\
@@ -84,7 +84,7 @@ The controlled PauliZ gate applies the PauliZ gate on the `target` qubit control
 
 ## ControlledPhaseShift
 
-The controlled phase shift gate implements  a phase shift applied on `target` qubit based on the value of the `control` qubit. The unitary matrix is given by
+The controlled phase shift gate implements a phase shift applied on `target` qubit based on the value of the `control` qubit. The unitary matrix is given by
 
 \\[
  U = \begin{pmatrix}
@@ -115,7 +115,7 @@ _Note_: The qubits have to be adjacent, i.e., \\( |i-j|=1 \\) has to hold. This 
 
 ## FSwap
 
-The fermionic SWAP gate has the following form of the unitary matrix
+The fermionic SWAP gate can be represented as the following unitary matrix
 
 \\[
  U = \begin{pmatrix}
@@ -208,7 +208,7 @@ This gate implements the fixed-phase MolmerSorensen XX operation as introduced i
 
 ## PhaseShiftedControlledZ
 
-The phase-shifted controlled-Z gate, modified, i.e. phase-shifted ControlledPauliZ two-qubit gate, that corresponds to the equation (1) in the original [reference](https://arxiv.org/pdf/1908.06101.pdf). The full matrix form is defined as
+The phase-shifted controlled-Z gate, modified, i.e. phase-shifted ControlledPauliZ two-qubit gate, which corresponds to the equation (1) in the original [reference](https://arxiv.org/pdf/1908.06101.pdf). The full matrix form is defined as
 
 \\[
  U = \begin{pmatrix}
@@ -233,7 +233,7 @@ where \\(X_c\\) is the Pauli matrix \\(\sigma_x\\) acting on the control qubit, 
 
 ## Qsim
 
-The Qsim gate implements a `SWAP` between two spins and a `SpinInteraction` simultaniously. In this context, spins are meant to be localized and therefore distinguishable degrees of freedom. The definition of the Qsim gate in matrix form is given by
+The Qsim gate implements a `SWAP` between two spins and a `SpinInteraction` simultaneously. In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom. The definition of the Qsim gate in matrix form is given by
 
 \\[
  U = \begin{pmatrix}
@@ -244,7 +244,7 @@ The Qsim gate implements a `SWAP` between two spins and a `SpinInteraction` simu
  \end{pmatrix}
 \\]
 
-where x, y, z are the prefactors of the products of Pauli matrices \\(X_c X_t\\), \\(Y_c Y_t\\), \\(Z_c Z_t\\) acting on control (`c`) and target (`t`) qubit, that are part of the spin interaction.
+where x, y, z are the prefactors of the products of Pauli matrices \\(X_c X_t\\), \\(Y_c Y_t\\), \\(Z_c Z_t\\) acting on the control (`c`) and target (`t`) qubits that are part of the spin interaction.
 
 ## SpinInteraction
 
@@ -257,7 +257,7 @@ The gate represents the generalized, anisotropic XYZ Heisenberg interaction betw
 where x, y, z are the prefactors of the products of Pauli matrices \\(X_c X_t\\), \\(Y_c Y_t\\), \\(Z_c Z_t\\) acting on control (`c`) and target (`t`) qubit,
 with the underlying definition \\(XX \equiv \sigma_x \sigma_x\\), \\(YY \equiv \sigma_y \sigma_y\\) and \\(ZZ \equiv \sigma_z \sigma_z\\). 
 
-In this context, spins are meant to be localized and therefore distinguishable degrees of freedom.
+In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom.
 
 ## SqrtISwap
 
@@ -274,7 +274,7 @@ The square root of the ISwap gate is represented by the matrix
 
 ## SWAP
 
-The SWAP gate is used to change the positions between two qubits. For example the SWAP gate is used by many compilation routines if the given connectivity on the quantum computing device is limited and the qubits need to be remapped in order to run a quantum program successfully on the quantum computing hardware. The full matrix form is given by
+The SWAP gate is used to change the positions between two qubits. For example, the SWAP gate is used by many compilation routines if the given connectivity on the quantum computing device is limited and the qubits need to be remapped in order to run a quantum program successfully on the quantum computing hardware. The full matrix form is given by
 
 \\[
  U = \begin{pmatrix}

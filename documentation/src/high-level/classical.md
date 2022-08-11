@@ -1,9 +1,9 @@
 # ClassicalRegister Measurement
 
-A `ClassicalRegister` measurement returns the unprocessed register readouts of `Circuits`.  
-A `ClassicalRegister` measurement can be used when end users want to perform their own post-processing. For example when working with external tools that expect full measurement records. 
+A `ClassicalRegister` measurement returns the unprocessed register readouts of `Circuits`. 
+A `ClassicalRegister` measurement can be used when end-users want to perform their own post-processing, for instance when working with external tools that expect full measurement records. 
  
-The registers are returned  as a tuple of three dictionaries/HashMaps: 
+The registers are returned as a tuple of three dictionaries/HashMaps: 
 
 * The collection of bit registers
 * The collection of float registers
@@ -11,7 +11,7 @@ The registers are returned  as a tuple of three dictionaries/HashMaps:
 
 A `ClassicalRegister` measurement does _not_ need a separate `measurement_input` since no post-processing takes place.
 
-To distinguish between a method returning expectation values and a method  returning registers the method `run_registers()` is used when executing a `ClassicalRegister` measurement.
+To distinguish between a method returning expectation values and a method returning registers, the method `run_registers()` is used when executing a `ClassicalRegister` measurement.
 
 An example for running a `ClassicalRegister` measurement:
 
