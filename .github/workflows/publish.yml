@@ -8,13 +8,13 @@ jobs:
   publish_book:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: peaceiris/actions-mdbook@v1
-        with:
-          version: latest
-      - run: |
-          mdbook build
-      - name: publish
+    - uses: actions/checkout@v3
+    - uses: peaceiris/actions-mdbook@v1
+      with:
+        version: latest
+    - run: |
+        mdbook build
+    - name: publish
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
