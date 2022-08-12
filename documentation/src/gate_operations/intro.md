@@ -1,6 +1,6 @@
 # List of Gate Operations
 
-Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit unitary operations that apply a unitary transformation and can be executed on a universal quantum computer. Mathematically, a gate can be represented by a unitary matrix.
+Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit unitary operations that apply a unitary transformation and can be executed on any universal quantum computer. Mathematically, a gate can be represented by a unitary matrix.
 
 A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section. We differentiate between [single-qubit gates](single_qubit_gates.md) acting on a single qubit, [two-qubit gates](two_qubit_gates.md) applied on a pair of qubits and [multi-qubit gates](multi_qubit_gates.md) affecting a series of qubits.
 
@@ -27,7 +27,7 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 | PhaseShiftState1     | Rotation around z-axis by angle \\(\theta\\) applied on state \\( \left\|1 \right> \\) results in phase shift compared to RotateZ gate. |
 | RotateAroundSphericalAxis     | Implements a rotation around an axis in spherical coordinates.  |
 | RotateX     | The rotation gate around x-axis \\( e^{-i \frac{\theta}{2} \sigma_x} \\).  |
-| RotateXY     | Implements a rotation around the x- and y-axes in spherical coordinates.  |
+| RotateXY     | Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates.  |
 | RotateY     | The rotation gate around y-axis \\( e^{-i \frac{\theta}{2} \sigma_y} \\).  |
 | RotateZ     | The rotation gate around z-axis \\( e^{-i \frac{\theta}{2} \sigma_z} \\).  |
 | SGate     | The S gate.  |

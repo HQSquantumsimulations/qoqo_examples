@@ -15,11 +15,6 @@ In the majority of quantum computing applications, the output of several quantum
 qoqo and roqoqo also provide tools to group quantum circuits and measurement input into a [QuantumProgram](high-level/intro.md). QuantumPrograms are designed as a high-level interface to quantum computations that can be used similar to standard function calls.
 QuantumPrograms accept floating point inputs, can be serialized, and only need qoqo/roqoqo and a simulator or a hardware backend to be executed.
 
-### qoqo vs roqoqo
-
-roqoqo is the core implementation of the toolkit. It is written in Rust.
-qoqo is the Python interface to roqoqo and provides operations, Circuit, measurements and QuantumProgram from roqoqo in the Python environment.
-
 ### What roqoqo/qoqo is
 
 * A toolkit to represent quantum operations and circuits
@@ -32,6 +27,11 @@ qoqo is the Python interface to roqoqo and provides operations, Circuit, measure
 * A decomposer translating circuits to a specific set of gates
 * A quantum circuit optimizer
 * A collection of quantum algorithms
+
+### qoqo vs roqoqo
+
+roqoqo is the core implementation of the toolkit. It is written in Rust.
+qoqo is the Python interface to roqoqo and provides operations, Circuit, measurements and QuantumProgram from roqoqo in the Python environment.
 
 ## Architecture
 

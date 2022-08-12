@@ -122,7 +122,7 @@ The rotation gate around x-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_x} \\
 
 ## RotateXY
 
-Implements a rotation around the x- and y-axes in spherical coordinates. The unitary matrix representing the gate is given by
+Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates. The unitary matrix representing the gate is given by
 
 \\[
  U  = \begin{pmatrix}
