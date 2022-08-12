@@ -184,7 +184,6 @@ pub fn serialization_quantum_program() {
     println!(">> Introduction example end.")
 }
 
-
 fn main() {
     entangling_circuit_snippet();
     measuring_qubits();
