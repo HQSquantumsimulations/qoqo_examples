@@ -1,7 +1,7 @@
 # QuantumProgram and Variable-Replacement
 
-A `QuantumProgram` allows the user to call it with a list of free `float` parameters.  
-It contains a `measurement` with quantum circuits that contain symbolic parameters. Circuits with symbolic parameters can not be simulated or executed on real hardware. The symbolic parameters need to be replaced with real floating point numbers first. A `QuantumProgram` contains a list of the free parameters (`input_parameter_names`) and can automatically replace the parameters when it is executed. It replaces the parameters by its `run` methods and returns the result.
+A `QuantumProgram` allows the user to call it with a list of free `float` parameters. 
+It contains a `measurement` with quantum circuits that contain symbolic parameters. Circuits with symbolic parameters cannot be simulated or executed on real hardware. The symbolic parameters need to be replaced with real floating point numbers first. A `QuantumProgram` contains a list of the free parameters (`input_parameter_names`) and can automatically replace the parameters when it is executed. It replaces the parameters by its `run` methods and returns the result.
 
 As an example we will use the measurement from [PauliZProduct](pauliz.md) with a state`|psi>` parameterized by an angle between `|0>` and `|1>`.
 

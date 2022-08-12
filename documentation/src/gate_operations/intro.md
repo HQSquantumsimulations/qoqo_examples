@@ -1,13 +1,13 @@
 # List of Gate Operations
 
-Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit unitary operations that apply a unitary transformation and can be executed on a any universal quantum computer. Mathematically, a gate can be represented by a unitary matrix.
+Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit unitary operations that apply a unitary transformation and can be executed on any universal quantum computer. Mathematically, a gate can be represented by a unitary matrix.
 
-A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section.  We differentiate between [single-qubit gates](single_qubit_gates.md) acting on a single qubit, [two-qubit gates](two_qubit_gates.md) applied on a pair of qubits and [multi-qubit gates](multi_qubit_gates.md) affecting a series of qubits.
+A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section. We differentiate between [single-qubit gates](single_qubit_gates.md) acting on a single qubit, [two-qubit gates](two_qubit_gates.md) applied on a pair of qubits and [multi-qubit gates](multi_qubit_gates.md) affecting a series of qubits.
 
 ### Notation
 
-* A rotation angle is usually annotated with \\( \theta \\) and the according argument being `theta`.
-* For the phase angle the symbol \\( \varphi \\) is used.
+* A rotation angle is usually annotated with \\( \theta \\) and its corresponding argument is `theta`.
+* For the phase angle, the symbol \\( \varphi \\) is used.
 * The rotation angle  \\( \phi \\)  in the x-y plane is addressed by the argument name `phi`.
 * \\( \sigma_x \\), \\( \sigma_y \\), \\( \sigma_z \\) are the Pauli matrices X, Y, Z
 \\[
@@ -20,14 +20,14 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 |---------|---------|
 | Hadamard     | The Hadamard gate, to create a superposition of states, and so to change the basis.  |
 | InvSqrtPauliX     | The inverse square root of the PauliX gate \\( e^{i \frac{\theta}{4} \sigma_x} \\).  |
-| PauliX     | The Pauli X gate, rotation with a fixed angle \\( \frac{\pi}{2} \\) corresponds to a "flip" on x-axis.  |
-| PauliY     | The Pauli Y gate, rotation with a fixed angle \\( \frac{\pi}{2} \\) corresponds to a "flip" on y-axis.  |
-| PauliZ     | The Pauli Z gate, rotation with a fixed angle \\( \frac{\pi}{2} \\) corresponds to a "flip" on z-axis.  |
+| PauliX     | The Pauli X gate, a rotation with a fixed angle of \\( \frac{\pi}{2} \\), corresponds to a "flip" on x-axis.  |
+| PauliY     | The Pauli Y gate, a rotation with a fixed angle of \\( \frac{\pi}{2} \\), corresponds to a "flip" on y-axis.  |
+| PauliZ     | The Pauli Z gate, a rotation with a fixed angle of \\( \frac{\pi}{2} \\), corresponds to a "flip" on z-axis.  |
 | PhaseShiftState0     | Rotation around z-axis by angle \\(\theta\\) applied on state \\( \left \|0 \right> \\) results in a phase shift compared to RotateZ gate. |
 | PhaseShiftState1     | Rotation around z-axis by angle \\(\theta\\) applied on state \\( \left\|1 \right> \\) results in phase shift compared to RotateZ gate. |
 | RotateAroundSphericalAxis     | Implements a rotation around an axis in spherical coordinates.  |
 | RotateX     | The rotation gate around x-axis \\( e^{-i \frac{\theta}{2} \sigma_x} \\).  |
-| RotateXY     | Implements a rotation around an x- and y-axis in spherical coordinates.  |
+| RotateXY     | Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates.  |
 | RotateY     | The rotation gate around y-axis \\( e^{-i \frac{\theta}{2} \sigma_y} \\).  |
 | RotateZ     | The rotation gate around z-axis \\( e^{-i \frac{\theta}{2} \sigma_z} \\).  |
 | SGate     | The S gate.  |

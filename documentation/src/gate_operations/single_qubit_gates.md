@@ -1,6 +1,6 @@
 # Single-qubit gates
 
-Single-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum computer that act on a single qubit. In single-qubit gates the qubit is always referred to as `qubit`.  The unitary matrices of single-qubit gates are 2x2-dimensional matrices applied on single-qubit states  \\( \left \|0 \right> \\) and  \\( \left \|1 \right> \\), as defined in chapter [conventions](../conventions.md). 
+Single-qubit gates in qoqo/roqoqo represent atomic instructions of any quantum computer that act on a single qubit. In single-qubit gates the qubit is always referred to as `qubit`. The unitary matrices of single-qubit gates are 2x2-dimensional matrices applied on single-qubit states \\( \left \|0 \right> \\) and \\( \left \|1 \right> \\), as defined in chapter [conventions](../conventions.md). 
 
 The most general unitary operation acting on one qubit is of the form 
 \\[ 
@@ -10,11 +10,11 @@ The most general unitary operation acting on one qubit is of the form
  \end{pmatrix}
  \\]
 
-The parameters \\( \alpha_r \\), \\( \alpha_i \\) and  \\( \beta_r \\), \\( \beta_i \\) can be accessed by the functions `alpha_r()`, `alpha_i()`, `beta_r()` and `beta_i()` applied on the particular single-qubit gate. The full matrix form of the single-qubit gates available in qoqo/roqoqo is documented in this chapter.
+The parameters \\( \alpha_r \\), \\( \alpha_i \\) and \\( \beta_r \\), \\( \beta_i \\) can be accessed by the functions `alpha_r()`, `alpha_i()`, `beta_r()` and `beta_i()`, applied on the particular single-qubit gate. The full matrix form of the single-qubit gates available in qoqo/roqoqo is documented in this chapter.
 
 ## Hadamard
 
-The Hadamard gate when applied creates a superposition of states, and so it can be used to change the basis if required. The definition of the gate in matrix form is given by
+The Hadamard gate when applied creates a superposition of states, and can therefore be used to change the basis if required. The definition of the gate in matrix form is given by
 
 \\[
  U = \frac{1}{\sqrt{2}} \begin{pmatrix}
@@ -25,7 +25,7 @@ The Hadamard gate when applied creates a superposition of states, and so it can 
 
 ## InvSqrtPauliX
 
-The inverse square root of the PauliX gate  \\( e^{\mathrm{i} \frac{\theta}{4} \sigma_x} \\) corresponds to a unitary matrix defined as
+The inverse square root of the PauliX gate \\( e^{\mathrm{i} \frac{\theta}{4} \sigma_x} \\) corresponds to a unitary matrix defined as
 
 \\[
  U = \frac{1}{\sqrt{2}} \begin{pmatrix}
@@ -34,11 +34,11 @@ The inverse square root of the PauliX gate  \\( e^{\mathrm{i} \frac{\theta}{4} \
  \end{pmatrix}
 \\]
 
-In some cases, the gate operation `InvSqrtPauliX` together with the operation `SqrtPauliX` are the only available rotation gates on some hardware platforms. This aspect becomes relevant when it comes to the compilation of a quantum algorithm containing any arbitrary gates to the set of basic gates supported by the hardware device.
+ On some hardware platforms, the gate operation `InvSqrtPauliX` together with the operation `SqrtPauliX` are the only available rotation gates. This becomes relevant when it comes to the compilation of a quantum algorithm containing any arbitrary gates to the set of basic gates supported by the hardware device.
 
 ## PauliX
 
-The Pauli X gate implements a rotation around x-axis with a fixed angle \\( \frac{\pi}{2} \\) that can be used e.g. to flip the qubit state. The full matrix form is given by 
+The Pauli X gate implements a rotation of \\( \frac{\pi}{2} \\) about the x-axis that can be used e.g. to flip the qubit state. The full matrix form is given by 
 
 \\[
  U = \begin{pmatrix}
@@ -49,7 +49,7 @@ The Pauli X gate implements a rotation around x-axis with a fixed angle \\( \fra
 
 ## PauliY
 
-The Pauli Y gate implements a rotation around y-axis with a fixed angle \\( \frac{\pi}{2} \\) that can be used e.g. to flip the qubit state. The unitary matrix is defined as
+The Pauli Y gate implements a rotation of \\( \frac{\pi}{2} \\) about the y-axis that can be used e.g. to flip the qubit state. The unitary matrix is defined as
 
 \\[
  U = \begin{pmatrix}
@@ -60,7 +60,7 @@ The Pauli Y gate implements a rotation around y-axis with a fixed angle \\( \fra
 
 ## PauliZ
 
-The Pauli Z gate implements a rotation around z-axis with a fixed angle \\( \frac{\pi}{2} \\) that can be used e.g. to flip the qubit state. The full matrix form is given by
+The Pauli Z gate implements a rotation of \\( \frac{\pi}{2} \\) about the z-axis that can be used e.g. to flip the qubit state. The full matrix form is given by
 
 \\[
  U = \begin{pmatrix}
@@ -122,7 +122,7 @@ The rotation gate around x-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_x} \\
 
 ## RotateXY
 
-Implements a rotation around an x- and y-axis in spherical coordinates. The unitary matrix representing the gate is given by
+Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates. The unitary matrix representing the gate is given by
 
 \\[
  U  = \begin{pmatrix}
@@ -133,7 +133,7 @@ Implements a rotation around an x- and y-axis in spherical coordinates. The unit
 
 ## RotateY
 
-The rotation gate around y-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_y} \\). The full matrix form is given by
+The rotation gate around the y-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_y} \\). The full matrix form is given by
 
 \\[
  U = \begin{pmatrix}
@@ -144,7 +144,7 @@ The rotation gate around y-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_y} \\
 
 ## RotateZ
 
-The rotation gate around z-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_z} \\). The unitary matrix reads
+The rotation gate around the z-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_z} \\). The unitary matrix reads
 
 \\[
  U = \begin{pmatrix} \\\ 
@@ -155,7 +155,7 @@ The rotation gate around z-axis \\( e^{-\mathrm{i} \frac{\theta}{2} \sigma_z} \\
 
 ## SGate
 
-The unitary matrix of the S gate, that is often used in the theory of error correction, reads
+The unitary matrix of the S gate, which is often used in the theory of error correction, reads
 
 \\[
  U = \frac{1}{\sqrt{2}} \begin{pmatrix}
@@ -175,11 +175,11 @@ The square root of the PauliX gate \\( e^{-\mathrm{i} \frac{\theta}{4} \sigma_x}
  \end{pmatrix}
 \\]
 
-In some cases, the gate operation `SqrtPauliX` together with the operation `InvSqrtPauliX` are the only available rotation gates on some hardware platforms. This aspect becomes relevant when it comes to the compilation of a quantum algorithm containing any arbitrary gates to the set of basic gates supported by the hardware device.
+On some hardware platforms, the gate operation `SqrtPauliX` together with the operation `InvSqrtPauliX` are the only available rotation gates. This becomes relevant when it comes to the compilation of a quantum algorithm containing any arbitrary gates to the set of basic gates supported by the hardware device.
 
 ## TGate
 
-The unitary matrix of the T gate, that is often used in the theory of error correction, is defined as follows
+The unitary matrix of the T gate, which is often used in the theory of error correction, is defined as follows
 
 \\[
  U = \frac{1}{\sqrt{2}} \begin{pmatrix}
