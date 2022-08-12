@@ -141,7 +141,7 @@
 <p>The noise operations can be directly added to a quantum circuit and can be simulated by compatible backends. Since noise cannot be actively controlled on a quantum computer normally, the noise operations are defined as <a href="pragma.html">Pragma</a> operations in qoqo/roqoqo. The strength of the noise is determined by defining a <code>gate_time</code> and a <code>rate</code>. The noise Pragma operation affects the system as a Lindblad type noise acting on the system with the rate <code>rate</code> for the time <code>gate_time</code>.</p>
 <p><em>Note</em>: as long as gate times and rates are scaled inversely any kind of units can be used.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
-<p>For example we can add dephasing noise to qubit 0, damping noise to qubit 1 and depolarising noise to qubit 2  after a <code>CNOT</code> gate has been applied.</p>
+<p>For example we can add dephasing noise to qubit 0, damping noise to qubit 1, and depolarising noise to qubit 2 after a <code>CNOT</code> gate has been applied.</p>
 <p>In Python:</p>
 <pre><code class="language-python">
 from qoqo import Circuit
@@ -149,7 +149,7 @@ from qoqo import operations
 
 circuit = Circuit()
 circuit += operations.CNOT(0,1)
-#Adding dephasing noise acting on gate 0 with gate_time 1.0 and rate 1e-3
+# Adding dephasing noise acting on gate 0 with gate_time 1.0 and rate 1e-3
 circuit += operations.PragmaDephasing(qubit=0, gate_time=1.0, rate=1e-3)
 circuit += operations.PragmaDamping(1, 1.0, 2e-3)
 circuit += operations.PragmaDepolarising(3, 1.0, 5e-3)
@@ -168,20 +168,19 @@ circuit += operations::PragmaDepolarising::new(3, 1.0, 5e-3);
 </code></pre>
 <h2 id="superoperator-representation"><a class="header" href="#superoperator-representation">Superoperator representation</a></h2>
 <p>All noise operations in qoqo/roqoqo provide a <code>superoperator()</code> method that returns the definition of the noise operation in superoperator matrix form.
-In the superoperator formalism the density matrix of the system is rewritten as a vector in row-major form. Applying the noise to the quantum computer then corresponds to multiplying the vector with the superoperator matrix.
+In the superoperator formalism, the density matrix of the system is rewritten as a vector in row-major form. Applying the noise to the quantum computer then corresponds to multiplying the vector with the superoperator matrix.
 The superoperator matrix ignores the qubits the noise operation acts on to fit in the smallest possible matrix dimension.</p>
-<p>For other methods available for noise operations see the API documentation of <a href="https://docs.rs/roqoqo/latest/roqoqo/operations/index.html">roqoqo</a> 
-and <a href="https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.operations.html#module-qoqo.operations">qoqo</a>.</p>
+<p>For other methods available for noise operations see the API documentation of <a href="https://docs.rs/roqoqo/latest/roqoqo/operations/index.html">roqoqo</a> and <a href="https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.operations.html#module-qoqo.operations">qoqo</a>.</p>
 <h2 id="noise-operations-1"><a class="header" href="#noise-operations-1">Noise operations</a></h2>
 <p>The single noise operations shown in the example above are:</p>
 <ul>
-<li><code>PragmaDamping</code> that applies a pure damping error corresponding to <em>zero</em> temperature environments.</li>
-<li><code>PragmaDepolarising</code> which applies a depolarising noise.</li>
-<li><code>PragmaDephasing</code> representing a pure dephasing noise.</li>
+<li><code>PragmaDamping</code>, which applies a pure damping error corresponding to <em>zero</em> temperature environments.</li>
+<li><code>PragmaDepolarising</code>, which applies a depolarising noise.</li>
+<li><code>PragmaDephasing</code>, which applies a pure dephasing noise.</li>
 </ul>
-<p>For a stochastically unravelled combination of dephasing and depolarising the user can choose to use the <code>PragmaRandomNoise</code>. The error rate of the depolaristion (<code>depolarising_rate</code>) and the error rate of the dephasing (<code>dephasing_rate</code>) are provided as input parameters for this random noise operation.</p>
+<p>For a stochastically unravelled combination of dephasing and depolarising, the user can choose to use the <code>PragmaRandomNoise</code>. The error rate of the depolaristion (<code>depolarising_rate</code>) and the error rate of the dephasing (<code>dephasing_rate</code>) are provided as input parameters for this random noise operation.</p>
 <h3 id="pragmageneralnoise"><a class="header" href="#pragmageneralnoise">PragmaGeneralNoise</a></h3>
-<p>The most general noise can be modelled in qoqo by the PragmaGeneralNoise operation. This Pragma operation applies a noise term according to the given rates. The rates are represented by a 3x3 matrix:</p>
+<p>The most general noise can be modeled in qoqo by the PragmaGeneralNoise operation. This Pragma operation applies a noise term according to the given rates. The rates are represented by a 3x3 matrix:</p>
 <p>\[
 M = \begin{pmatrix}
 a &amp; b &amp; c \\
@@ -199,7 +198,7 @@ g &amp; h &amp; j \\
 <p>qoqo/roqoqo also supports Pragma operations that lead to errors in the execution of the quantum program that do not correspond to applying physical noise to the system</p>
 <h3 id="pragmaoverrotation"><a class="header" href="#pragmaoverrotation">PragmaOverrotation</a></h3>
 <p>This operation applies a statistical overrotation to the next rotation gate in the circuit, which matches the name given in the <code>gate</code> parameter of <code>PragmaOverrotation</code> and the involved qubits provided in <code>qubits</code>. The applied overrotation corresponds to adding a random number to the rotation angle.
-The random number is drawn from a normal distribution with mean <code>0</code> and standard deviation given by the input parameter <code>variance</code> that is multiplied by the <code>amplitude</code> parameter.</p>
+The random number is drawn from a normal distribution with mean <code>0</code> and standard deviation given by the input parameter <code>variance</code>, which is multiplied by the <code>amplitude</code> parameter.</p>
 <h3 id="pragmaboostnoise"><a class="header" href="#pragmaboostnoise">PragmaBoostNoise</a></h3>
 <p>This operation boosts noise and overrotations in the circuit. The input parameter <code>noise_coefficient</code> defines the coefficient by which the noise is boosted, i.e. the number by which the <code>gate_time</code> is multiplied.</p>
 <h3 id="pragmasleep"><a class="header" href="#pragmasleep">PragmaSleep</a></h3>

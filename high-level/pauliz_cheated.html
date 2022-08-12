@@ -138,11 +138,11 @@
                     <main>
                         <h1 id="cheatedpaulizproduct-measurement"><a class="header" href="#cheatedpaulizproduct-measurement">CheatedPauliZProduct Measurement</a></h1>
 <p>The <code>CheatedPauliZProduct</code> measurement in qoqo/roqoqo calculates expectation values based on the expectation values of products of Pauli operators. It uses the <code>PragmaGetPauliProduct</code> readout and can only be used on a simulator backend.</p>
-<p>The measurement input <code>CheatedPauliZProductInput</code> registers Pauli products and combines the expectation values of Pauli products into results like the measurement input of the <a href="pauliz.html">PauliZProduct</a> measurement. In contrast to the <code>PauliZProductInput</code> the involved qubits of the Pauli product are defined in the <code>PragmaGetPauliProduct</code> and no basis rotation is necessary.</p>
-<p>The expectation values of Pauli products are directly derived from the state of a simulator in the backend and are exact on the level of the numerical accuracy of the simulator. The <code>CheatedPauliZProduct</code> operation can be used to benchmark an algorithm assuming that the statistical error due to a finite amount of projective measurements vanishes.</p>
+<p>The measurement input <code>CheatedPauliZProductInput</code> registers Pauli products and combines the expectation values of Pauli products into results just like the measurement input of the <a href="pauliz.html">PauliZProduct</a> measurement. In contrast to the <code>PauliZProductInput</code>, however, the involved qubits of the Pauli product are defined in the <code>PragmaGetPauliProduct</code> and no basis rotation is necessary.</p>
+<p>The expectation values of Pauli products are directly derived from the state of a simulator in the backend and are exact on the level of the numerical accuracy of the simulator. The <code>CheatedPauliZProduct</code> operation can be used to benchmark an algorithm, assuming that the statistical error due to a finite amount of projective measurements vanishes.</p>
 <p>The <code>ChatedPauliZProduct</code> only requires running one <code>Circuit</code> compared to several for more complex <code>PauliZProduct</code> measurements and can be faster.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
-<p>The following code measures the same observable as the  <a href="pauliz.html">PauliZProduct</a> example with the <code>CheatedPauliZProduct</code> measurement.</p>
+<p>The following code measures the same observable as the <a href="pauliz.html">PauliZProduct</a> example with the <code>CheatedPauliZProduct</code> measurement.</p>
 <p>Example in python:</p>
 <pre><code class="language-python">from qoqo import Circuit
 from qoqo import operations as ops

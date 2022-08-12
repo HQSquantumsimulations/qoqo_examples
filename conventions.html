@@ -140,7 +140,7 @@
 <p>This section gives a quick overview of some of the conventions used in qoqo/roqoqo.</p>
 <h2 id="definitions"><a class="header" href="#definitions">Definitions</a></h2>
 <ul>
-<li><code>operation</code>: An atomic instruction applied to a quantum computer (or simulated quantum computer)</li>
+<li><code>operation</code>: An atomic instruction applied to a quantum computer (or simulated quantum computer).</li>
 <li><code>gate</code>: An <code>operation</code> that corresponds to a unitary transformation of the state of the quantum computer and can be implemented on all universal quantum computers.</li>
 <li><code>qubit</code>: A quantum bit. Can be in a superposition of two basis states.</li>
 <li><code>Circuit</code>: A linear sequence of <code>operations</code>.</li>
@@ -159,9 +159,9 @@
 1
 \end{pmatrix} \\
 \]</p>
-<p>Before  any operations are applied in a circuit a quantum computer is always assumed to be in the ground state (all qubits in state <code>|0&gt;</code>).</p>
+<p>Before any operations are applied in a circuit, a quantum computer is always assumed to be in the ground state (all qubits in state <code>|0&gt;</code>).</p>
 <h2 id="endianness"><a class="header" href="#endianness">Endianness</a></h2>
-<p>qoqo and roqoqo use little endian encoding, the least significant qubit is at the smallest memory address (or at the lowest index in a vector and at the rightmost entry when writing the qubit state as a sequence of <code>0</code> and <code>1</code> like a binary number).</p>
+<p>qoqo and roqoqo use little endian encoding, where the least significant qubit is at the smallest memory address (or at the lowest index in a vector and at the rightmost entry when writing the qubit state as a sequence of <code>0</code> and <code>1</code> like a binary number).</p>
 <p>For a two-qubit state space we write the states of the qubits in the following order:
 \[
 \left|00 \right&gt;  =  \textrm{state} 0 \\
@@ -170,7 +170,7 @@
 \left|11 \right&gt;  =  \textrm{state} 3 \\
 \]</p>
 <h2 id="operation-order"><a class="header" href="#operation-order">Operation order</a></h2>
-<p>When adding qoqo/roqoqo operations to circuits, the first operation added will be executed first. When writing qoqo/roqoqo operations, they are read left to right. This leads to an inversion of the order when transcribing to matrix form where the matrix to the right acts first.</p>
+<p>When adding qoqo/roqoqo operations to circuits, the first operation added will be executed first. When writing qoqo/roqoqo operations, they are read left to right. This leads to an inversion of the order when transcribing to matrix form, where the matrix to the right acts first.</p>
 <p>\[
 \textrm{PauliX}(0) \cdot  \textrm{PauliZ}(0)  \\ =
 \textrm{PauliZ(0).unitary_matrix()} \cdot  \textrm{PauliX(0).unitary_matrix()}  \\
@@ -185,17 +185,17 @@
 <h2 id="qubit-naming"><a class="header" href="#qubit-naming">Qubit naming</a></h2>
 <p>qoqo uses a unified naming scheme for qubits in operations</p>
 <ul>
-<li>In single-qubit operations the qubit is always referred to as <code>qubit</code>,</li>
-<li>In two-qubit gates the two qubits are referred to as <code>control</code> and <code>target</code>,</li>
-<li>In multi-qubit gates the ordered list/ vector of qubits the gates acts on is reffered to as <code>qubits</code>.</li>
+<li>In single-qubit operations, the qubit is always referred to as <code>qubit</code>,</li>
+<li>In two-qubit gates, the two qubits are referred to as <code>control</code> and <code>target</code>,</li>
+<li>In multi-qubit gates, the ordered list/vector of qubits the gates acts on is referred to as <code>qubits</code>.</li>
 </ul>
-<p>When initializing two-qubit gates, the <code>control</code> is always the first and <code>target</code> the second argument.</p>
+<p>When initializing two-qubit gates, the <code>control</code> is always the first argumemt and <code>target</code> the second argument.</p>
 <h2 id="unitary-matrix"><a class="header" href="#unitary-matrix">Unitary Matrix</a></h2>
 <p>Unitary operations in qoqo/roqoqo provide a <code>unitary_matrix()</code> method that returns the definition of the gate in matrix form. This definition ignores the qubits of the gate to fit in the smallest possible matrix dimension.</p>
 <ul>
-<li>For single-qubit gates the created matrix always corresponds to <code>qubit=0</code> and has a 2x2-dimension.</li>
-<li>For two-qubit gates the created matrix always corresponds to <code>control=1</code>, <code>target=0</code> and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding described above.</li>
-<li>For multi-qubit gates the created matrix always corresponds to <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</li>
+<li>For single-qubit gates, the created matrix always corresponds to <code>qubit=0</code> and has a 2x2-dimension.</li>
+<li>For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code> and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding described above.</li>
+<li>For multi-qubit gates, the created matrix always corresponds to <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</li>
 </ul>
 
                     </main>

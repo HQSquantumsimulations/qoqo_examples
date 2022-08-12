@@ -137,16 +137,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="classicalregister-measurement"><a class="header" href="#classicalregister-measurement">ClassicalRegister Measurement</a></h1>
-<p>A <code>ClassicalRegister</code> measurement returns the unprocessed register readouts of <code>Circuits</code>.<br />
-A <code>ClassicalRegister</code> measurement can be used when end users want to perform their own post-processing. For example when working with external tools that expect full measurement records. </p>
-<p>The registers are returned  as a tuple of three dictionaries/HashMaps: </p>
+<p>A <code>ClassicalRegister</code> measurement returns the unprocessed register readouts of <code>Circuits</code>. 
+A <code>ClassicalRegister</code> measurement can be used when end-users want to perform their own post-processing, for instance when working with external tools that expect full measurement records. </p>
+<p>The registers are returned as a tuple of three dictionaries/HashMaps: </p>
 <ul>
 <li>The collection of bit registers</li>
 <li>The collection of float registers</li>
 <li>The collection of complex registers</li>
 </ul>
 <p>A <code>ClassicalRegister</code> measurement does <em>not</em> need a separate <code>measurement_input</code> since no post-processing takes place.</p>
-<p>To distinguish between a method returning expectation values and a method  returning registers the method <code>run_registers()</code> is used when executing a <code>ClassicalRegister</code> measurement.</p>
+<p>To distinguish between a method returning expectation values and a method returning registers, the method <code>run_registers()</code> is used when executing a <code>ClassicalRegister</code> measurement.</p>
 <p>An example for running a <code>ClassicalRegister</code> measurement:</p>
 <pre><code class="language-python">from qoqo import Circuit
 from qoqo import operations as ops

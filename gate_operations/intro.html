@@ -137,12 +137,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="list-of-gate-operations"><a class="header" href="#list-of-gate-operations">List of Gate Operations</a></h1>
-<p>Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit unitary operations that apply a unitary transformation and can be executed on a any universal quantum computer. Mathematically, a gate can be represented by a unitary matrix.</p>
-<p>A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section.  We differentiate between <a href="single_qubit_gates.html">single-qubit gates</a> acting on a single qubit, <a href="two_qubit_gates.html">two-qubit gates</a> applied on a pair of qubits and <a href="multi_qubit_gates.html">multi-qubit gates</a> affecting a series of qubits.</p>
+<p>Operations are the atomic instructions in any quantum program that can be represented by qoqo/roqoqo. Gate operations are single-, two- or multi-qubit unitary operations that apply a unitary transformation and can be executed on any universal quantum computer. Mathematically, a gate can be represented by a unitary matrix.</p>
+<p>A list of the gate operations available in qoqo and roqoqo with their mathematical description is provided in this section. We differentiate between <a href="single_qubit_gates.html">single-qubit gates</a> acting on a single qubit, <a href="two_qubit_gates.html">two-qubit gates</a> applied on a pair of qubits and <a href="multi_qubit_gates.html">multi-qubit gates</a> affecting a series of qubits.</p>
 <h3 id="notation"><a class="header" href="#notation">Notation</a></h3>
 <ul>
-<li>A rotation angle is usually annotated with \( \theta \) and the according argument being <code>theta</code>.</li>
-<li>For the phase angle the symbol \( \varphi \) is used.</li>
+<li>A rotation angle is usually annotated with \( \theta \) and its corresponding argument is <code>theta</code>.</li>
+<li>For the phase angle, the symbol \( \varphi \) is used.</li>
 <li>The rotation angle  \( \phi \)  in the x-y plane is addressed by the argument name <code>phi</code>.</li>
 <li>\( \sigma_x \), \( \sigma_y \), \( \sigma_z \) are the Pauli matrices X, Y, Z
 \[
@@ -153,14 +153,14 @@
 <div class="table-wrapper"><table><thead><tr><th>Gate</th><th>Short Description</th></tr></thead><tbody>
 <tr><td>Hadamard</td><td>The Hadamard gate, to create a superposition of states, and so to change the basis.</td></tr>
 <tr><td>InvSqrtPauliX</td><td>The inverse square root of the PauliX gate \( e^{i \frac{\theta}{4} \sigma_x} \).</td></tr>
-<tr><td>PauliX</td><td>The Pauli X gate, rotation with a fixed angle \( \frac{\pi}{2} \) corresponds to a &quot;flip&quot; on x-axis.</td></tr>
-<tr><td>PauliY</td><td>The Pauli Y gate, rotation with a fixed angle \( \frac{\pi}{2} \) corresponds to a &quot;flip&quot; on y-axis.</td></tr>
-<tr><td>PauliZ</td><td>The Pauli Z gate, rotation with a fixed angle \( \frac{\pi}{2} \) corresponds to a &quot;flip&quot; on z-axis.</td></tr>
+<tr><td>PauliX</td><td>The Pauli X gate, a rotation with a fixed angle of \( \frac{\pi}{2} \), corresponds to a &quot;flip&quot; on x-axis.</td></tr>
+<tr><td>PauliY</td><td>The Pauli Y gate, a rotation with a fixed angle of \( \frac{\pi}{2} \), corresponds to a &quot;flip&quot; on y-axis.</td></tr>
+<tr><td>PauliZ</td><td>The Pauli Z gate, a rotation with a fixed angle of \( \frac{\pi}{2} \), corresponds to a &quot;flip&quot; on z-axis.</td></tr>
 <tr><td>PhaseShiftState0</td><td>Rotation around z-axis by angle \(\theta\) applied on state \( \left |0 \right&gt; \) results in a phase shift compared to RotateZ gate.</td></tr>
 <tr><td>PhaseShiftState1</td><td>Rotation around z-axis by angle \(\theta\) applied on state \( \left|1 \right&gt; \) results in phase shift compared to RotateZ gate.</td></tr>
 <tr><td>RotateAroundSphericalAxis</td><td>Implements a rotation around an axis in spherical coordinates.</td></tr>
 <tr><td>RotateX</td><td>The rotation gate around x-axis \( e^{-i \frac{\theta}{2} \sigma_x} \).</td></tr>
-<tr><td>RotateXY</td><td>Implements a rotation around an x- and y-axis in spherical coordinates.</td></tr>
+<tr><td>RotateXY</td><td>Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates.</td></tr>
 <tr><td>RotateY</td><td>The rotation gate around y-axis \( e^{-i \frac{\theta}{2} \sigma_y} \).</td></tr>
 <tr><td>RotateZ</td><td>The rotation gate around z-axis \( e^{-i \frac{\theta}{2} \sigma_z} \).</td></tr>
 <tr><td>SGate</td><td>The S gate.</td></tr>

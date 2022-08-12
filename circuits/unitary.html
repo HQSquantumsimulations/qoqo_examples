@@ -141,9 +141,9 @@
 <h2 id="unitary-matrix"><a class="header" href="#unitary-matrix">Unitary Matrix</a></h2>
 <p>Gate operations in qoqo/roqoqo provide a <code>unitary_matrix()</code> method that returns the definition of the gate in matrix form. This definition ignores the qubits the gates acts on to fit in the smallest possible matrix dimension.</p>
 <ul>
-<li>For single-qubit gates the created matrix always corresponds to <code>qubit=0</code> and has dimension 2x2.</li>
-<li>For two-qubit gates the created matrix always corresponds to <code>control=1</code>, <code>target=0</code> and has dimension a 4x4. See also the state ordering <a href="../conventions.html">conventions</a>.</li>
-<li>For multi-qubit gates the created matrix always corresponds to <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</li>
+<li>For single-qubit gates, the created matrix always corresponds to <code>qubit=0</code> and has dimension 2x2.</li>
+<li>For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code> and has dimension a 4x4. See also the state ordering <a href="../conventions.html">conventions</a>.</li>
+<li>For multi-qubit gates, the created matrix always corresponds to <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</li>
 </ul>
 <p>For a list of unitary operations see <a href="../gate_operations/intro.html">gate operations</a>.</p>
 

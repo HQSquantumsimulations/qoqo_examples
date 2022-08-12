@@ -137,20 +137,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="quantum-circuit"><a class="header" href="#quantum-circuit">Quantum circuit</a></h1>
-<p>A quantum circuit refers to a linear sequence of operations that can be executed on a quantum computer. Like most quantum computing toolkits qoqo/roqoqo provides a <code>Circuit</code> object and a set of <code>Operations</code> that can be added to a <code>Circuit</code>.</p>
+<p>A quantum circuit refers to a linear sequence of operations that can be executed on a quantum computer. Like most quantum computing toolkits, qoqo/roqoqo provides a <code>Circuit</code> object and a set of <code>Operations</code> that can be added to a <code>Circuit</code>.</p>
 <p>qoqo/roqoqo distinguishes between:</p>
 <ul>
-<li>Definitions: Operations that declare (and initialize) classical register values (<a href="readout.html">see also here</a> )</li>
+<li>Definitions: Operations that declare (and initialize) classical register values (<a href="readout.html">see also here</a>)</li>
 <li>Gate Operations: Unitary operations that can be executed on every unitary quantum computer (but might need to be decomposed into a sequence of native operations) (<a href="unitary.html">see also here</a>)</li>
-<li>Pargma operations that are not generally available on all universal quantum computers (see <a href="pragma.html">pragma operations</a> and <a href="noise.html">noise operations</a> )</li>
+<li>Pragma operations that are not generally available on all universal quantum computers (see <a href="pragma.html">pragma operations</a> and <a href="noise.html">noise operations</a> )</li>
 </ul>
-<p>In order to create a useful result a Circuit in qoqo/roqoqo must contain:</p>
+<p>In order to create a useful result, a Circuit in qoqo/roqoqo must contain:</p>
 <ul>
 <li>A definition of a classical register for readout</li>
 <li>Operations to change the state of the quantum computer, for example <code>RotateZ</code> or <code>CNOT</code> gate operations.</li>
 <li>A measurement to return classical information based on the state of the quantum computer.</li>
 </ul>
-<p>With qoqo a <code>Circuit</code> can be constructed like this:</p>
+<p>With qoqo, a <code>Circuit</code> can be constructed like this:</p>
 <pre><code class="language-python">from qoqo import Circuit
 from qoqo import operations as ops
 # create a new circuit
@@ -165,7 +165,7 @@ circuit += ops.CNOT(control=0, target=1)
 circuit += ops.MeasureQubit(qubit=0, readout=&quot;ro&quot;, readout_index=0)
 circuit += ops.MeasureQubit(qubit=1, readout=&quot;ro&quot;, readout_index=1)
 </code></pre>
-<p>And with roqoqo like this:</p>
+<p>And with roqoqo, like this:</p>
 <pre><code class="language-rust">use roqoqo::{Circuit, operations::*};
 
 // Create a new _modifiable_ circuit

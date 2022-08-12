@@ -137,20 +137,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="paulizproduct-measurement"><a class="header" href="#paulizproduct-measurement">PauliZProduct Measurement</a></h1>
-<p>The <code>PauliZProduct</code> measurement is based on measuring the product of PauliZ operators for given qubits. Combined with a basis rotation of the measured qubits it can be used to measure arbitrary expectation values. It is uses projective qubit readouts like <code>MeasureQubit</code> or <code>PragmaRepeatedMeasurement</code>. It can be run on on real quantum computer hardware and simulators.</p>
-<p>As an <strong>example</strong> let us consider the measurement of a Hamiltonian
+<p>The <code>PauliZProduct</code> measurement is based on measuring the product of PauliZ operators for given qubits. Combined with a basis rotation of the measured qubits, it can be used to measure arbitrary expectation values. It uses projective qubit readouts like <code>MeasureQubit</code> or <code>PragmaRepeatedMeasurement</code>. It can be run on real quantum computer hardware and simulators.</p>
+<p>As an <strong>example</strong> let us consider the measurement of the following Hamiltonian
 \[
 \hat{H} = 0.1\cdot X + 0.2\cdot Z
 \] where <code>X</code> and <code>Z</code> are Pauli operators. The target is to measure \(\hat{H} \) with respect to a state
 \[
 |\psi&gt; = (|0&gt; + |1&gt;)/\sqrt{2}.
 \]
-The <code>constant_circuit</code> will be used to prepare the state \( |\psi&gt; \) by applying the Hadamard gate. The given Hamiltonian includes <code>X</code> and <code>Z</code> terms that can not be measured at the same time since they are measured using different bases. The <code>circuits</code> list includes one quantum circuit that does not apply any additional gate and one circuit that rotates the qubit basis into the X-basis so that the expectation value <code>&lt;X&gt;</code> is equivalent to the measurement of <code>&lt;Z&gt;</code> in the new basis. In this example each measured Pauli product contains only one Pauli operator. For the post-processing of the measured results the <code>PauliZProduct</code> measurement needs two more inputs provided by the object <code>PauliZProductInput</code>:</p>
+The <code>constant_circuit</code> will be used to prepare the state \( |\psi&gt; \) by applying the Hadamard gate. The given Hamiltonian includes <code>X</code> and <code>Z</code> terms that cannot be measured at the same time, since they are measured using different bases. The <code>circuits</code> list includes one quantum circuit that does not apply any additional gate and one circuit that rotates the qubit basis into the X-basis so that the expectation value <code>&lt;X&gt;</code> is equivalent to the measurement of <code>&lt;Z&gt;</code> in the new basis. In this example, each measured Pauli product contains only one Pauli operator. For the post-processing of the measured results, the <code>PauliZProduct</code> measurement needs two more inputs provided by the object <code>PauliZProductInput</code>:</p>
 <ul>
 <li>The definition of the measured Pauli products after basis transformations (<code>add_pauliz_product()</code>),</li>
 <li>The weights of the Pauli product expectation values in the final expectation values (<code>add_linear_exp_val()</code>).</li>
 </ul>
-<p>In general one can measure the expectation values of the products of local Z operators, e.g. <code>&lt;Z0&gt;</code>, <code>&lt;Z1&gt;</code>, <code>&lt;Z0*Z1&gt;</code>, <code>&lt;Z0*Z3&gt;</code>, etc. The <code>PauliZProductInput</code> needs to define all of the products that are measured. In the given example we will measure two products <code>&lt;Z0&gt;</code> after a rotation in the X basis (corresponding to <code>&lt;X0&gt;</code>) and <code>&lt;Z0&gt;</code> <em>without</em> a rotation before the measurement.
+<p>In general, one can measure the expectation values of the products of local Z operators, e.g. <code>&lt;Z0&gt;</code>, <code>&lt;Z1&gt;</code>, <code>&lt;Z0*Z1&gt;</code>, <code>&lt;Z0*Z3&gt;</code>, etc. The <code>PauliZProductInput</code> needs to define all of the products that are measured. In the given example, we will measure two products <code>&lt;Z0&gt;</code> after a rotation in the X basis (corresponding to <code>&lt;X0&gt;</code>) and <code>&lt;Z0&gt;</code> <em>without</em> a rotation before the measurement.
 The <code>PauliZProductInput</code> also defines the weights of the products in the final result. In the example below, 0.1 is the coefficient for the first product and 0.2 for the second.</p>
 <pre><code class="language-python">from qoqo import Circuit
 from qoqo import operations as ops

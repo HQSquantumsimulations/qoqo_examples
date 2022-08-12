@@ -144,9 +144,9 @@
 </ul>
 <h2 id="running-quantum-programs"><a class="header" href="#running-quantum-programs">Running quantum programs</a></h2>
 <p>To obtain results based on a quantum program (or quantum circuit) defined in qoqo/roqoqo, the program must run on a simulator or real quantum computing hardware.</p>
-<p>For an individual simulator or hardware a backend can be created that implements roqoqo's <code>EvaluatingBackend</code> trait and executes quantum circuits.
+<p>For an individual simulator or hardware, a backend can be created that implements roqoqo's <code>EvaluatingBackend</code> trait and executes quantum circuits.
 The implementation of individual backends is provided not in qoqo itself, but in other packages.</p>
-<p>At the moment the following evaluating backends are implemented for qoqo/roqoqo:</p>
+<p>At the moment the following EvaluatingBackends are implemented for qoqo/roqoqo:</p>
 <ul>
 <li><a href="https://github.com/HQSquantumsimulations/qoqo_aqt">qoqo_aqt</a></li>
 <li><a href="https://github.com/HQSquantumsimulations/qoqo_aqt">qoqo_mock</a></li>
@@ -161,7 +161,7 @@ The implementation of individual backends is provided not in qoqo itself, but in
 </ul>
 <p>All evaluating backends provide the same methods: <code>run_circuit()</code>, <code>run_measurement()</code> or <code>run_measurement_registers()</code>, and <code>run()</code>.</p>
 <h3 id="example"><a class="header" href="#example">Example</a></h3>
-<p>In this subsection an example is provided.  A <a href="hight-level/program.html">QuantumProgram</a> is created to be executed on the <a href="https://github.com/HQSquantumsimulations/qoqo-quest">qoqo_quest</a> simulator backend. Here, all three options supported by an <code>EvaluatingBackend</code> are presented:</p>
+<p>In this subsection, an example is provided. A <a href="hight-level/program.html">QuantumProgram</a> is created to be executed on the <a href="https://github.com/HQSquantumsimulations/qoqo-quest">qoqo_quest</a> simulator backend. Here, all three options supported by an <code>EvaluatingBackend</code> are presented:</p>
 <ul>
 <li>to run a single circuit,</li>
 <li>to run a measurement, and</li>
@@ -227,7 +227,7 @@ print(expecation_values)
 # The symbolic value &quot;angle&quot; in the circuits will be replaced by that free parameter
 # during execution.
 program = QuantumProgram(measurement=measurement, input_parameter_names=[&quot;angle&quot;])
-# Run the program with  0.1 substituting `angle`
+# Run the program with 0.1 substituting `angle`
 expecation_values = program.run(backend, [0.1])
 </code></pre>
 <p>In Rust:</p>
@@ -298,7 +298,7 @@ println!(&quot;{:?}&quot;, expecation_values);
 // The symbolic value &quot;angle&quot; in the circuits will be replaced by that free parameter
 // during execution.
 let program = QuantumProgram::PauliZProduct{ measurement, input_parameter_names: vec![&quot;angle&quot;.to_string()]};
-// Run the program with  0.1 substituting `angle`
+// Run the program with 0.1 substituting `angle`
 let expecation_values = program.run(backend, &amp;[0.1]).unwrap();
 </code></pre>
 <h2 id="translating-to-other-frameworks"><a class="header" href="#translating-to-other-frameworks">Translating to other frameworks</a></h2>

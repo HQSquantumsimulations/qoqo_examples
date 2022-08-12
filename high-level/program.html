@@ -137,8 +137,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="quantumprogram-and-variable-replacement"><a class="header" href="#quantumprogram-and-variable-replacement">QuantumProgram and Variable-Replacement</a></h1>
-<p>A <code>QuantumProgram</code> allows the user to call it with a list of free <code>float</code> parameters.<br />
-It contains a <code>measurement</code> with quantum circuits that contain symbolic parameters. Circuits with symbolic parameters can not be simulated or executed on real hardware. The symbolic parameters need to be replaced with real floating point numbers first. A <code>QuantumProgram</code> contains a list of the free parameters (<code>input_parameter_names</code>) and can automatically replace the parameters when it is executed. It replaces the parameters by its <code>run</code> methods and returns the result.</p>
+<p>A <code>QuantumProgram</code> allows the user to call it with a list of free <code>float</code> parameters. 
+It contains a <code>measurement</code> with quantum circuits that contain symbolic parameters. Circuits with symbolic parameters cannot be simulated or executed on real hardware. The symbolic parameters need to be replaced with real floating point numbers first. A <code>QuantumProgram</code> contains a list of the free parameters (<code>input_parameter_names</code>) and can automatically replace the parameters when it is executed. It replaces the parameters by its <code>run</code> methods and returns the result.</p>
 <p>As an example we will use the measurement from <a href="pauliz.html">PauliZProduct</a> with a state<code>|psi&gt;</code> parameterized by an angle between <code>|0&gt;</code> and <code>|1&gt;</code>.</p>
 <p>In python:</p>
 <pre><code class="language-python">from qoqo import Circuit
