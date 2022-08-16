@@ -235,6 +235,7 @@ where \\(X_c\\) is the Pauli matrix \\(\sigma_x\\) acting on the control qubit, 
 
 The Qsim gate implements a `SWAP` between two spins and a `SpinInteraction` simultaneously. In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom. The definition of the Qsim gate in matrix form is given by:
 
+
 \\[
  U = \begin{pmatrix}
  \cos(x-y) \cdot e^{-\mathrm{i} z} & 0 & 0 & -\mathrm{i}\sin(x-y)\cdot e^{-\mathrm{i} z}\\\\

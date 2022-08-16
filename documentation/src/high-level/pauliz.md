@@ -9,6 +9,7 @@ As an example, let us consider the measurement of the following Hamiltonian
 \\[
     |\psi> = (|0> + |1>)/\sqrt{2}.
 \\].
+
 The `constant_circuit` will be used to prepare the state \\( |\psi> \\) by applying the Hadamard gate. The given Hamiltonian includes `X` and `Z` terms that cannot be measured at the same time, since they are measured using different bases. The `circuits` list includes one quantum circuit that does not apply any additional gate and one circuit that rotates the qubit basis into the X-basis so that the expectation value `<X>` is equivalent to the measurement of `<Z>` in the new basis. In this example, each measured Pauli product contains only one Pauli operator. For the post-processing of the measured results, the `PauliZProduct` measurement needs two more inputs provided by the object `PauliZProductInput`:
 
 * The definition of the measured Pauli products after basis transformations (`add_pauliz_product()`),
