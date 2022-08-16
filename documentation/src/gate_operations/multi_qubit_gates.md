@@ -4,13 +4,13 @@ Multi-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum co
 
 ## MultiQubitMS
 
-The Molmer-Sorensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms, the gate applies
+The Mølmer–Sørensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms, the gate applies
 
 \\[
     e^{-i * \theta/2 * X_{i0} * X_{i1} * ... * X_{in}},
-\\]
+\\],
 
-whereas \\(\theta\\) is the angle parameter of the multi-qubit Molmer-Sorensen gate and `i0`, `i1` etc. are the qubits the gate acts on.
+whereas \\(\theta\\) is the angle parameter of the multi-qubit Mølmer–Sørensen gate and `i0`, `i1` *etc.* are the qubits the gate acts on.
 
 ## MultiQubitZZ
 
@@ -18,6 +18,6 @@ The multi-qubit PauliZ-product gate. he gate applies the rotation under the prod
 
 \\[
     e^{-i * \theta/2 * Z_{i0} * Z_{i1} * ... * Z_{in}},
-\\]
+\\],
 
-whereas \\(\theta\\) is the angle parameter of the multi-qubit PauliZ-product gate and `i0`, `i1` etc. are the qubits the gate acts on.
+whereas \\(\theta\\) is the angle parameter of the multi-qubit PauliZ-product gate and `i0`, `i1` *etc.* are the qubits the gate acts on.

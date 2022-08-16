@@ -1,6 +1,6 @@
 # Noise Operations
 
-qoqo/roqoqo enables the user to construct finely controlled noise models. Noise acting on the quantum computer is modeled as noise operations acting on individual qubits between unitary gates applied on the quantum computer.
+qoqo/roqoqo enables the user to construct finely controlled noise models. Noise acting on the quantum computer is modeled as noise operations acting on individual qubits in between each unitary gate applied on the quantum computer.
 
 The noise operations can be directly added to a quantum circuit and can be simulated by compatible backends. Since noise cannot be actively controlled on a quantum computer normally, the noise operations are defined as [Pragma](pragma.md) operations in qoqo/roqoqo. The strength of the noise is determined by defining a `gate_time` and a `rate`. The noise Pragma operation affects the system as a Lindblad type noise acting on the system with the rate `rate` for the time `gate_time`.
 
@@ -35,9 +35,9 @@ use roqoqo::operations;
 let mut circuit = Circuit::new();
 circuit += operations::CNOT::new(0,1);
 // Adding dephasing noise acting on gate 0 with gate_time 1.0 and rate 1e-3
-circuit += operations::PragmaDephasing::new(0, 1.0, 1e-3);
-circuit += operations::PragmaDamping::new(1, 1.0, 2e-3);
-circuit += operations::PragmaDepolarising::new(3, 1.0, 5e-3);
+circuit += operations::PragmaDephasing::new(0, 1.0, 1e-3.into());
+circuit += operations::PragmaDamping::new(1, 1.0, 2e-3.into());
+circuit += operations::PragmaDepolarising::new(3, 1.0, 5e-3.into());
 ```
 
 ## Superoperator representation
@@ -68,12 +68,12 @@ The most general noise can be modeled in qoqo by the PragmaGeneralNoise operatio
  d & e & f \\\\
  g & h & j \\\\
  \end{pmatrix}
-\\]
+\\],
 
 where the coefficients correspond to the following summands expanded from the first term of the non-coherent part of the Lindblad equation:
 \\[
  \frac{d}{dt}\rho = \sum_{i,j=0}^{2} M_{i,j} L_{i} \rho L_{j}^{\dagger} - \frac{1}{2} \{ L_{j}^{\dagger} L_i, \rho \}
-\\]
+\\],
 
 with \\( L_0 = \sigma^{+} \\), \\( L_1 = \sigma^{-} \\) and \\( L_3 = \sigma_{z} \\).
 
@@ -86,11 +86,11 @@ qoqo/roqoqo also supports Pragma operations that lead to errors in the execution
 ### PragmaOverrotation
 
 This operation applies a statistical overrotation to the next rotation gate in the circuit, which matches the name given in the `gate` parameter of `PragmaOverrotation` and the involved qubits provided in `qubits`. The applied overrotation corresponds to adding a random number to the rotation angle.
-The random number is drawn from a normal distribution with mean `0` and standard deviation given by the input parameter `variance`, which is multiplied by the `amplitude` parameter.
+The random number is drawn from a normal distribution with mean `0` and standard deviation whose variance is given by the input parameter `variance`, which is then multiplied by the `amplitude` parameter.
 
 ### PragmaBoostNoise
 
-This operation boosts noise and overrotations in the circuit. The input parameter `noise_coefficient` defines the coefficient by which the noise is boosted, i.e. the number by which the `gate_time` is multiplied.
+This operation boosts noise and overrotations in the circuit. The input parameter `noise_coefficient` defines the coefficient by which the noise is boosted, *i.e.* the number by which the `gate_time` is multiplied.
 
 ### PragmaSleep
 

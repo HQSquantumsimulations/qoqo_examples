@@ -44,7 +44,7 @@ roqoqo has several components:
 
 Operations and Circuit can be used to represent single quantum circuits that run on quantum hardware.
 
-Measurements and QuantumProgram combine several circuits with classical information, to provide a high level interface for running quantum programs that yield an immediately usable result.
+Measurements and QuantumProgram combine several circuits with classical information, to provide a high-level interface for running quantum programs that yield an immediately usable result.
 
 To execute quantum circuits or quantum programs, a backend connecting to quantum hardware or a simulator is required.
 qoqo/roqoqo does not directly implement these backends. To minimize dependencies, backends are implemented in separate packages (e.g. `qoqo-quest`).

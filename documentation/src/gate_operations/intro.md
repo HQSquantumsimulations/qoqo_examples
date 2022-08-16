@@ -12,7 +12,7 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 * \\( \sigma_x \\), \\( \sigma_y \\), \\( \sigma_z \\) are the Pauli matrices X, Y, Z
 \\[
     \sigma_x = \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix} := X, \quad \sigma_y = \begin{pmatrix} 0 & -i \\\\ i & 0 \end{pmatrix} := Y,  \quad \sigma_z = \begin{pmatrix} 1 & 0 \\\\ 0 & -1 \end{pmatrix} := Z
-\\]
+\\].
 
 ## [Single-qubit gates](single_qubit_gates.md)
 
@@ -39,7 +39,7 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 | Gate | Short Description |
 |---------|---------|
 | Bogoliubov    |  The Bogoliubov DeGennes interaction gate. |
-| CNOT    |  The controlled not gate, e.g. to entangle two qubits. |
+| CNOT    |  The controlled not gate, *e.g.* to entangle two qubits. |
 | ComplexPMInteraction    |  The complex hopping gate. |
 | ControlledPauliY    |  The controlled PauliY gate. |
 | ControlledPauliZ    |  The controlled PauliZ gate. |
@@ -47,22 +47,22 @@ A list of the gate operations available in qoqo and roqoqo with their mathematic
 | Fsim   |  The fermionic qubit simulation gate. |
 | FSwap   |  The fermionic SWAP gate. |
 | GivensRotation   |  The Givens rotation interaction gate in big endian notation: \\(e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-i \phi Z_t/2} \\). |
-| GivensRotationLittleEndian   |  The Givens rotation interaction gate in little endian notation: \\(e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-i \phi Z_c/2} \\). |
+| GivensRotationLittleEndian   |  The Givens rotation interaction gate in little-endian notation: \\(e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-i \phi Z_c/2} \\). |
 | InvSqrtISwap    |  The inverse square root of the ISwap gate. |
 | ISwap    |  The complex swap gate. |
-| MolmerSorensenXX    |  The fixed-phase MolmerSorensen XX gate. |
+| MolmerSorensenXX    |  The fixed-phase Mølmer–Sørensen XX gate. |
 | PhaseShiftedControlledZ    |  The phased-shifted controlled-Z gate. |
 | PMInteraction    |  The transversal interaction gate. |
 | Qsim    |  The qubit simulation gate. |
 | SpinInteraction    |  The generalized, anisotropic XYZ Heisenberg interaction between spins. |
 | SqrtISwap    |  The square root of the ISwap gate. |
 | SWAP    |  The swap gate, to switch the positions of two qubits. |
-| VariablesMSXX    |  The variable-angle MolmerSorensen XX gate. |
+| VariablesMSXX    |  The variable-angle Mølmer–Sørensen XX gate. |
 | XY    |  The XY gate. |
 
 ## [Multi-qubit gates](multi_qubit_gates.md)
 
 | Gate | Short Description |
 |---------|---------|
-| MultiQubitMS    |  The Molmer-Sorensen gate between multiple qubits. |
+| MultiQubitMS    |  The Mølmer–Sørensen gate between multiple qubits. |
 | MultiQubitZZ    |  The multi-qubit PauliZ-product gate. |

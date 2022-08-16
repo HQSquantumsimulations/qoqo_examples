@@ -29,7 +29,7 @@ All evaluating backends provide the same methods: `run_circuit()`, `run_measurem
 
 ### Example
 
-In this subsection, an example is provided. A [QuantumProgram](hight-level/program.md) is created to be executed on the [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest) simulator backend. Here, all three options supported by an `EvaluatingBackend` are presented:
+A [QuantumProgram](hight-level/program.md) is created to be executed on the [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest) simulator backend. Here, all three options supported by an `EvaluatingBackend` are presented:
 
 * to run a single circuit,
 * to run a measurement, and
@@ -175,7 +175,8 @@ let program = QuantumProgram::PauliZProduct{ measurement, input_parameter_names:
 let expecation_values = program.run(backend, &[0.1]).unwrap();
 ```
 
-## Translating to other frameworks
+## Translating to other quantum computing frameworks
 
-Backends that translate qoqo/roqoqo objects (for example Circuits) to other frameworks or representations do not implement the `EvaluatingBackend`.
-At the moment a backend to translate qoqo/roqoqo `Circuits` to qasm is implemented: [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm).
+There are many open- and closed-source quantum frameworks. For some use cases, it may be advantageous to interface between qoqo and another quantum computing framework. Depending on the target framework, circuits containing an available subset of qoqo operations can be translated to other frameworks by backends. Backends that translate qoqo/roqoqo objects (for example Circuits) to other frameworks or representations do not implement the `EvaluatingBackend`.
+
+At the moment, we have implemented one translating backend, from qoqo/roqoqo `Circuits` to qasm: [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm).

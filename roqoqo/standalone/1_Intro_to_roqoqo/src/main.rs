@@ -89,7 +89,7 @@ pub fn measuring_qubits() {
 
 /// Example for measuring observables.
 ///
-/// roqoqo includes the direct evaluation of projective measurements to an observable measurement e.g. 3 * < Z0 > + < Z0 Z1 >.
+/// roqoqo includes the direct evaluation of projective measurements to an observable measurement *e.g.* 3 * < Z0 > + < Z0 Z1 >.
 /// The measurement is defined by a set of expectation values of a product of pauli operators and a matrix that combines the expectation values.
 ///
 pub fn measuring_observables() {

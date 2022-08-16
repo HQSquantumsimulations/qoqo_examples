@@ -4,7 +4,7 @@ Pragma operations in qoqo/roqoqo are operations that are _not_ part of the set o
 
 Pragma operations can be used to:
 
-* Annotate a quantum circuit with additional information that is not necessary for execution (e.g `PragmaGlobalPhase`, `PragmaStartDecompositionBlock`)
+* Annotate a quantum circuit with additional information that is not necessary for execution (e.g. `PragmaGlobalPhase`, `PragmaStartDecompositionBlock`)
 * Apply operations that lead to a repeated execution of a circuit (`PragmaRepeatedMeasurement`, `PragmaSetNumberOfMeasurements`)
 * Apply operations that are only available on specific hardware (e.g. `PragmaChangeDevice`, `PragmaSleep`)
 * Apply operations that are only available on a simulator (e.g. `PragmaSetStateVector`, `PragmaGetStateVector`)

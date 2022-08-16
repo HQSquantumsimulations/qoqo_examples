@@ -10,11 +10,11 @@ For pre-built wheels you can install qoqo with a simple pip command
 pip install qoqo
 ```
 
-For the source distribution, a rust toolchain and the [maturin](https://maturin.rs/) Python package need to be already installed to install qoqo. A Rust toolchain can be installed using [rustup](https://rustup.rs/).
-
-With a Rust toolchain installed, qoqo can also be installed using a pip command.
+Alternatively, installing from the source distribution is possible. For this, a rust toolchain and the [maturin](https://maturin.rs/) Python package need to be already installed. A Rust toolchain can be installed using [rustup](https://rustup.rs/).
+With this Rust toolchain installed, qoqo can be installed using a pip command:
 
 ```bash
+# After installing the Rust toolchain, execute the following:
 pip install maturin
 pip install qoqo
 ```
