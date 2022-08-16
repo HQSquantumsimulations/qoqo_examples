@@ -40,7 +40,7 @@ x_circuit += ops.Hadamard(0)
 x_circuit += ops.PragmaRepeatedMeasurement("ro_x", 1000, None)
 
 # Preparing the measurement input for one qubit
-# The PauliZProductInput starts with just the number of qubtis
+# The PauliZProductInput starts with just the number of qubits
 # and if to use a flipped measurements set.
 measurement_input = PauliZProductInput(1, False)
 # Next, pauli products are added to the PauliZProductInput
@@ -93,7 +93,7 @@ x_circuit.add_operation(
 );
 
 // Preparing the measurement input for one qubit
-// The PauliZProductInput starts with just the number of qubtis
+// The PauliZProductInput starts with just the number of qubits
 // and if to use a flipped measurements set.
 let mut measurement_input = PauliZProductInput::new(1, false);
 // Next, pauli products are added to the PauliZProductInput
@@ -121,5 +121,7 @@ let measurement = PauliZProduct {
     input: measurement_input,
     circuits: vec![z_circuit.clone(), x_circuit.clone()],
     constant_circuit: Some(init_circuit.clone()),
+
+println!("{:?}", measurement);
 };
 ```

@@ -14,20 +14,26 @@ This section gives a quick overview of some of the conventions used in qoqo/roqo
 For the two basis states of a single qubit we define
 
 \\[
- \left\| 0 \right>  =  \left|\textrm{false} \right> =  \left| \downarrow \right> = \begin{pmatrix}
+ \left\| 0 \right>  =  \left|\textrm{false} \right> =  \left| \uparrow \right> = \begin{pmatrix}
  1 \\\\
  0
  \end{pmatrix} \\\\
  \\].
 
  \\[
- \left \|1 \right>  =  \left|\textrm{true} \right> =  \left| \uparrow \right> = \begin{pmatrix}
+ \left \|1 \right>  =  \left|\textrm{true} \right> =  \left| \downarrow \right> = \begin{pmatrix}
  0 \\\\
  1
  \end{pmatrix} \\\\
  \\].
 
-Before any operations are applied in a circuit, a quantum computer is always assumed to be in the ground state (all qubits in state `|0>`).
+Before  any operations are applied in a circuit a quantum computer is always assumed to be in the zero state (all qubits in state `|0>`).
+
+### Note
+
+This convention implies that `|0>` is the **excited** state with respect to the `Z` Pauli operator and `|1>` is the **ground** state. This is in contract with the physical implementation of qubits, where `|0>` typically corresponds to the state with lower energy and damping will lead to the system relaxing from `|1>` to `|0>`.
+
+This means that in this convention, when identifying the qubits with spins with respect to the `Z` operator, the system starts out in the highest energy case and damping leads to a heating effect where the system population shifts to higher energy spin states.
 
 ## Endianness
 

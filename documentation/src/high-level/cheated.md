@@ -73,7 +73,7 @@ circuit += ops::PragmaGetStateVector::new("state_vec".to_string(), None);
 // Preparing the measurement input for CheatedPauliZProductInput
 let mut measurement_input = CheatedInput::new(1);
 // Add the measured operator
-measurement_input.add_operator_exp_val("<H>".to_string(), operator, "state_vec".to_string());
+measurement_input.add_operator_exp_val("<H>".to_string(), operator, "state_vec".to_string()).unwrap();
 
 let measurement = Cheated {
    constant_circuit: None,

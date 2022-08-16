@@ -50,4 +50,4 @@ circuit += MeasureQubit::new(0, "ro".to_string(), 0);
 circuit += MeasureQubit::new(1, "ro".to_string(), 1);
 ```
 
-For details on the **available methods** of a `Circuit` please refer to the **API documentation** of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html) and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.Circuit.html).
+For details on the **available methods** of a `Circuit` please refer to the **API documentation** of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html) and [qoqo](https://hqsquantumsimulations.github.io/qoqo/generated/qoqo.html#qoqo.Circuit).

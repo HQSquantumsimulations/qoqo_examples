@@ -46,7 +46,7 @@ All noise operations in qoqo/roqoqo provide a `superoperator()` method that retu
 In the superoperator formalism, the density matrix of the system is rewritten as a vector in row-major form. Applying the noise to the quantum computer then corresponds to multiplying the vector with the superoperator matrix.
 The superoperator matrix ignores the qubits the noise operation acts on to fit in the smallest possible matrix dimension.
 
-For other methods available for noise operations see the API documentation of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/operations/index.html) and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.operations.html#module-qoqo.operations).
+For other methods available for noise operations see the API documentation of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/operations/index.html) and [qoqo](https://hqsquantumsimulations.github.io/qoqo/generated/generated/qoqo.operations.html).
 
 ## Noise operations
 

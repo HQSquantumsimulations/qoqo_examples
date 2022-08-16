@@ -12,4 +12,4 @@ Pragma operations can be used to:
 * Model error sources (`PragmaOverrotation`)
 
 For a full list of available Pragma operations see the API documentation of [roqoqo](https://docs.rs/roqoqo/latest/roqoqo/operations/index.html) 
- and [qoqo](https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.operations.html#module-qoqo.operations).
+ and [qoqo](https://hqsquantumsimulations.github.io/qoqo/generated/generated/qoqo.operations.html).
