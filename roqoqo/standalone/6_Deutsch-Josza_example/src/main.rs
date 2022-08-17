@@ -17,14 +17,14 @@ use roqoqo_quest::Backend;
 fn main() {
     println!(">> Deutsch-Josza example start.");
 
-    // We have given a function `f: {0, 1}^n->{0, 1}` from input bitstrings with length `n`, e.g., `00110`, to a single bit output.
+    // We have given a function `f: {0, 1}^n->{0, 1}` from input bitstrings with length `n`, *e.g.*, `00110`, to a single bit output.
     // The given function is either balanced (50% of inputs yield 0, 50% yield 1 as output) or the function is constant (always 1 or always 0).
     // The task for our algorithm is to decide if the given function is constant or balanced.
 
     // On a conventional computer we can query the function using the different input bitstrings.
     // As soon as we have seen two different outputs we know that the function is balanced.
     // However, if we have measured k-times the same value we only know that the function is constant with probability `P_k=1-1/2^(k-1)`.
-    // If we want to be 100% certain we need to query 50% of all `2^n` bitstrings, i.e., `2^(n-1)` queries.
+    // If we want to be 100% certain we need to query 50% of all `2^n` bitstrings, *i.e.*, `2^(n-1)` queries.
 
     // The Deutsch-Josza algorithm can perform the same task with exactly 1 query using `n+1` qubits.
 

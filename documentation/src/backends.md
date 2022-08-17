@@ -29,7 +29,7 @@ All evaluating backends provide the same methods: `run_circuit()`, `run_measurem
 
 ### Example
 
-In this subsection, an example is provided. A [QuantumProgram](hight-level/program.md) is created to be executed on the [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest) simulator backend. Here, all three options supported by an `EvaluatingBackend` are presented:
+A [QuantumProgram](hight-level/program.md) is created to be executed on the [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest) simulator backend. Here, all three options supported by an `EvaluatingBackend` are presented:
 
 * to run a single circuit,
 * to run a measurement, and
@@ -42,7 +42,7 @@ from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import PauliZProduct, PauliZProductInput
 from qoqo import QuantumProgram
-from qoqo_quest import SimulatorBackend
+from qoqo_quest import Backend
 # initialize |psi>
 init_circuit = Circuit()
 # Apply a RotateY gate with a symbolic angle
@@ -82,15 +82,15 @@ measurement = PauliZProduct(
 # a single circuit, a measurement, and a quantum program.
 
 # Create a backend simulating one qubit
-backend = SimulatorBackend(1)
+backend = Backend(1)
 
 # a) Run a single circuit
 (bit_registers, float_registers, complex_registers) = backend.run_circuit(z_circuit)
 
 # b) To run a measurement we need to replace the free parameter by hand
 executable_measurement = measurement.substitute_parameters({"angle": 0.2})
-expecation_values = backend.run_measurement(executable_measurement)
-print(expecation_values)
+expectation_values = backend.run_measurement(executable_measurement)
+print(expectation_values)
 
 # c) Run a quantum program
 # The QuantumProgram now has one free parameter that must be set when executing it.
@@ -98,7 +98,7 @@ print(expecation_values)
 # during execution.
 program = QuantumProgram(measurement=measurement, input_parameter_names=["angle"])
 # Run the program with 0.1 substituting `angle`
-expecation_values = program.run(backend, [0.1])
+expectation_values = program.run(backend, [0.1])
 ```
 
 In Rust:
@@ -144,7 +144,7 @@ let x_basis_index = measurement_input.add_pauliz_product("ro_x".to_string(), vec
 let mut linear: HashMap<usize, f64> = HashMap::new();
 linear.insert(x_basis_index, 0.1);
 linear.insert(z_basis_index, 0.2);
-measurement_input.add_linear_exp_val("<H>".to_string(), linear);
+measurement_input.add_linear_exp_val("<H>".to_string(), linear).unwrap();
 
 let measurement = PauliZProduct{
    constant_circuit: Some(init_circuit),
@@ -159,12 +159,12 @@ let measurement = PauliZProduct{
 let backend = Backend::new(1);
 
 // a) Run a single circuit
-let (bit_registers, float_registers, complex_registers) = backend.run_circuit(&z_circuit).unwrap();
+let (_bit_registers, _float_registers, _complex_registers) = backend.run_circuit(&z_circuit).unwrap();
 
 // b) To run a measurement we need to replace the free parameter by hand
 let executable_measurement = measurement.substitute_parameters(HashMap::from([("angle".to_string(), 0.2)])).unwrap();
-let expecation_values = backend.run_measurement(&executable_measurement).unwrap();
-println!("{:?}", expecation_values);
+let expectation_values = backend.run_measurement(&executable_measurement).unwrap();
+println!("{:?}", expectation_values);
 
 // c) Run a quantum program
 // The QuantumProgram now has one free parameter that must be set when executing it.
@@ -172,10 +172,12 @@ println!("{:?}", expecation_values);
 // during execution.
 let program = QuantumProgram::PauliZProduct{ measurement, input_parameter_names: vec!["angle".to_string()]};
 // Run the program with 0.1 substituting `angle`
-let expecation_values = program.run(backend, &[0.1]).unwrap();
+let expectation_values = program.run(backend, &[0.1]).unwrap();
+println!("{:?}", expectation_values);
 ```
 
-## Translating to other frameworks
+## Translating to other quantum computing frameworks
 
-Backends that translate qoqo/roqoqo objects (for example Circuits) to other frameworks or representations do not implement the `EvaluatingBackend`.
-At the moment a backend to translate qoqo/roqoqo `Circuits` to qasm is implemented: [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm).
+There are many open- and closed-source quantum frameworks. For some use cases, it may be advantageous to interface between qoqo and another quantum computing framework. Depending on the target framework, circuits containing an available subset of qoqo operations can be translated to other frameworks by backends. Backends that translate qoqo/roqoqo objects (for example Circuits) to other frameworks or representations do not implement the `EvaluatingBackend`.
+
+At the moment, we have implemented one translating backend, from qoqo/roqoqo `Circuits` to qasm: [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm).

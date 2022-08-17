@@ -82,7 +82,7 @@ fn main() {
 
     // How would the result that we would get from a real quantum computer look?
 
-    // We define a number of measurements, i.e., repetitions and measurements of the circuit and add a bit register to store
+    // We define a number of measurements, *i.e.*, repetitions and measurements of the circuit and add a bit register to store
     // the measured values for each run.
     // We add `MeasureQubit` operations for the two output qubits.
     // To make this more interesting we initialize the input qubits in a superposition of all possible states using Hadamard gates `H`.

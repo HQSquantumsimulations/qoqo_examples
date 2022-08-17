@@ -1,8 +1,8 @@
-# High level interface: quantum programs
+# High-level interface: quantum programs
 
-In the definition of qoqo/roqoqo, a quantum program accepts input from a user/calling function, runs operations on a quantum computer and returns an output in the form of expectation values instead of raw output from the quantum computer. 
+In the definition of qoqo/roqoqo, a quantum program accepts input from a user/calling function and runs operations on a quantum computer. It then returns an output in the form of expectation values, instead of raw output from the quantum computer. 
 To represent quantum programs qoqo/roqoqo provides `QuantumProgram`.
-It is intended as a high level interface between a complex program and the quantum computer, which can be called (almost) as easily as a normal function and handles variable replacement and the post-processing of the raw output of the quantum computer/simulator.
+It is intended as a high-level interface between a complex program and the quantum computer, which can be called (almost) as easily as a normal function and handles variable replacement and the post-processing of the raw output of the quantum computer/simulator.
 
 ## Measurements
 
@@ -23,7 +23,7 @@ The `PauliZProduct` measurement is based on measuring the product of PauliZ oper
 
 The `ClassicalRegister` measurement returns the raw output of the classical registers written during circuit execution.
 
-The `CheatedPauliZProduct` measurement directly calculates operator expectation values the from the expectation values of products of Pauli matrices . The Pauli product expectation values are read out by the `PragmaGetPauliProduct` operation. It can only be used on simulator backends.
+The `CheatedPauliZProduct` measurement directly calculates operator expectation values from the expectation values of products of Pauli matrices. The Pauli product expectation values are read out by the `PragmaGetPauliProduct` operation. It can only be used on simulator backends.
 
 The `Cheated` measurement calculates expectation values by directly extracting the state vector `PragmaGetStateVector` or the density matrix `PragmaGetDensityMatrix` from a simulator and applying matrix multiplication.
 

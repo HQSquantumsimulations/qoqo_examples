@@ -11,14 +11,14 @@ Devices based on the roqoqo `Device` trait can be abstract devices or backend de
 
 A typical example for abstract devices are linear chains of square lattices in which two-qubit gate operations are only available between neighboring qubits.
 
-The noise model of the `Device` trait is based on the continuous time Lindblad equation:
+The noise model of the `Device` trait is based on the continuous-time Lindblad equation:
 \\[
  \frac{d}{dt}\rho = \sum_{i,j=0}^{2} M_{i,j} L_{i} \rho L_{j}^{\dagger} - \frac{1}{2} \{ L_{j}^{\dagger} L_i \rho \},
-\\]
+\\],
 
 with \\( L_0 = \sigma^{+}\\), \\( L_1 = \sigma^{-}\\) and \\(L_3 = \sigma^{z}\\).
 
-It is defined by the decoherence rates `M` and the (pseudo) time needed to execute a quantum operation.
+It is defined by the decoherence rates `M` and the (pseudo-)time needed to execute a quantum operation.
 
 The matrix representation of the decoherence rates of the Lindblad equation can be obtained by calling the method `qubit_decoherence_rates()` of a device.
 

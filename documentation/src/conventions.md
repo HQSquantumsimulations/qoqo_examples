@@ -14,24 +14,30 @@ This section gives a quick overview of some of the conventions used in qoqo/roqo
 For the two basis states of a single qubit we define
 
 \\[
- \left\| 0 \right>  =  \left|\textrm{false} \right> =  \left| \downarrow \right> = \begin{pmatrix}
+ \left\| 0 \right>  =  \left|\textrm{false} \right> =  \left| \uparrow \right> = \begin{pmatrix}
  1 \\\\
  0
  \end{pmatrix} \\\\
- \\]
+ \\].
 
  \\[
- \left \|1 \right>  =  \left|\textrm{true} \right> =  \left| \uparrow \right> = \begin{pmatrix}
+ \left \|1 \right>  =  \left|\textrm{true} \right> =  \left| \downarrow \right> = \begin{pmatrix}
  0 \\\\
  1
  \end{pmatrix} \\\\
- \\]
+ \\].
 
-Before any operations are applied in a circuit, a quantum computer is always assumed to be in the ground state (all qubits in state `|0>`).
+Before  any operations are applied in a circuit a quantum computer is always assumed to be in the zero state (all qubits in state `|0>`).
+
+### Note
+
+This convention implies that `|0>` is the **excited** state with respect to the `Z` Pauli operator and `|1>` is the **ground** state. This is in contract with the physical implementation of qubits, where `|0>` typically corresponds to the state with lower energy and damping will lead to the system relaxing from `|1>` to `|0>`.
+
+This means that in this convention, when identifying the qubits with spins with respect to the `Z` operator, the system starts out in the highest energy case and damping leads to a heating effect where the system population shifts to higher energy spin states.
 
 ## Endianness
 
-qoqo and roqoqo use little endian encoding, where the least significant qubit is at the smallest memory address (or at the lowest index in a vector and at the rightmost entry when writing the qubit state as a sequence of `0` and `1` like a binary number).
+qoqo and roqoqo use little-endian encoding, where the least significant qubit is at the smallest memory address (or at the lowest index in a vector and at the rightmost entry when writing the qubit state as a sequence of `0` and `1` like a binary number).
 
 For a two-qubit state space we write the states of the qubits in the following order:
  \\[
@@ -39,7 +45,7 @@ For a two-qubit state space we write the states of the qubits in the following o
  \left|01 \right>  =  \textrm{state} 1 \\\\
  \left|10 \right>  =  \textrm{state} 2 \\\\
  \left|11 \right>  =  \textrm{state} 3 \\\\
- \\]
+ \\].
 
 ## Operation order
 
@@ -55,7 +61,7 @@ For a two-qubit state space we write the states of the qubits in the following o
  0 & 1 \\\\
  1 & 0
  \end{pmatrix}
- \\]
+ \\].
 
 ## Qubit naming
 
@@ -72,5 +78,5 @@ When initializing two-qubit gates, the `control` is always the first argumemt an
 Unitary operations in qoqo/roqoqo provide a `unitary_matrix()` method that returns the definition of the gate in matrix form. This definition ignores the qubits of the gate to fit in the smallest possible matrix dimension.
 
 * For single-qubit gates, the created matrix always corresponds to `qubit=0` and has a 2x2-dimension.
-* For two-qubit gates, the created matrix always corresponds to `control=1`, `target=0` and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding described above.
+* For two-qubit gates, the created matrix always corresponds to `control=1`, `target=0` and is a 4x4-dimensional matrix. This convention corresponds to the little-endian encoding described above.
 * For multi-qubit gates, the created matrix always corresponds to `qubits=[0..N]` where `N` is the number of qubits in the qubit vector of the multi-qubit gate.

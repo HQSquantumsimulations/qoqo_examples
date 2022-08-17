@@ -2,7 +2,7 @@
 
 **Welcome to the user documentation for the qoqo/roqoqo quantum computing toolkit.**
 
-This user documentation gives a general overview of the design principles and intended usage scenarios for qoqo and roqoqo. For a detailed description of all the types and functions, see the API-documentation of [roqoqo](https://docs.rs/roqoqo/) and [qoqo](https://qoqo.readthedocs.io/en/latest/).
+This user documentation gives a general overview of the design principles and intended usage scenarios for qoqo and roqoqo. For a detailed description of all the types and functions, see the API-documentation of [roqoqo](https://docs.rs/roqoqo/) and [qoqo](https://hqsquantumsimulations.github.io/qoqo/).
 
 ## What are qoqo and roqoqo
 
@@ -44,7 +44,7 @@ roqoqo has several components:
 
 Operations and Circuit can be used to represent single quantum circuits that run on quantum hardware.
 
-Measurements and QuantumProgram combine several circuits with classical information, to provide a high level interface for running quantum programs that yield an immediately usable result.
+Measurements and QuantumProgram combine several circuits with classical information, to provide a high-level interface for running quantum programs that yield an immediately usable result.
 
 To execute quantum circuits or quantum programs, a backend connecting to quantum hardware or a simulator is required.
 qoqo/roqoqo does not directly implement these backends. To minimize dependencies, backends are implemented in separate packages (e.g. `qoqo-quest`).

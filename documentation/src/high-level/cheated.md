@@ -1,8 +1,8 @@
 # Cheated Measurement
 
-The `Cheated` measurement in qoqo/roqoqo reads out the state vector or the density matrix of a quantum computer and obtains expectation values by multiplying the matrix representation of the observable with the state vector or multiplying the operator with the density matrix and taking the trace (respectively).
+A `Cheated` measurement in qoqo/roqoqo reads out the state vector or the density matrix of a quantum computer and obtains expectation values by multiplying the matrix representation of the observable with the state vector or multiplying the operator with the density matrix and taking the trace (respectively).
 
-`Cheated` measurements are only possible with simulator backends that can return the state vector or the density matrix of the quantum state. The expectation values are defined by a sparse matrix representation of the measured observables. Using `Cheated` measurements, expectation values can be obtained directly, without decomposing operators into Pauli products and post-processing the raw output of quantum computers.
+`Cheated` measurements are only possible with simulator backends that can return the state vector or the density matrix of the quantum state. The expectation values are defined by a sparse matrix representation of the measured observables. Using `Cheated` measurements, expectation values can be obtained directly without decomposing operators into Pauli products and post-processing the raw output of quantum computers.
 
 ```python
 from qoqo import Circuit
@@ -73,7 +73,7 @@ circuit += ops::PragmaGetStateVector::new("state_vec".to_string(), None);
 // Preparing the measurement input for CheatedPauliZProductInput
 let mut measurement_input = CheatedInput::new(1);
 // Add the measured operator
-measurement_input.add_operator_exp_val("<H>".to_string(), operator, "state_vec".to_string());
+measurement_input.add_operator_exp_val("<H>".to_string(), operator, "state_vec".to_string()).unwrap();
 
 let measurement = Cheated {
    constant_circuit: None,

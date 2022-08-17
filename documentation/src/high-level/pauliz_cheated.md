@@ -2,11 +2,11 @@
 
 The `CheatedPauliZProduct` measurement in qoqo/roqoqo calculates expectation values based on the expectation values of products of Pauli operators. It uses the `PragmaGetPauliProduct` readout and can only be used on a simulator backend.
 
-The measurement input `CheatedPauliZProductInput` registers Pauli products and combines the expectation values of Pauli products into results just like the measurement input of the [PauliZProduct](pauliz.md) measurement. In contrast to the `PauliZProductInput`, however, the involved qubits of the Pauli product are defined in the `PragmaGetPauliProduct` and no basis rotation is necessary.
+The measurement input `CheatedPauliZProductInput` registers Pauli products and combines the expectation values of Pauli products into results just like the measurement input of a [PauliZProduct](pauliz.md) measurement. In contrast to the `PauliZProductInput`, however, the involved qubits of the Pauli product are defined in the `PragmaGetPauliProduct` and no basis rotation is necessary.
 
 The expectation values of Pauli products are directly derived from the state of a simulator in the backend and are exact on the level of the numerical accuracy of the simulator. The `CheatedPauliZProduct` operation can be used to benchmark an algorithm, assuming that the statistical error due to a finite amount of projective measurements vanishes.
 
-The `ChatedPauliZProduct` only requires running one `Circuit` compared to several for more complex `PauliZProduct` measurements and can be faster.
+The `CheatedPauliZProduct` only requires running one `Circuit` compared to several for more complex `PauliZProduct` measurements and can be faster.
 
 ## Example
 
@@ -18,7 +18,6 @@ Example in python:
 from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import CheatedPauliZProduct, CheatedPauliZProductInput
-from qoqo import QuantumProgram
 from qoqo_quest import Backend
 
 # initialize |psi> = (|0> + |1>)/ sqrt(2)
@@ -68,7 +67,7 @@ The same example in Rust:
 
 ```rust
 
-use roqoqo::backends::{EvaluatingBackend, RegisterResult, self};
+use roqoqo::backends::{EvaluatingBackend, RegisterResult};
 use roqoqo::measurements::{CheatedPauliZProduct, CheatedPauliZProductInput};
 use roqoqo::{operations::*, Circuit, QuantumProgram};
 use std::collections::HashMap;
