@@ -156,7 +156,7 @@ from qoqo import operations as ops
 # create a new circuit
 circuit = Circuit()
 # Define the readout for two qubits 
-circuit += ops.DefinitionBit(readout=&quot;ro&quot;, length=2, is_output=True)
+circuit += ops.DefinitionBit(name=&quot;ro&quot;, length=2, is_output=True)
 # Rotation around Z axis by pi/2 on qubit 0
 circuit += ops.RotateZ(qubit=0, theta=1.57)
 # Entangling qubits 0 and 1 with CNOT gate
@@ -180,7 +180,7 @@ circuit += CNOT::new(0, 1);
 circuit += MeasureQubit::new(0, &quot;ro&quot;.to_string(), 0);
 circuit += MeasureQubit::new(1, &quot;ro&quot;.to_string(), 1);
 </code></pre>
-<p>For details on the <strong>available methods</strong> of a <code>Circuit</code> please refer to the <strong>API documentation</strong> of <a href="https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html">roqoqo</a> and <a href="https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.Circuit.html">qoqo</a>.</p>
+<p>For details on the <strong>available methods</strong> of a <code>Circuit</code> please refer to the <strong>API documentation</strong> of <a href="https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html">roqoqo</a> and <a href="https://hqsquantumsimulations.github.io/qoqo/generated/qoqo.html#qoqo.Circuit">qoqo</a>.</p>
 
                     </main>
 

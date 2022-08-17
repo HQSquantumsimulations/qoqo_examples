@@ -148,27 +148,30 @@
 <h2 id="qubit-states"><a class="header" href="#qubit-states">Qubit states</a></h2>
 <p>For the two basis states of a single qubit we define</p>
 <p>\[
-\left| 0 \right&gt;  =  \left|\textrm{false} \right&gt; =  \left| \downarrow \right&gt; = \begin{pmatrix}
+\left| 0 \right&gt;  =  \left|\textrm{false} \right&gt; =  \left| \uparrow \right&gt; = \begin{pmatrix}
 1 \\
 0
 \end{pmatrix} \\
-\]</p>
+\].</p>
 <p>\[
-\left |1 \right&gt;  =  \left|\textrm{true} \right&gt; =  \left| \uparrow \right&gt; = \begin{pmatrix}
+\left |1 \right&gt;  =  \left|\textrm{true} \right&gt; =  \left| \downarrow \right&gt; = \begin{pmatrix}
 0 \\
 1
 \end{pmatrix} \\
-\]</p>
-<p>Before any operations are applied in a circuit, a quantum computer is always assumed to be in the ground state (all qubits in state <code>|0&gt;</code>).</p>
+\].</p>
+<p>Before  any operations are applied in a circuit a quantum computer is always assumed to be in the zero state (all qubits in state <code>|0&gt;</code>).</p>
+<h3 id="note"><a class="header" href="#note">Note</a></h3>
+<p>This convention implies that <code>|0&gt;</code> is the <strong>excited</strong> state with respect to the <code>Z</code> Pauli operator and <code>|1&gt;</code> is the <strong>ground</strong> state. This is in contract with the physical implementation of qubits, where <code>|0&gt;</code> typically corresponds to the state with lower energy and damping will lead to the system relaxing from <code>|1&gt;</code> to <code>|0&gt;</code>.</p>
+<p>This means that in this convention, when identifying the qubits with spins with respect to the <code>Z</code> operator, the system starts out in the highest energy case and damping leads to a heating effect where the system population shifts to higher energy spin states.</p>
 <h2 id="endianness"><a class="header" href="#endianness">Endianness</a></h2>
-<p>qoqo and roqoqo use little endian encoding, where the least significant qubit is at the smallest memory address (or at the lowest index in a vector and at the rightmost entry when writing the qubit state as a sequence of <code>0</code> and <code>1</code> like a binary number).</p>
+<p>qoqo and roqoqo use little-endian encoding, where the least significant qubit is at the smallest memory address (or at the lowest index in a vector and at the rightmost entry when writing the qubit state as a sequence of <code>0</code> and <code>1</code> like a binary number).</p>
 <p>For a two-qubit state space we write the states of the qubits in the following order:
 \[
 \left|00 \right&gt;  =  \textrm{state} 0 \\
 \left|01 \right&gt;  =  \textrm{state} 1 \\
 \left|10 \right&gt;  =  \textrm{state} 2 \\
 \left|11 \right&gt;  =  \textrm{state} 3 \\
-\]</p>
+\].</p>
 <h2 id="operation-order"><a class="header" href="#operation-order">Operation order</a></h2>
 <p>When adding qoqo/roqoqo operations to circuits, the first operation added will be executed first. When writing qoqo/roqoqo operations, they are read left to right. This leads to an inversion of the order when transcribing to matrix form, where the matrix to the right acts first.</p>
 <p>\[
@@ -181,7 +184,7 @@
 0 &amp; 1 \\
 1 &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="qubit-naming"><a class="header" href="#qubit-naming">Qubit naming</a></h2>
 <p>qoqo uses a unified naming scheme for qubits in operations</p>
 <ul>
@@ -194,7 +197,7 @@
 <p>Unitary operations in qoqo/roqoqo provide a <code>unitary_matrix()</code> method that returns the definition of the gate in matrix form. This definition ignores the qubits of the gate to fit in the smallest possible matrix dimension.</p>
 <ul>
 <li>For single-qubit gates, the created matrix always corresponds to <code>qubit=0</code> and has a 2x2-dimension.</li>
-<li>For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code> and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding described above.</li>
+<li>For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code> and is a 4x4-dimensional matrix. This convention corresponds to the little-endian encoding described above.</li>
 <li>For multi-qubit gates, the created matrix always corresponds to <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</li>
 </ul>
 

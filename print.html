@@ -139,7 +139,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>Welcome to the user documentation for the qoqo/roqoqo quantum computing toolkit.</strong></p>
-<p>This user documentation gives a general overview of the design principles and intended usage scenarios for qoqo and roqoqo. For a detailed description of all the types and functions, see the API-documentation of <a href="https://docs.rs/roqoqo/">roqoqo</a> and <a href="https://qoqo.readthedocs.io/en/latest/">qoqo</a>.</p>
+<p>This user documentation gives a general overview of the design principles and intended usage scenarios for qoqo and roqoqo. For a detailed description of all the types and functions, see the API-documentation of <a href="https://docs.rs/roqoqo/">roqoqo</a> and <a href="https://hqsquantumsimulations.github.io/qoqo/">qoqo</a>.</p>
 <h2 id="what-are-qoqo-and-roqoqo"><a class="header" href="#what-are-qoqo-and-roqoqo">What are qoqo and roqoqo</a></h2>
 <p>The qoqo and roqoqo packages are a pair of quantum computing toolkits by <a href="https://quantumsimulations.de">HQS Quantum Simulations</a>.</p>
 <p>Like many quantum toolkits, qoqo and roqoqo are circuit-based toolkits, at the core. A sequence of operations to be run on a quantum computer is grouped into a <a href="circuits/intro.html">quantum circuit</a>.</p>
@@ -171,7 +171,7 @@ qoqo is the Python interface to roqoqo and provides operations, Circuit, measure
 <li>Devices (see <a href="devices.html">Devices</a>)</li>
 </ul>
 <p>Operations and Circuit can be used to represent single quantum circuits that run on quantum hardware.</p>
-<p>Measurements and QuantumProgram combine several circuits with classical information, to provide a high level interface for running quantum programs that yield an immediately usable result.</p>
+<p>Measurements and QuantumProgram combine several circuits with classical information, to provide a high-level interface for running quantum programs that yield an immediately usable result.</p>
 <p>To execute quantum circuits or quantum programs, a backend connecting to quantum hardware or a simulator is required.
 qoqo/roqoqo does not directly implement these backends. To minimize dependencies, backends are implemented in separate packages (e.g. <code>qoqo-quest</code>).
 In the <code>backends</code> module roqoqo provides an interface description for backends with the <code>EvaluatingBackend</code> Rust trait.</p>
@@ -187,9 +187,10 @@ At the moment, qoqo/roqoqo does not implement generic devices but defines an int
 <p>For pre-built wheels you can install qoqo with a simple pip command</p>
 <pre><code class="language-bash">pip install qoqo
 </code></pre>
-<p>For the source distribution, a rust toolchain and the <a href="https://maturin.rs/">maturin</a> Python package need to be already installed to install qoqo. A Rust toolchain can be installed using <a href="https://rustup.rs/">rustup</a>.</p>
-<p>With a Rust toolchain installed, qoqo can also be installed using a pip command.</p>
-<pre><code class="language-bash">pip install maturin
+<p>Alternatively, installing from the source distribution is possible. For this, a rust toolchain and the <a href="https://maturin.rs/">maturin</a> Python package need to be already installed. A Rust toolchain can be installed using <a href="https://rustup.rs/">rustup</a>.
+With this Rust toolchain installed, qoqo can be installed using a pip command:</p>
+<pre><code class="language-bash"># After installing the Rust toolchain, execute the following:
+pip install maturin
 pip install qoqo
 </code></pre>
 <h2 id="roqoqo"><a class="header" href="#roqoqo">roqoqo</a></h2>
@@ -217,7 +218,7 @@ from qoqo import operations as ops
 # create a new circuit
 circuit = Circuit()
 # Define the readout for two qubits 
-circuit += ops.DefinitionBit(readout=&quot;ro&quot;, length=2, is_output=True)
+circuit += ops.DefinitionBit(name=&quot;ro&quot;, length=2, is_output=True)
 # Rotation around Z axis by pi/2 on qubit 0
 circuit += ops.RotateZ(qubit=0, theta=1.57)
 # Entangling qubits 0 and 1 with CNOT gate
@@ -241,7 +242,7 @@ circuit += CNOT::new(0, 1);
 circuit += MeasureQubit::new(0, &quot;ro&quot;.to_string(), 0);
 circuit += MeasureQubit::new(1, &quot;ro&quot;.to_string(), 1);
 </code></pre>
-<p>For details on the <strong>available methods</strong> of a <code>Circuit</code> please refer to the <strong>API documentation</strong> of <a href="https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html">roqoqo</a> and <a href="https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.Circuit.html">qoqo</a>.</p>
+<p>For details on the <strong>available methods</strong> of a <code>Circuit</code> please refer to the <strong>API documentation</strong> of <a href="https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html">roqoqo</a> and <a href="https://hqsquantumsimulations.github.io/qoqo/generated/qoqo.html#qoqo.Circuit">qoqo</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="unitary-operations"><a class="header" href="#unitary-operations">Unitary Operations</a></h1>
 <p>Unitary operations or gate operations are operations that can be executed on all universal quantum computers. The operations correspond to unitary transformations of the state of a quantum computer.</p>
 <h2 id="unitary-matrix"><a class="header" href="#unitary-matrix">Unitary Matrix</a></h2>
@@ -314,7 +315,7 @@ circuit += ops.MeasureQubit(qubit=1, readout=&quot;bit_register&quot;, readout_i
 # Alternatively, define a Complex register to readout the state vector
 circuit += ops.DefinitionComplex(&quot;complex_register&quot;, 3, is_output = False)
 # Measure the state vector when running the circuit on a simulator
-circuit += ops.PragmaGetStateVector(&quot;complex_register&quot;)
+circuit += ops.PragmaGetStateVector(&quot;complex_register&quot;, None)
 </code></pre>
 <p>Setting up readouts in Rust:</p>
 <pre><code class="language-rust">use roqoqo::Circuit;
@@ -341,7 +342,7 @@ circuit += operations::PragmaGetStateVector::new(
 <p>Pragma operations in qoqo/roqoqo are operations that are <em>not</em> part of the set of operations that can run on all universal quantum computers.</p>
 <p>Pragma operations can be used to:</p>
 <ul>
-<li>Annotate a quantum circuit with additional information that is not necessary for execution (e.g <code>PragmaGlobalPhase</code>, <code>PragmaStartDecompositionBlock</code>)</li>
+<li>Annotate a quantum circuit with additional information that is not necessary for execution (e.g. <code>PragmaGlobalPhase</code>, <code>PragmaStartDecompositionBlock</code>)</li>
 <li>Apply operations that lead to a repeated execution of a circuit (<code>PragmaRepeatedMeasurement</code>, <code>PragmaSetNumberOfMeasurements</code>)</li>
 <li>Apply operations that are only available on specific hardware (e.g. <code>PragmaChangeDevice</code>, <code>PragmaSleep</code>)</li>
 <li>Apply operations that are only available on a simulator (e.g. <code>PragmaSetStateVector</code>, <code>PragmaGetStateVector</code>)</li>
@@ -349,9 +350,9 @@ circuit += operations::PragmaGetStateVector::new(
 <li>Model error sources (<code>PragmaOverrotation</code>)</li>
 </ul>
 <p>For a full list of available Pragma operations see the API documentation of <a href="https://docs.rs/roqoqo/latest/roqoqo/operations/index.html">roqoqo</a> 
-and <a href="https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.operations.html#module-qoqo.operations">qoqo</a>.</p>
+and <a href="https://hqsquantumsimulations.github.io/qoqo/generated/generated/qoqo.operations.html">qoqo</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="noise-operations"><a class="header" href="#noise-operations">Noise Operations</a></h1>
-<p>qoqo/roqoqo enables the user to construct finely controlled noise models. Noise acting on the quantum computer is modeled as noise operations acting on individual qubits between unitary gates applied on the quantum computer.</p>
+<p>qoqo/roqoqo enables the user to construct finely controlled noise models. Noise acting on the quantum computer is modeled as noise operations acting on individual qubits in between each unitary gate applied on the quantum computer.</p>
 <p>The noise operations can be directly added to a quantum circuit and can be simulated by compatible backends. Since noise cannot be actively controlled on a quantum computer normally, the noise operations are defined as <a href="circuits/pragma.html">Pragma</a> operations in qoqo/roqoqo. The strength of the noise is determined by defining a <code>gate_time</code> and a <code>rate</code>. The noise Pragma operation affects the system as a Lindblad type noise acting on the system with the rate <code>rate</code> for the time <code>gate_time</code>.</p>
 <p><em>Note</em>: as long as gate times and rates are scaled inversely any kind of units can be used.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
@@ -376,15 +377,15 @@ use roqoqo::operations;
 let mut circuit = Circuit::new();
 circuit += operations::CNOT::new(0,1);
 // Adding dephasing noise acting on gate 0 with gate_time 1.0 and rate 1e-3
-circuit += operations::PragmaDephasing::new(0, 1.0, 1e-3);
-circuit += operations::PragmaDamping::new(1, 1.0, 2e-3);
-circuit += operations::PragmaDepolarising::new(3, 1.0, 5e-3);
+circuit += operations::PragmaDephasing::new(0, 1.0, 1e-3.into());
+circuit += operations::PragmaDamping::new(1, 1.0, 2e-3.into());
+circuit += operations::PragmaDepolarising::new(3, 1.0, 5e-3.into());
 </code></pre>
 <h2 id="superoperator-representation"><a class="header" href="#superoperator-representation">Superoperator representation</a></h2>
 <p>All noise operations in qoqo/roqoqo provide a <code>superoperator()</code> method that returns the definition of the noise operation in superoperator matrix form.
 In the superoperator formalism, the density matrix of the system is rewritten as a vector in row-major form. Applying the noise to the quantum computer then corresponds to multiplying the vector with the superoperator matrix.
 The superoperator matrix ignores the qubits the noise operation acts on to fit in the smallest possible matrix dimension.</p>
-<p>For other methods available for noise operations see the API documentation of <a href="https://docs.rs/roqoqo/latest/roqoqo/operations/index.html">roqoqo</a> and <a href="https://qoqo.readthedocs.io/en/latest/generated/generated/qoqo.operations.html#module-qoqo.operations">qoqo</a>.</p>
+<p>For other methods available for noise operations see the API documentation of <a href="https://docs.rs/roqoqo/latest/roqoqo/operations/index.html">roqoqo</a> and <a href="https://hqsquantumsimulations.github.io/qoqo/generated/generated/qoqo.operations.html">qoqo</a>.</p>
 <h2 id="noise-operations-1"><a class="header" href="#noise-operations-1">Noise operations</a></h2>
 <p>The single noise operations shown in the example above are:</p>
 <ul>
@@ -401,26 +402,26 @@ a &amp; b &amp; c \\
 d &amp; e &amp; f \\
 g &amp; h &amp; j \\
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>where the coefficients correspond to the following summands expanded from the first term of the non-coherent part of the Lindblad equation:
 \[
 \frac{d}{dt}\rho = \sum_{i,j=0}^{2} M_{i,j} L_{i} \rho L_{j}^{\dagger} - \frac{1}{2} { L_{j}^{\dagger} L_i, \rho }
-\]</p>
+\],</p>
 <p>with \( L_0 = \sigma^{+} \), \( L_1 = \sigma^{-} \) and \( L_3 = \sigma_{z} \).</p>
 <p>Applying a Pragma noise operation with a given <code>gate_time</code> corresponds to applying the full time-evolution under the Lindblad equation.</p>
 <h2 id="error-pragmas-that-are-not-noise-operations"><a class="header" href="#error-pragmas-that-are-not-noise-operations">Error Pragmas that are not noise operations</a></h2>
 <p>qoqo/roqoqo also supports Pragma operations that lead to errors in the execution of the quantum program that do not correspond to applying physical noise to the system</p>
 <h3 id="pragmaoverrotation"><a class="header" href="#pragmaoverrotation">PragmaOverrotation</a></h3>
 <p>This operation applies a statistical overrotation to the next rotation gate in the circuit, which matches the name given in the <code>gate</code> parameter of <code>PragmaOverrotation</code> and the involved qubits provided in <code>qubits</code>. The applied overrotation corresponds to adding a random number to the rotation angle.
-The random number is drawn from a normal distribution with mean <code>0</code> and standard deviation given by the input parameter <code>variance</code>, which is multiplied by the <code>amplitude</code> parameter.</p>
+The random number is drawn from a normal distribution with mean <code>0</code> and standard deviation whose variance is given by the input parameter <code>variance</code>, which is then multiplied by the <code>amplitude</code> parameter.</p>
 <h3 id="pragmaboostnoise"><a class="header" href="#pragmaboostnoise">PragmaBoostNoise</a></h3>
-<p>This operation boosts noise and overrotations in the circuit. The input parameter <code>noise_coefficient</code> defines the coefficient by which the noise is boosted, i.e. the number by which the <code>gate_time</code> is multiplied.</p>
+<p>This operation boosts noise and overrotations in the circuit. The input parameter <code>noise_coefficient</code> defines the coefficient by which the noise is boosted, <em>i.e.</em> the number by which the <code>gate_time</code> is multiplied.</p>
 <h3 id="pragmasleep"><a class="header" href="#pragmasleep">PragmaSleep</a></h3>
 <p>This operation makes the quantum computer hardware, that provides this functionality, wait a given amount of time (<code>sleep_time</code>). Waiting for a given time can increase the effect of continuous noise on the result of running a quantum circuit. This is sometimes used in noise-extrapolation error mitigation techniques.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="high-level-interface-quantum-programs"><a class="header" href="#high-level-interface-quantum-programs">High level interface: quantum programs</a></h1>
-<p>In the definition of qoqo/roqoqo, a quantum program accepts input from a user/calling function, runs operations on a quantum computer and returns an output in the form of expectation values instead of raw output from the quantum computer. 
+<div style="break-before: page; page-break-before: always;"></div><h1 id="high-level-interface-quantum-programs"><a class="header" href="#high-level-interface-quantum-programs">High-level interface: quantum programs</a></h1>
+<p>In the definition of qoqo/roqoqo, a quantum program accepts input from a user/calling function and runs operations on a quantum computer. It then returns an output in the form of expectation values, instead of raw output from the quantum computer. 
 To represent quantum programs qoqo/roqoqo provides <code>QuantumProgram</code>.
-It is intended as a high level interface between a complex program and the quantum computer, which can be called (almost) as easily as a normal function and handles variable replacement and the post-processing of the raw output of the quantum computer/simulator.</p>
+It is intended as a high-level interface between a complex program and the quantum computer, which can be called (almost) as easily as a normal function and handles variable replacement and the post-processing of the raw output of the quantum computer/simulator.</p>
 <h2 id="measurements"><a class="header" href="#measurements">Measurements</a></h2>
 <p>Post-processing the raw output is handled by <code>measurements</code>.
 For many applications, the measurement results of several circuits need to be combined to extract the required information.
@@ -436,7 +437,7 @@ The type of <code>measurement</code> and <code>measurement input</code> depends 
 </ul>
 <p>The <code>PauliZProduct</code> measurement is based on measuring the product of PauliZ operators for given qubits. Combined with a basis rotation of the measured qubits, it can be used to measure arbitrary expectation values. It uses projective qubit readouts like <code>MeasureQubit</code> or <code>PragmaRepeatedMeasurement</code>. It can be run on real quantum computer hardware and simulators. For further details please refer to section <a href="high-level/pauliz.html">PauliZProduct</a>.</p>
 <p>The <code>ClassicalRegister</code> measurement returns the raw output of the classical registers written during circuit execution.</p>
-<p>The <code>CheatedPauliZProduct</code> measurement directly calculates operator expectation values the from the expectation values of products of Pauli matrices . The Pauli product expectation values are read out by the <code>PragmaGetPauliProduct</code> operation. It can only be used on simulator backends.</p>
+<p>The <code>CheatedPauliZProduct</code> measurement directly calculates operator expectation values from the expectation values of products of Pauli matrices. The Pauli product expectation values are read out by the <code>PragmaGetPauliProduct</code> operation. It can only be used on simulator backends.</p>
 <p>The <code>Cheated</code> measurement calculates expectation values by directly extracting the state vector <code>PragmaGetStateVector</code> or the density matrix <code>PragmaGetDensityMatrix</code> from a simulator and applying matrix multiplication.</p>
 <p>For examples how to construct measurement input and measurements see the pages for the separate measurement types.</p>
 <h2 id="variable-replacement"><a class="header" href="#variable-replacement">Variable replacement</a></h2>
@@ -445,24 +446,23 @@ When calling its <code>run</code> method, it replaces the free parameters with t
 <p>For an example how to <code>run</code> a <code>QuantumProgram</code> <a href="high-level/program.html">see here</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="paulizproduct-measurement"><a class="header" href="#paulizproduct-measurement">PauliZProduct Measurement</a></h1>
 <p>The <code>PauliZProduct</code> measurement is based on measuring the product of PauliZ operators for given qubits. Combined with a basis rotation of the measured qubits, it can be used to measure arbitrary expectation values. It uses projective qubit readouts like <code>MeasureQubit</code> or <code>PragmaRepeatedMeasurement</code>. It can be run on real quantum computer hardware and simulators.</p>
-<p>As an <strong>example</strong> let us consider the measurement of the following Hamiltonian
+<p>As an example, let us consider the measurement of the following Hamiltonian
 \[
 \hat{H} = 0.1\cdot X + 0.2\cdot Z
 \] where <code>X</code> and <code>Z</code> are Pauli operators. The target is to measure \(\hat{H} \) with respect to a state
 \[
 |\psi&gt; = (|0&gt; + |1&gt;)/\sqrt{2}.
-\]
-The <code>constant_circuit</code> will be used to prepare the state \( |\psi&gt; \) by applying the Hadamard gate. The given Hamiltonian includes <code>X</code> and <code>Z</code> terms that cannot be measured at the same time, since they are measured using different bases. The <code>circuits</code> list includes one quantum circuit that does not apply any additional gate and one circuit that rotates the qubit basis into the X-basis so that the expectation value <code>&lt;X&gt;</code> is equivalent to the measurement of <code>&lt;Z&gt;</code> in the new basis. In this example, each measured Pauli product contains only one Pauli operator. For the post-processing of the measured results, the <code>PauliZProduct</code> measurement needs two more inputs provided by the object <code>PauliZProductInput</code>:</p>
+\].</p>
+<p>The <code>constant_circuit</code> will be used to prepare the state \( |\psi&gt; \) by applying the Hadamard gate. The given Hamiltonian includes <code>X</code> and <code>Z</code> terms that cannot be measured at the same time, since they are measured using different bases. The <code>circuits</code> list includes one quantum circuit that does not apply any additional gate and one circuit that rotates the qubit basis into the X-basis so that the expectation value <code>&lt;X&gt;</code> is equivalent to the measurement of <code>&lt;Z&gt;</code> in the new basis. In this example, each measured Pauli product contains only one Pauli operator. For the post-processing of the measured results, the <code>PauliZProduct</code> measurement needs two more inputs provided by the object <code>PauliZProductInput</code>:</p>
 <ul>
 <li>The definition of the measured Pauli products after basis transformations (<code>add_pauliz_product()</code>),</li>
 <li>The weights of the Pauli product expectation values in the final expectation values (<code>add_linear_exp_val()</code>).</li>
 </ul>
-<p>In general, one can measure the expectation values of the products of local Z operators, e.g. <code>&lt;Z0&gt;</code>, <code>&lt;Z1&gt;</code>, <code>&lt;Z0*Z1&gt;</code>, <code>&lt;Z0*Z3&gt;</code>, etc. The <code>PauliZProductInput</code> needs to define all of the products that are measured. In the given example, we will measure two products <code>&lt;Z0&gt;</code> after a rotation in the X basis (corresponding to <code>&lt;X0&gt;</code>) and <code>&lt;Z0&gt;</code> <em>without</em> a rotation before the measurement.
+<p>In general, one can measure the expectation values of the products of local Z operators, <em>e.g.</em> <code>&lt;Z0&gt;</code>, <code>&lt;Z1&gt;</code>, <code>&lt;Z0*Z1&gt;</code>, <code>&lt;Z0*Z3&gt;</code>, <em>etc.</em> The <code>PauliZProductInput</code> needs to define all of the products that are measured. In the given example, we will measure two products <code>&lt;Z0&gt;</code> after a rotation in the X basis (corresponding to <code>&lt;X0&gt;</code>) and <code>&lt;Z0&gt;</code> <em>without</em> a rotation before the measurement.
 The <code>PauliZProductInput</code> also defines the weights of the products in the final result. In the example below, 0.1 is the coefficient for the first product and 0.2 for the second.</p>
 <pre><code class="language-python">from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import PauliZProduct, PauliZProductInput
-from qoqo import QuantumProgram
 
 # initialize |psi&gt;
 init_circuit = Circuit()
@@ -481,7 +481,7 @@ x_circuit += ops.Hadamard(0)
 x_circuit += ops.PragmaRepeatedMeasurement(&quot;ro_x&quot;, 1000, None)
 
 # Preparing the measurement input for one qubit
-# The PauliZProductInput starts with just the number of qubtis
+# The PauliZProductInput starts with just the number of qubits
 # and if to use a flipped measurements set.
 measurement_input = PauliZProductInput(1, False)
 # Next, pauli products are added to the PauliZProductInput
@@ -506,9 +506,8 @@ measurement = PauliZProduct(
 )
 </code></pre>
 <p>The same example in Rust:</p>
-<pre><code class="language-rust">use roqoqo::{Circuit, operations::*, QuantumProgram};
+<pre><code class="language-rust">use roqoqo::{Circuit, operations::*};
 use roqoqo::measurements::{PauliZProduct, PauliZProductInput};
-use roqoqo::backends::{EvaluatingBackend, RegisterResult};
 use std::collections::HashMap;
 
 // initialize |psi&gt;
@@ -532,7 +531,7 @@ x_circuit.add_operation(
 );
 
 // Preparing the measurement input for one qubit
-// The PauliZProductInput starts with just the number of qubtis
+// The PauliZProductInput starts with just the number of qubits
 // and if to use a flipped measurements set.
 let mut measurement_input = PauliZProductInput::new(1, false);
 // Next, pauli products are added to the PauliZProductInput
@@ -560,6 +559,8 @@ let measurement = PauliZProduct {
     input: measurement_input,
     circuits: vec![z_circuit.clone(), x_circuit.clone()],
     constant_circuit: Some(init_circuit.clone()),
+
+println!(&quot;{:?}&quot;, measurement);
 };
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quantumprogram-and-variable-replacement"><a class="header" href="#quantumprogram-and-variable-replacement">QuantumProgram and Variable-Replacement</a></h1>
@@ -798,16 +799,15 @@ let result_registers: (
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cheatedpaulizproduct-measurement"><a class="header" href="#cheatedpaulizproduct-measurement">CheatedPauliZProduct Measurement</a></h1>
 <p>The <code>CheatedPauliZProduct</code> measurement in qoqo/roqoqo calculates expectation values based on the expectation values of products of Pauli operators. It uses the <code>PragmaGetPauliProduct</code> readout and can only be used on a simulator backend.</p>
-<p>The measurement input <code>CheatedPauliZProductInput</code> registers Pauli products and combines the expectation values of Pauli products into results just like the measurement input of the <a href="high-level/pauliz.html">PauliZProduct</a> measurement. In contrast to the <code>PauliZProductInput</code>, however, the involved qubits of the Pauli product are defined in the <code>PragmaGetPauliProduct</code> and no basis rotation is necessary.</p>
+<p>The measurement input <code>CheatedPauliZProductInput</code> registers Pauli products and combines the expectation values of Pauli products into results just like the measurement input of a <a href="high-level/pauliz.html">PauliZProduct</a> measurement. In contrast to the <code>PauliZProductInput</code>, however, the involved qubits of the Pauli product are defined in the <code>PragmaGetPauliProduct</code> and no basis rotation is necessary.</p>
 <p>The expectation values of Pauli products are directly derived from the state of a simulator in the backend and are exact on the level of the numerical accuracy of the simulator. The <code>CheatedPauliZProduct</code> operation can be used to benchmark an algorithm, assuming that the statistical error due to a finite amount of projective measurements vanishes.</p>
-<p>The <code>ChatedPauliZProduct</code> only requires running one <code>Circuit</code> compared to several for more complex <code>PauliZProduct</code> measurements and can be faster.</p>
+<p>The <code>CheatedPauliZProduct</code> only requires running one <code>Circuit</code> compared to several for more complex <code>PauliZProduct</code> measurements and can be faster.</p>
 <h2 id="example-1"><a class="header" href="#example-1">Example</a></h2>
 <p>The following code measures the same observable as the <a href="high-level/pauliz.html">PauliZProduct</a> example with the <code>CheatedPauliZProduct</code> measurement.</p>
 <p>Example in python:</p>
 <pre><code class="language-python">from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import CheatedPauliZProduct, CheatedPauliZProductInput
-from qoqo import QuantumProgram
 from qoqo_quest import Backend
 
 # initialize |psi&gt; = (|0&gt; + |1&gt;)/ sqrt(2)
@@ -854,7 +854,7 @@ print(result)
 </code></pre>
 <p>The same example in Rust:</p>
 <pre><code class="language-rust">
-use roqoqo::backends::{EvaluatingBackend, RegisterResult, self};
+use roqoqo::backends::{EvaluatingBackend, RegisterResult};
 use roqoqo::measurements::{CheatedPauliZProduct, CheatedPauliZProductInput};
 use roqoqo::{operations::*, Circuit, QuantumProgram};
 use std::collections::HashMap;
@@ -917,8 +917,8 @@ println!(&quot;{:?}&quot;, res);
 
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cheated-measurement"><a class="header" href="#cheated-measurement">Cheated Measurement</a></h1>
-<p>The <code>Cheated</code> measurement in qoqo/roqoqo reads out the state vector or the density matrix of a quantum computer and obtains expectation values by multiplying the matrix representation of the observable with the state vector or multiplying the operator with the density matrix and taking the trace (respectively).</p>
-<p><code>Cheated</code> measurements are only possible with simulator backends that can return the state vector or the density matrix of the quantum state. The expectation values are defined by a sparse matrix representation of the measured observables. Using <code>Cheated</code> measurements, expectation values can be obtained directly, without decomposing operators into Pauli products and post-processing the raw output of quantum computers.</p>
+<p>A <code>Cheated</code> measurement in qoqo/roqoqo reads out the state vector or the density matrix of a quantum computer and obtains expectation values by multiplying the matrix representation of the observable with the state vector or multiplying the operator with the density matrix and taking the trace (respectively).</p>
+<p><code>Cheated</code> measurements are only possible with simulator backends that can return the state vector or the density matrix of the quantum state. The expectation values are defined by a sparse matrix representation of the measured observables. Using <code>Cheated</code> measurements, expectation values can be obtained directly without decomposing operators into Pauli products and post-processing the raw output of quantum computers.</p>
 <pre><code class="language-python">from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import Cheated, CheatedInput
@@ -985,7 +985,7 @@ circuit += ops::PragmaGetStateVector::new(&quot;state_vec&quot;.to_string(), Non
 // Preparing the measurement input for CheatedPauliZProductInput
 let mut measurement_input = CheatedInput::new(1);
 // Add the measured operator
-measurement_input.add_operator_exp_val(&quot;&lt;H&gt;&quot;.to_string(), operator, &quot;state_vec&quot;.to_string());
+measurement_input.add_operator_exp_val(&quot;&lt;H&gt;&quot;.to_string(), operator, &quot;state_vec&quot;.to_string()).unwrap();
 
 let measurement = Cheated {
    constant_circuit: None,
@@ -1022,7 +1022,7 @@ The implementation of individual backends is provided not in qoqo itself, but in
 </ul>
 <p>All evaluating backends provide the same methods: <code>run_circuit()</code>, <code>run_measurement()</code> or <code>run_measurement_registers()</code>, and <code>run()</code>.</p>
 <h3 id="example-2"><a class="header" href="#example-2">Example</a></h3>
-<p>In this subsection, an example is provided. A <a href="hight-level/program.html">QuantumProgram</a> is created to be executed on the <a href="https://github.com/HQSquantumsimulations/qoqo-quest">qoqo_quest</a> simulator backend. Here, all three options supported by an <code>EvaluatingBackend</code> are presented:</p>
+<p>A <a href="hight-level/program.html">QuantumProgram</a> is created to be executed on the <a href="https://github.com/HQSquantumsimulations/qoqo-quest">qoqo_quest</a> simulator backend. Here, all three options supported by an <code>EvaluatingBackend</code> are presented:</p>
 <ul>
 <li>to run a single circuit,</li>
 <li>to run a measurement, and</li>
@@ -1033,7 +1033,7 @@ The implementation of individual backends is provided not in qoqo itself, but in
 from qoqo import operations as ops
 from qoqo.measurements import PauliZProduct, PauliZProductInput
 from qoqo import QuantumProgram
-from qoqo_quest import SimulatorBackend
+from qoqo_quest import Backend
 # initialize |psi&gt;
 init_circuit = Circuit()
 # Apply a RotateY gate with a symbolic angle
@@ -1073,15 +1073,15 @@ measurement = PauliZProduct(
 # a single circuit, a measurement, and a quantum program.
 
 # Create a backend simulating one qubit
-backend = SimulatorBackend(1)
+backend = Backend(1)
 
 # a) Run a single circuit
 (bit_registers, float_registers, complex_registers) = backend.run_circuit(z_circuit)
 
 # b) To run a measurement we need to replace the free parameter by hand
 executable_measurement = measurement.substitute_parameters({&quot;angle&quot;: 0.2})
-expecation_values = backend.run_measurement(executable_measurement)
-print(expecation_values)
+expectation_values = backend.run_measurement(executable_measurement)
+print(expectation_values)
 
 # c) Run a quantum program
 # The QuantumProgram now has one free parameter that must be set when executing it.
@@ -1089,7 +1089,7 @@ print(expecation_values)
 # during execution.
 program = QuantumProgram(measurement=measurement, input_parameter_names=[&quot;angle&quot;])
 # Run the program with 0.1 substituting `angle`
-expecation_values = program.run(backend, [0.1])
+expectation_values = program.run(backend, [0.1])
 </code></pre>
 <p>In Rust:</p>
 <pre><code class="language-rust">use std::collections::HashMap;
@@ -1132,7 +1132,7 @@ let x_basis_index = measurement_input.add_pauliz_product(&quot;ro_x&quot;.to_str
 let mut linear: HashMap&lt;usize, f64&gt; = HashMap::new();
 linear.insert(x_basis_index, 0.1);
 linear.insert(z_basis_index, 0.2);
-measurement_input.add_linear_exp_val(&quot;&lt;H&gt;&quot;.to_string(), linear);
+measurement_input.add_linear_exp_val(&quot;&lt;H&gt;&quot;.to_string(), linear).unwrap();
 
 let measurement = PauliZProduct{
    constant_circuit: Some(init_circuit),
@@ -1147,12 +1147,12 @@ let measurement = PauliZProduct{
 let backend = Backend::new(1);
 
 // a) Run a single circuit
-let (bit_registers, float_registers, complex_registers) = backend.run_circuit(&amp;z_circuit).unwrap();
+let (_bit_registers, _float_registers, _complex_registers) = backend.run_circuit(&amp;z_circuit).unwrap();
 
 // b) To run a measurement we need to replace the free parameter by hand
 let executable_measurement = measurement.substitute_parameters(HashMap::from([(&quot;angle&quot;.to_string(), 0.2)])).unwrap();
-let expecation_values = backend.run_measurement(&amp;executable_measurement).unwrap();
-println!(&quot;{:?}&quot;, expecation_values);
+let expectation_values = backend.run_measurement(&amp;executable_measurement).unwrap();
+println!(&quot;{:?}&quot;, expectation_values);
 
 // c) Run a quantum program
 // The QuantumProgram now has one free parameter that must be set when executing it.
@@ -1160,11 +1160,12 @@ println!(&quot;{:?}&quot;, expecation_values);
 // during execution.
 let program = QuantumProgram::PauliZProduct{ measurement, input_parameter_names: vec![&quot;angle&quot;.to_string()]};
 // Run the program with 0.1 substituting `angle`
-let expecation_values = program.run(backend, &amp;[0.1]).unwrap();
+let expectation_values = program.run(backend, &amp;[0.1]).unwrap();
+println!(&quot;{:?}&quot;, expectation_values);
 </code></pre>
-<h2 id="translating-to-other-frameworks"><a class="header" href="#translating-to-other-frameworks">Translating to other frameworks</a></h2>
-<p>Backends that translate qoqo/roqoqo objects (for example Circuits) to other frameworks or representations do not implement the <code>EvaluatingBackend</code>.
-At the moment a backend to translate qoqo/roqoqo <code>Circuits</code> to qasm is implemented: <a href="https://github.com/HQSquantumsimulations/qoqo_qasm">qoqo_qasm</a>.</p>
+<h2 id="translating-to-other-quantum-computing-frameworks"><a class="header" href="#translating-to-other-quantum-computing-frameworks">Translating to other quantum computing frameworks</a></h2>
+<p>There are many open- and closed-source quantum frameworks. For some use cases, it may be advantageous to interface between qoqo and another quantum computing framework. Depending on the target framework, circuits containing an available subset of qoqo operations can be translated to other frameworks by backends. Backends that translate qoqo/roqoqo objects (for example Circuits) to other frameworks or representations do not implement the <code>EvaluatingBackend</code>.</p>
+<p>At the moment, we have implemented one translating backend, from qoqo/roqoqo <code>Circuits</code> to qasm: <a href="https://github.com/HQSquantumsimulations/qoqo_qasm">qoqo_qasm</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="devices"><a class="header" href="#devices">Devices</a></h1>
 <p>When working with quantum circuits it is often necessary to know the topology of a target quantum device. Device properties can also be used by backends, for example to accurately simulate a given quantum device.
 At the moment, qoqo/roqoqo does not implement devices but defines an interface for obtaining the device topology and the noise properties. The interface is defined by roqoqo's <code>Device</code> trait.</p>
@@ -1172,12 +1173,12 @@ At the moment, qoqo/roqoqo does not implement devices but defines an interface f
 <p><strong>Abstract devices</strong> contain abstract information about the device topology, the available gates and the noise model.</p>
 <p><strong>Backend devices</strong> are devices that are implemented by a roqoqo <a href="backends.html">backend</a>. They can specify additional information for accessing the device on the backend and can contain additional information. The devices also contain all the information of the abstract devices.</p>
 <p>A typical example for abstract devices are linear chains of square lattices in which two-qubit gate operations are only available between neighboring qubits.</p>
-<p>The noise model of the <code>Device</code> trait is based on the continuous time Lindblad equation:
+<p>The noise model of the <code>Device</code> trait is based on the continuous-time Lindblad equation:
 \[
 \frac{d}{dt}\rho = \sum_{i,j=0}^{2} M_{i,j} L_{i} \rho L_{j}^{\dagger} - \frac{1}{2} { L_{j}^{\dagger} L_i \rho },
-\]</p>
+\],</p>
 <p>with \( L_0 = \sigma^{+}\), \( L_1 = \sigma^{-}\) and \(L_3 = \sigma^{z}\).</p>
-<p>It is defined by the decoherence rates <code>M</code> and the (pseudo) time needed to execute a quantum operation.</p>
+<p>It is defined by the decoherence rates <code>M</code> and the (pseudo-)time needed to execute a quantum operation.</p>
 <p>The matrix representation of the decoherence rates of the Lindblad equation can be obtained by calling the method <code>qubit_decoherence_rates()</code> of a device.</p>
 <p>The time required for a gate operation can be obtained from the methods <code>single_qubit_gate_time()</code>, <code>two_qubit_gate_time()</code>, and <code>multi_qubit_gate_time()</code> for a specific type of gate (defined by its name) and the qubits the gate should act on. 
 The gate time method can also be used to query the topology and available gate operations on a device. If a specific type of gate operation is not available on the given qubits, the gate time method will return <code>None</code>.</p>
@@ -1194,27 +1195,30 @@ The gate time method can also be used to query the topology and available gate o
 <h2 id="qubit-states"><a class="header" href="#qubit-states">Qubit states</a></h2>
 <p>For the two basis states of a single qubit we define</p>
 <p>\[
-\left| 0 \right&gt;  =  \left|\textrm{false} \right&gt; =  \left| \downarrow \right&gt; = \begin{pmatrix}
+\left| 0 \right&gt;  =  \left|\textrm{false} \right&gt; =  \left| \uparrow \right&gt; = \begin{pmatrix}
 1 \\
 0
 \end{pmatrix} \\
-\]</p>
+\].</p>
 <p>\[
-\left |1 \right&gt;  =  \left|\textrm{true} \right&gt; =  \left| \uparrow \right&gt; = \begin{pmatrix}
+\left |1 \right&gt;  =  \left|\textrm{true} \right&gt; =  \left| \downarrow \right&gt; = \begin{pmatrix}
 0 \\
 1
 \end{pmatrix} \\
-\]</p>
-<p>Before any operations are applied in a circuit, a quantum computer is always assumed to be in the ground state (all qubits in state <code>|0&gt;</code>).</p>
+\].</p>
+<p>Before  any operations are applied in a circuit a quantum computer is always assumed to be in the zero state (all qubits in state <code>|0&gt;</code>).</p>
+<h3 id="note"><a class="header" href="#note">Note</a></h3>
+<p>This convention implies that <code>|0&gt;</code> is the <strong>excited</strong> state with respect to the <code>Z</code> Pauli operator and <code>|1&gt;</code> is the <strong>ground</strong> state. This is in contract with the physical implementation of qubits, where <code>|0&gt;</code> typically corresponds to the state with lower energy and damping will lead to the system relaxing from <code>|1&gt;</code> to <code>|0&gt;</code>.</p>
+<p>This means that in this convention, when identifying the qubits with spins with respect to the <code>Z</code> operator, the system starts out in the highest energy case and damping leads to a heating effect where the system population shifts to higher energy spin states.</p>
 <h2 id="endianness"><a class="header" href="#endianness">Endianness</a></h2>
-<p>qoqo and roqoqo use little endian encoding, where the least significant qubit is at the smallest memory address (or at the lowest index in a vector and at the rightmost entry when writing the qubit state as a sequence of <code>0</code> and <code>1</code> like a binary number).</p>
+<p>qoqo and roqoqo use little-endian encoding, where the least significant qubit is at the smallest memory address (or at the lowest index in a vector and at the rightmost entry when writing the qubit state as a sequence of <code>0</code> and <code>1</code> like a binary number).</p>
 <p>For a two-qubit state space we write the states of the qubits in the following order:
 \[
 \left|00 \right&gt;  =  \textrm{state} 0 \\
 \left|01 \right&gt;  =  \textrm{state} 1 \\
 \left|10 \right&gt;  =  \textrm{state} 2 \\
 \left|11 \right&gt;  =  \textrm{state} 3 \\
-\]</p>
+\].</p>
 <h2 id="operation-order"><a class="header" href="#operation-order">Operation order</a></h2>
 <p>When adding qoqo/roqoqo operations to circuits, the first operation added will be executed first. When writing qoqo/roqoqo operations, they are read left to right. This leads to an inversion of the order when transcribing to matrix form, where the matrix to the right acts first.</p>
 <p>\[
@@ -1227,7 +1231,7 @@ The gate time method can also be used to query the topology and available gate o
 0 &amp; 1 \\
 1 &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="qubit-naming"><a class="header" href="#qubit-naming">Qubit naming</a></h2>
 <p>qoqo uses a unified naming scheme for qubits in operations</p>
 <ul>
@@ -1240,7 +1244,7 @@ The gate time method can also be used to query the topology and available gate o
 <p>Unitary operations in qoqo/roqoqo provide a <code>unitary_matrix()</code> method that returns the definition of the gate in matrix form. This definition ignores the qubits of the gate to fit in the smallest possible matrix dimension.</p>
 <ul>
 <li>For single-qubit gates, the created matrix always corresponds to <code>qubit=0</code> and has a 2x2-dimension.</li>
-<li>For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code> and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding described above.</li>
+<li>For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code> and is a 4x4-dimensional matrix. This convention corresponds to the little-endian encoding described above.</li>
 <li>For multi-qubit gates, the created matrix always corresponds to <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="list-of-gate-operations"><a class="header" href="#list-of-gate-operations">List of Gate Operations</a></h1>
@@ -1254,7 +1258,7 @@ The gate time method can also be used to query the topology and available gate o
 <li>\( \sigma_x \), \( \sigma_y \), \( \sigma_z \) are the Pauli matrices X, Y, Z
 \[
 \sigma_x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} := X, \quad \sigma_y = \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix} := Y,  \quad \sigma_z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} := Z
-\]</li>
+\].</li>
 </ul>
 <h2 id="single-qubit-gates"><a class="header" href="#single-qubit-gates"><a href="gate_operations/single_qubit_gates.html">Single-qubit gates</a></a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Gate</th><th>Short Description</th></tr></thead><tbody>
@@ -1278,7 +1282,7 @@ The gate time method can also be used to query the topology and available gate o
 <h2 id="two-qubit-gates"><a class="header" href="#two-qubit-gates"><a href="gate_operations/two_qubit_gates.html">Two-qubit gates</a></a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Gate</th><th>Short Description</th></tr></thead><tbody>
 <tr><td>Bogoliubov</td><td>The Bogoliubov DeGennes interaction gate.</td></tr>
-<tr><td>CNOT</td><td>The controlled not gate, e.g. to entangle two qubits.</td></tr>
+<tr><td>CNOT</td><td>The controlled not gate, <em>e.g.</em> to entangle two qubits.</td></tr>
 <tr><td>ComplexPMInteraction</td><td>The complex hopping gate.</td></tr>
 <tr><td>ControlledPauliY</td><td>The controlled PauliY gate.</td></tr>
 <tr><td>ControlledPauliZ</td><td>The controlled PauliZ gate.</td></tr>
@@ -1286,23 +1290,23 @@ The gate time method can also be used to query the topology and available gate o
 <tr><td>Fsim</td><td>The fermionic qubit simulation gate.</td></tr>
 <tr><td>FSwap</td><td>The fermionic SWAP gate.</td></tr>
 <tr><td>GivensRotation</td><td>The Givens rotation interaction gate in big endian notation: \(e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-i \phi Z_t/2} \).</td></tr>
-<tr><td>GivensRotationLittleEndian</td><td>The Givens rotation interaction gate in little endian notation: \(e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-i \phi Z_c/2} \).</td></tr>
+<tr><td>GivensRotationLittleEndian</td><td>The Givens rotation interaction gate in little-endian notation: \(e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-i \phi Z_c/2} \).</td></tr>
 <tr><td>InvSqrtISwap</td><td>The inverse square root of the ISwap gate.</td></tr>
 <tr><td>ISwap</td><td>The complex swap gate.</td></tr>
-<tr><td>MolmerSorensenXX</td><td>The fixed-phase MolmerSorensen XX gate.</td></tr>
+<tr><td>MolmerSorensenXX</td><td>The fixed-phase Mølmer–Sørensen XX gate.</td></tr>
 <tr><td>PhaseShiftedControlledZ</td><td>The phased-shifted controlled-Z gate.</td></tr>
 <tr><td>PMInteraction</td><td>The transversal interaction gate.</td></tr>
 <tr><td>Qsim</td><td>The qubit simulation gate.</td></tr>
 <tr><td>SpinInteraction</td><td>The generalized, anisotropic XYZ Heisenberg interaction between spins.</td></tr>
 <tr><td>SqrtISwap</td><td>The square root of the ISwap gate.</td></tr>
 <tr><td>SWAP</td><td>The swap gate, to switch the positions of two qubits.</td></tr>
-<tr><td>VariablesMSXX</td><td>The variable-angle MolmerSorensen XX gate.</td></tr>
+<tr><td>VariablesMSXX</td><td>The variable-angle Mølmer–Sørensen XX gate.</td></tr>
 <tr><td>XY</td><td>The XY gate.</td></tr>
 </tbody></table>
 </div>
 <h2 id="multi-qubit-gates"><a class="header" href="#multi-qubit-gates"><a href="gate_operations/multi_qubit_gates.html">Multi-qubit gates</a></a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Gate</th><th>Short Description</th></tr></thead><tbody>
-<tr><td>MultiQubitMS</td><td>The Molmer-Sorensen gate between multiple qubits.</td></tr>
+<tr><td>MultiQubitMS</td><td>The Mølmer–Sørensen gate between multiple qubits.</td></tr>
 <tr><td>MultiQubitZZ</td><td>The multi-qubit PauliZ-product gate.</td></tr>
 </tbody></table>
 </div><div style="break-before: page; page-break-before: always;"></div><h1 id="single-qubit-gates-1"><a class="header" href="#single-qubit-gates-1">Single-qubit gates</a></h1>
@@ -1313,67 +1317,67 @@ U =e^{\mathrm{i} \phi}\begin{pmatrix}
 \alpha_r+\mathrm{i} \alpha_i &amp; -\beta_r+\mathrm{i} \beta_i \\
 \beta_r+\mathrm{i} \beta_i &amp; \alpha_r-\mathrm{i}\alpha_i
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>The parameters \( \alpha_r \), \( \alpha_i \) and \( \beta_r \), \( \beta_i \) can be accessed by the functions <code>alpha_r()</code>, <code>alpha_i()</code>, <code>beta_r()</code> and <code>beta_i()</code>, applied on the particular single-qubit gate. The full matrix form of the single-qubit gates available in qoqo/roqoqo is documented in this chapter.</p>
 <h2 id="hadamard"><a class="header" href="#hadamard">Hadamard</a></h2>
-<p>The Hadamard gate when applied creates a superposition of states, and can therefore be used to change the basis if required. The definition of the gate in matrix form is given by</p>
+<p>The Hadamard gate when applied creates a superposition of states, and can therefore be used to change the basis if required. The definition of the gate in matrix form is given by:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; 1 \\
 1 &amp; -1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="invsqrtpaulix"><a class="header" href="#invsqrtpaulix">InvSqrtPauliX</a></h2>
-<p>The inverse square root of the PauliX gate \( e^{\mathrm{i} \frac{\theta}{4} \sigma_x} \) corresponds to a unitary matrix defined as</p>
+<p>The inverse square root of the PauliX gate \( e^{\mathrm{i} \frac{\theta}{4} \sigma_x} \) corresponds to a unitary matrix defined as:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; \mathrm{i} \\
 \mathrm{i} &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>On some hardware platforms, the gate operation <code>InvSqrtPauliX</code> together with the operation <code>SqrtPauliX</code> are the only available rotation gates. This becomes relevant when it comes to the compilation of a quantum algorithm containing any arbitrary gates to the set of basic gates supported by the hardware device.</p>
 <h2 id="paulix"><a class="header" href="#paulix">PauliX</a></h2>
-<p>The Pauli X gate implements a rotation of \( \frac{\pi}{2} \) about the x-axis that can be used e.g. to flip the qubit state. The full matrix form is given by </p>
+<p>The Pauli X gate implements a rotation of \( \frac{\pi}{2} \) about the x-axis that can be used, for example, to flip the qubit state. The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 0 &amp; 1 \\
 1 &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="pauliy"><a class="header" href="#pauliy">PauliY</a></h2>
-<p>The Pauli Y gate implements a rotation of \( \frac{\pi}{2} \) about the y-axis that can be used e.g. to flip the qubit state. The unitary matrix is defined as</p>
+<p>The Pauli Y gate implements a rotation of \( \frac{\pi}{2} \) about the y-axis that can be used, for example, to flip the qubit state. The unitary matrix is defined as:</p>
 <p>\[
 U = \begin{pmatrix}
 0 &amp; -\mathrm{i} \\
 \mathrm{i} &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="pauliz"><a class="header" href="#pauliz">PauliZ</a></h2>
-<p>The Pauli Z gate implements a rotation of \( \frac{\pi}{2} \) about the z-axis that can be used e.g. to flip the qubit state. The full matrix form is given by</p>
+<p>The Pauli Z gate implements a rotation of \( \frac{\pi}{2} \) about the z-axis that can be used, for example, to flip the qubit state. The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; -1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="phaseshiftstate0"><a class="header" href="#phaseshiftstate0">PhaseShiftState0</a></h2>
-<p>This gate operation corresponds to the phase shift gate applied on state \( \left |0 \right&gt; \) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \(\theta\), also known as AC Stark shift of the state \( \left |0 \right&gt; \). The unitary matrix is given by</p>
+<p>This gate operation corresponds to the phase shift gate applied on state \( \left |0 \right&gt; \) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \(\theta\), also known as AC Stark shift of the state \( \left |0 \right&gt; \). The unitary matrix is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 e^{\mathrm{i} \theta} &amp; 0\\
 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="phaseshiftstate1"><a class="header" href="#phaseshiftstate1">PhaseShiftState1</a></h2>
-<p>This gate operation corresponds to the phase shift gate applied on state \( \left |1 \right&gt; \) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \(\theta\), also known as AC Stark shift of the state \( \left |1 \right&gt; \). The unitary matrix is given by</p>
+<p>This gate operation corresponds to the phase shift gate applied on state \( \left |1 \right&gt; \) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \(\theta\), also known as AC Stark shift of the state \( \left |1 \right&gt; \). The unitary matrix is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0\\
 0 &amp; e^{\mathrm{i} \theta}
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="rotatearoundsphericalaxis"><a class="header" href="#rotatearoundsphericalaxis">RotateAroundSphericalAxis</a></h2>
-<p>Implements a rotation around an axis in the x-y plane in spherical coordinates. The definition of the gate in matrix form is given by</p>
+<p>Implements a rotation around an axis in the x-y plane in spherical coordinates. The definition of the gate in matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos\left(\frac{\theta}{2}\right) &amp; 0\\
@@ -1383,81 +1387,81 @@ U = \begin{pmatrix}
 -\mathrm{i} \sin\left(\frac{\theta}{2}\right) v_z  &amp;  \sin\left(\frac{\theta}{2}\right) \left(-i v_x - v_y \right)\\
 \sin\left(\frac{\theta}{2}\right) \left(-\mathrm{i} v_x + v_y \right) &amp; \mathrm{i} \sin\left(\frac{\theta}{2}\right) v_z
 \end{pmatrix}
-\]</p>
-<p>with \[ v_x = \sin\left(\theta_{sph}\right) \cdot \cos\left(\phi_{sph}\right), \quad v_y = \sin\left(\theta_{sph}\right)\cdot\sin\left(\phi_{sph}\right), \quad v_z = \cos\left(\theta_{sph}\right). \]</p>
+\],</p>
+<p>with \[ v_x = \sin\left(\theta_{sph}\right) \cdot \cos\left(\phi_{sph}\right), \quad v_y = \sin\left(\theta_{sph}\right)\cdot\sin\left(\phi_{sph}\right), \quad v_z = \cos\left(\theta_{sph}\right). \].</p>
 <h2 id="rotatex"><a class="header" href="#rotatex">RotateX</a></h2>
-<p>The rotation gate around x-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_x} \). The definition of the unitary matrix is as follows</p>
+<p>The rotation gate around x-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_x} \). The definition of the unitary matrix is as follows:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(\frac{\theta}{2}) &amp; -\mathrm{i} \sin(\frac{\theta}{2})\\
 -\mathrm{i}\sin(\frac{\theta}{2}) &amp; \cos(\frac{\theta}{2})
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="rotatexy"><a class="header" href="#rotatexy">RotateXY</a></h2>
-<p>Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates. The unitary matrix representing the gate is given by</p>
+<p>Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates. The unitary matrix representing the gate is given by:</p>
 <p>\[
 U  = \begin{pmatrix}
 \cos \left(\frac{\theta}{2} \right) &amp; -\mathrm{i} e^{-\mathrm{i} \phi} \sin \left(\frac{\theta}{2} \right) \\
 -\mathrm{i} e^{\mathrm{i} \phi} \sin \left( \frac{\theta}{2} \right) &amp; \cos\left( \frac{\theta}{2} \right)
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="rotatey"><a class="header" href="#rotatey">RotateY</a></h2>
-<p>The rotation gate around the y-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_y} \). The full matrix form is given by</p>
+<p>The rotation gate around the y-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_y} \). The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(\frac{\theta}{2}) &amp;  - \sin(\frac{\theta}{2})\\
 \sin(\frac{\theta}{2})  &amp; \cos(\frac{\theta}{2})
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="rotatez"><a class="header" href="#rotatez">RotateZ</a></h2>
-<p>The rotation gate around the z-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_z} \). The unitary matrix reads</p>
+<p>The rotation gate around the z-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_z} \). The unitary matrix reads:</p>
 <p>\[
-U = \begin{pmatrix} \\ 
+U = \begin{pmatrix}
 \cos(\frac{\theta}{2})  -\mathrm{i} \sin(\frac{\theta}{2}) &amp; 0\\
 0 &amp; \cos(\frac{\theta}{2}) + \mathrm{i} \sin(\frac{\theta}{2})
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="sgate"><a class="header" href="#sgate">SGate</a></h2>
-<p>The unitary matrix of the S gate, which is often used in the theory of error correction, reads</p>
+<p>The unitary matrix of the S gate, which is often used in the theory of error correction, reads:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; \mathrm{i}
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="sqrtpaulix"><a class="header" href="#sqrtpaulix">SqrtPauliX</a></h2>
-<p>The square root of the PauliX gate \( e^{-\mathrm{i} \frac{\theta}{4} \sigma_x} \). The full matrix form is given by</p>
+<p>The square root of the PauliX gate \( e^{-\mathrm{i} \frac{\theta}{4} \sigma_x} \). The full matrix form is given by:</p>
 <p>\[
 U = \frac{1}{\sqrt(2)}\begin{pmatrix}
 1 &amp; -\mathrm{i} \\
 -\mathrm{i} &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>On some hardware platforms, the gate operation <code>SqrtPauliX</code> together with the operation <code>InvSqrtPauliX</code> are the only available rotation gates. This becomes relevant when it comes to the compilation of a quantum algorithm containing any arbitrary gates to the set of basic gates supported by the hardware device.</p>
 <h2 id="tgate"><a class="header" href="#tgate">TGate</a></h2>
-<p>The unitary matrix of the T gate, which is often used in the theory of error correction, is defined as follows</p>
+<p>The unitary matrix of the T gate, which is often used in the theory of error correction, is defined as follows:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; e^{\mathrm{i} \frac{\pi}{4}}
 \end{pmatrix}
-\]</p>
+\].</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="two-qubit-gates-1"><a class="header" href="#two-qubit-gates-1">Two-qubit gates</a></h1>
-<p>Two-qubit gates in qoqo/roqoqo represent atomic instructions of any quantum computer that act on a pair of qubits. In two-qubit gates the two qubits are referred to as <code>control</code> and <code>target</code>. When initializing two-qubit gates, the <code>control</code> is always the first argument and <code>target</code> the second argument. For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code>, and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding as described in chapter <a href="gate_operations/../conventions.html">conventions</a>. The full matrix form of the two-qubit gates implemented in qoqo/roqoqo is documented in this chapter.</p>
+<p>Two-qubit gates in qoqo/roqoqo represent atomic instructions of any quantum computer that act on a pair of qubits. In two-qubit gates the two qubits are referred to as <code>control</code> and <code>target</code>. When initializing two-qubit gates, the <code>control</code> is always the first argument and <code>target</code> the second argument. For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code>, and is a 4x4-dimensional matrix. This convention corresponds to the little-endian encoding as described in chapter <a href="gate_operations/../conventions.html">conventions</a>. The full matrix form of the two-qubit gates implemented in qoqo/roqoqo is documented in this chapter.</p>
 <p>The given form of the unitary matrix is consistent with the following ordering of qubit states in a two-qubit state space:</p>
 <p>\[
 \left|00 \right&gt;  =  \textrm{state} 0 \\
 \left|01 \right&gt;  =  \textrm{state} 1 \\
 \left|10 \right&gt;  =  \textrm{state} 2 \\
 \left|11 \right&gt;  =  \textrm{state} 3 \\
-\]</p>
+\].</p>
 <h2 id="bogoliubov"><a class="header" href="#bogoliubov">Bogoliubov</a></h2>
-<p>The Bogoliubov DeGennes gate representing interactions of the form 
+<p>The Bogoliubov DeGennes gate representing interactions of the form:
 \[ 
 e^{-\mathrm{i} \mathrm{Re}(\Delta)\cdot(X_c X_t - Y_c Y_t)/2 + \mathrm{Im}(\Delta)\cdot(X_c Y_t+Y_c X_t)/2},
-\]</p>
+\],</p>
 <p>where \(X_c\) is the Pauli matrix \(\sigma_x\) acting on the control qubit, and \(Y_t\) is the Pauli matrix \(\sigma_y\) acting on the target qubit, and \( \Delta \) is the complex Bogoliubov interaction strength.</p>
-<p>The full matrix form is given by </p>
+<p>The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(|\Delta|) &amp; 0 &amp; 0 &amp; \mathrm{i} \sin(|\Delta|) e^{\mathrm{i} \cdot \varphi(\Delta)} \\
@@ -1465,10 +1469,10 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 1 &amp; 0 \\
 \mathrm{i} \sin(|\Delta|) e^{-\mathrm{i} \cdot \varphi(\Delta)} &amp; 0 &amp; 0 &amp; \cos(|\Delta|)
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>with the value \(|\Delta|\) of the complex Bogoliubov interaction strength \( \Delta \), and its phase angle \(\varphi(\Delta)\).</p>
 <h2 id="cnot"><a class="header" href="#cnot">CNOT</a></h2>
-<p>The controlled not gate can be used to entangle two qubits. The unitary matrix for the CNOT gate is defined as</p>
+<p>The controlled not gate can be used to entangle two qubits. The unitary matrix for the CNOT gate is defined as:</p>
 <p>\[
 U  = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1476,15 +1480,15 @@ U  = \begin{pmatrix}
 0 &amp; 0 &amp; 0 &amp; 1 \\
 0 &amp; 0 &amp; 1 &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="complexpminteraction"><a class="header" href="#complexpminteraction">ComplexPMInteraction</a></h2>
-<p>This gate implements the complex hopping operation of the form</p>
+<p>This gate implements the complex hopping operation of the form:</p>
 <p>\[
 e^{-\mathrm{i} \left[ \mathrm{Re}(\theta) \cdot (X_c X_t + Y_c Y_t) - \mathrm{Im}(\theta) \cdot (X_c Y_t - Y_c X_t) \right] } , 
-\]</p>
+\],</p>
 <p>where \(X_c\) is the Pauli matrix \(\sigma_x\) acting on the control qubit, and \(Y_t\) is the Pauli matrix \(\sigma_y\) acting on the target qubit. The complex parameter \( \theta \) gives the strength of the rotation.</p>
 <h2 id="controlledpauliy"><a class="header" href="#controlledpauliy">ControlledPauliY</a></h2>
-<p>The controlled PauliY gate applies the PauliY gate on the <code>target</code> qubit based on the value of the <code>control</code> qubit. The corresponding unitary matrix reads</p>
+<p>The controlled PauliY gate applies the PauliY gate on the <code>target</code> qubit based on the value of the <code>control</code> qubit. The corresponding unitary matrix reads:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1492,9 +1496,9 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 0 &amp; -\mathrm{i} \\
 0 &amp; 0 &amp; \mathrm{i}  &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="controlledpauliz"><a class="header" href="#controlledpauliz">ControlledPauliZ</a></h2>
-<p>The controlled PauliZ gate applies the PauliZ gate on the <code>target</code> qubit controlled by the <code>control</code> qubit. The definition for the unitary matrix is as follows</p>
+<p>The controlled PauliZ gate applies the PauliZ gate on the <code>target</code> qubit controlled by the <code>control</code> qubit. The definition for the unitary matrix is as follows:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1502,9 +1506,9 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 1 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; -1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="controlledphaseshift"><a class="header" href="#controlledphaseshift">ControlledPhaseShift</a></h2>
-<p>The controlled phase shift gate implements a phase shift applied on <code>target</code> qubit based on the value of the <code>control</code> qubit. The unitary matrix is given by</p>
+<p>The controlled phase shift gate implements a phase shift applied on <code>target</code> qubit based on the value of the <code>control</code> qubit. The unitary matrix is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1512,9 +1516,9 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 1 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} \theta}
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="fsim"><a class="header" href="#fsim">Fsim</a></h2>
-<p>The fermionic qubit simulation gate that can be represented as the following unitary matrix</p>
+<p>The fermionic qubit simulation gate that can be represented as the following unitary matrix:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(\Delta) &amp; 0 &amp; 0 &amp; \mathrm{i} \sin(\Delta) \\
@@ -1522,11 +1526,11 @@ U = \begin{pmatrix}
 0 &amp; \cos(t) &amp; -\mathrm{i} \sin(t) &amp; 0 \\
 -\sin(\Delta) \cdot e^{-\mathrm{i} U} &amp; 0 &amp; 0 &amp; -\cos(\Delta) \cdot e^{-\mathrm{i} U}
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>where <code>t</code> is the hopping strength, <code>U</code> is the interaction strength and \( \Delta \) is the Bogoliubov interaction strength.</p>
-<p><em>Note</em>: The qubits have to be adjacent, i.e., \( |i-j|=1 \) has to hold. This is the only case in which the gate is valid as a two-qubit gate (due to the Jordan-Wigner transformation).</p>
+<p><em>Note</em>: The qubits have to be adjacent, <em>i.e.</em>, \( |i-j|=1 \) has to hold. This is the only case in which the gate is valid as a two-qubit gate (due to the Jordan-Wigner transformation).</p>
 <h2 id="fswap"><a class="header" href="#fswap">FSwap</a></h2>
-<p>The fermionic SWAP gate can be represented as the following unitary matrix</p>
+<p>The fermionic SWAP gate can be represented as the following unitary matrix:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1534,14 +1538,14 @@ U = \begin{pmatrix}
 0 &amp; 1 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; -1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="givensrotation"><a class="header" href="#givensrotation">GivensRotation</a></h2>
 <p>The Givens rotation interaction gate in big endian notation:
 \[
 e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-\mathrm{i} \phi Z_t/2},
-\]</p>
+\],</p>
 <p>where \(X_c\) is the Pauli matrix \(\sigma_x\) acting on the control qubit, \(Y_t\) is the Pauli matrix \(\sigma_y\) acting on the target qubit, and \(Z_t\) is the Pauli matrix \(\sigma_z\) acting on the target qubit.</p>
-<p>The unitary matrix representation is</p>
+<p>The unitary matrix representation is:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1549,15 +1553,15 @@ U = \begin{pmatrix}
 0 &amp; -\sin(\theta) \cdot e^{\mathrm{i} \phi} &amp; \cos(\theta)  &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} \phi}
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>Further information on the endianness in context of qoqo can be found in the section <a href="gate_operations/../conventions.html">conventions</a>.</p>
 <h2 id="givensrotationlittleendian"><a class="header" href="#givensrotationlittleendian">GivensRotationLittleEndian</a></h2>
-<p>The Givens rotation interaction gate in little endian notation:
+<p>The Givens rotation interaction gate in little-endian notation:
 \[
 e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-\mathrm{i} \phi Z_c/2},
-\]
+\],
 with Pauli matrices \( X := \sigma_x\), \( Y := \sigma_y\), \( Z := \sigma_z\) and indices <code>c</code> for control qubit and <code>t</code> for target qubit.</p>
-<p>The unitary matrix form is given by </p>
+<p>The unitary matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1565,9 +1569,9 @@ U = \begin{pmatrix}
 0 &amp; -\sin(\theta) \cdot e^{\mathrm{i} \phi} &amp; \cos(\theta) \cdot e^{\mathrm{i} \phi}  &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} \phi}
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="invsqrtiswap"><a class="header" href="#invsqrtiswap">InvSqrtISwap</a></h2>
-<p>The inverse square root of the ISwap gate has the full matrix form</p>
+<p>The inverse square root of the ISwap gate has the full matrix form:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1575,9 +1579,9 @@ U = \begin{pmatrix}
 0 &amp; \frac{-\mathrm{i}}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="iswap"><a class="header" href="#iswap">ISwap</a></h2>
-<p>The unitary matrix of the complex ISwap gate reads</p>
+<p>The unitary matrix of the complex ISwap gate reads:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1585,9 +1589,9 @@ U = \begin{pmatrix}
 0 &amp; \mathrm{i} &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="molmersorensenxx"><a class="header" href="#molmersorensenxx">MolmerSorensenXX</a></h2>
-<p>This gate implements the fixed-phase MolmerSorensen XX operation as introduced in this <a href="http://arxiv.org/abs/1705.02771">reference</a>. The MolmerSorensenXX gate can be used to represent global laser-driver entangling operations, for example in the context of quantum computing hardware based on trapped ions. The unitary matrix is given by </p>
+<p>This gate implements the fixed-phase MolmerSorensen XX operation as introduced in this <a href="http://arxiv.org/abs/1705.02771">reference</a>. The MolmerSorensenXX gate can be used to represent global laser-driver entangling operations, for example in the context of quantum computing hardware based on trapped ions. The unitary matrix is given by:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; -\mathrm{i} \\
@@ -1595,9 +1599,9 @@ U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 0 &amp; -\mathrm{i} &amp; 1 &amp; 0 \\
 -\mathrm{i} &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="phaseshiftedcontrolledz"><a class="header" href="#phaseshiftedcontrolledz">PhaseShiftedControlledZ</a></h2>
-<p>The phase-shifted controlled-Z gate, modified, i.e. phase-shifted ControlledPauliZ two-qubit gate, which corresponds to the equation (1) in the original <a href="https://arxiv.org/pdf/1908.06101.pdf">reference</a>. The full matrix form is defined as</p>
+<p>The phase-shifted controlled-Z gate, modified, <em>i.e.</em> phase-shifted ControlledPauliZ two-qubit gate, which corresponds to the equation (1) in the original <a href="https://arxiv.org/pdf/1908.06101.pdf">reference</a>. The full matrix form is defined as:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1605,16 +1609,16 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; e^{\mathrm{i} \phi} &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} (2\cdot\phi - \pi)}
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>with the single-qubit phase \( \phi \).</p>
 <h2 id="pminteraction"><a class="header" href="#pminteraction">PMInteraction</a></h2>
-<p>The transversal interaction gate of the form </p>
+<p>The transversal interaction gate of the form:</p>
 <p>\[
 e^{-\mathrm{i} \theta (X_c X_t + Y_c Y_t)} = e^{-\mathrm{i} \theta (\sigma^+_c \sigma^-_t + \sigma^-_c \sigma^+_t)} , 
-\]</p>
+\],</p>
 <p>where \(X_c\) is the Pauli matrix \(\sigma_x\) acting on the control qubit, and \(Y_t\) is the Pauli matrix \(\sigma_y\) acting on the target qubit. The parameter \( \theta \) gives the strength of the rotation.</p>
 <h2 id="qsim"><a class="header" href="#qsim">Qsim</a></h2>
-<p>The Qsim gate implements a <code>SWAP</code> between two spins and a <code>SpinInteraction</code> simultaneously. In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom. The definition of the Qsim gate in matrix form is given by</p>
+<p>The Qsim gate implements a <code>SWAP</code> between two spins and a <code>SpinInteraction</code> simultaneously. In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom. The definition of the Qsim gate in matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(x-y) \cdot e^{-\mathrm{i} z} &amp; 0 &amp; 0 &amp; -\mathrm{i}\sin(x-y)\cdot e^{-\mathrm{i} z}\\
@@ -1622,18 +1626,18 @@ U = \begin{pmatrix}
 0 &amp; \cos(x+y)\cdot e^{\mathrm{i} z}&amp; -\mathrm{i} \sin(x+y)\cdot e^{\mathrm{i} z} &amp; 0 \\
 -\sin(x-y)\cdot e^{-\mathrm{i} z} &amp; 0 &amp; 0 &amp; \cos(x-y)\cdot e^{-\mathrm{i} z}
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>where x, y, z are the prefactors of the products of Pauli matrices \(X_c X_t\), \(Y_c Y_t\), \(Z_c Z_t\) acting on the control (<code>c</code>) and target (<code>t</code>) qubits that are part of the spin interaction.</p>
 <h2 id="spininteraction"><a class="header" href="#spininteraction">SpinInteraction</a></h2>
-<p>The gate represents the generalized, anisotropic XYZ Heisenberg interaction between spins of the form</p>
+<p>The gate represents the generalized, anisotropic XYZ Heisenberg interaction between spins of the form:</p>
 <p>\[
 e^{-\mathrm{i} (x \cdot X_c X_t + y \cdot Y_c Y_t + z \cdot Z_c Z_t)} , 
-\]</p>
+\],</p>
 <p>where x, y, z are the prefactors of the products of Pauli matrices \(X_c X_t\), \(Y_c Y_t\), \(Z_c Z_t\) acting on control (<code>c</code>) and target (<code>t</code>) qubit,
 with the underlying definition \(XX \equiv \sigma_x \sigma_x\), \(YY \equiv \sigma_y \sigma_y\) and \(ZZ \equiv \sigma_z \sigma_z\). </p>
 <p>In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom.</p>
 <h2 id="sqrtiswap"><a class="header" href="#sqrtiswap">SqrtISwap</a></h2>
-<p>The square root of the ISwap gate is represented by the matrix</p>
+<p>The square root of the ISwap gate is represented by the matrix:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1641,9 +1645,9 @@ U = \begin{pmatrix}
 0 &amp; \frac{\mathrm{i}}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="swap"><a class="header" href="#swap">SWAP</a></h2>
-<p>The SWAP gate is used to change the positions between two qubits. For example, the SWAP gate is used by many compilation routines if the given connectivity on the quantum computing device is limited and the qubits need to be remapped in order to run a quantum program successfully on the quantum computing hardware. The full matrix form is given by</p>
+<p>The SWAP gate is used to change the positions between two qubits. For example, the SWAP gate is used by many compilation routines if the given connectivity on the quantum computing device is limited and the qubits need to be remapped in order to run a quantum program successfully on the quantum computing hardware. The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1651,9 +1655,9 @@ U = \begin{pmatrix}
 0 &amp; 1 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="variablesmsxx"><a class="header" href="#variablesmsxx">VariablesMSXX</a></h2>
-<p>The variable-angle MolmerSorensen XX gate as defined by the unitary matrix of the form</p>
+<p>The variable-angle MolmerSorensen XX gate as defined by the unitary matrix of the form:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(\theta/2) &amp; 0 &amp; 0 &amp; -\mathrm{i} \sin(\theta/2) \\
@@ -1661,10 +1665,10 @@ U = \begin{pmatrix}
 0 &amp; -\mathrm{i} \sin(\theta/2) &amp; \cos(\theta/2) &amp; 0 \\
 -\mathrm{i}\sin(\theta/2) &amp; 0 &amp; 0 &amp; \cos(\theta/2)
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>In general, the MolmerSorensenXX gate can be used to represent global laser-driver entangling operations, for example in the context of quantum computing hardware based on trapped ions, as introduced in this <a href="http://arxiv.org/abs/1705.02771">reference</a>.</p>
 <h2 id="xy"><a class="header" href="#xy">XY</a></h2>
-<p>The definition of the XY gate in matrix form is given by</p>
+<p>The definition of the XY gate in matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -1672,22 +1676,22 @@ U = \begin{pmatrix}
 0 &amp; \mathrm{i} \sin(\theta/2) &amp; \cos(\theta/2) &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>It implements the same interaction as described by the <code>PMInteraction</code> gate but with a different prefactor.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="multi-qubit-gates-1"><a class="header" href="#multi-qubit-gates-1">Multi-qubit gates</a></h1>
 <p>Multi-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum computer that act on <code>N</code> number of qubits. In multi-qubit gates the <code>qubits</code> are given as a vector of all involved qubits. The unitary matrix of a multi-qubit gate corresponds to the notation based on <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</p>
 <h2 id="multiqubitms"><a class="header" href="#multiqubitms">MultiQubitMS</a></h2>
-<p>The Molmer-Sorensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms, the gate applies</p>
+<p>The Mølmer–Sørensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms, the gate applies</p>
 <p>\[
 e^{-i * \theta/2 * X_{i0} * X_{i1} * ... * X_{in}},
-\]</p>
-<p>whereas \(\theta\) is the angle parameter of the multi-qubit Molmer-Sorensen gate and <code>i0</code>, <code>i1</code> etc. are the qubits the gate acts on.</p>
+\],</p>
+<p>whereas \(\theta\) is the angle parameter of the multi-qubit Mølmer–Sørensen gate and <code>i0</code>, <code>i1</code> <em>etc.</em> are the qubits the gate acts on.</p>
 <h2 id="multiqubitzz"><a class="header" href="#multiqubitzz">MultiQubitZZ</a></h2>
 <p>The multi-qubit PauliZ-product gate. he gate applies the rotation under the product of PauliZ operators on multiple qubits.</p>
 <p>\[
 e^{-i * \theta/2 * Z_{i0} * Z_{i1} * ... * Z_{in}},
-\]</p>
-<p>whereas \(\theta\) is the angle parameter of the multi-qubit PauliZ-product gate and <code>i0</code>, <code>i1</code> etc. are the qubits the gate acts on.</p>
+\],</p>
+<p>whereas \(\theta\) is the angle parameter of the multi-qubit PauliZ-product gate and <code>i0</code>, <code>i1</code> <em>etc.</em> are the qubits the gate acts on.</p>
 
                     </main>
 

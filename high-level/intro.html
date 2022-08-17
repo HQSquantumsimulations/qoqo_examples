@@ -136,10 +136,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="high-level-interface-quantum-programs"><a class="header" href="#high-level-interface-quantum-programs">High level interface: quantum programs</a></h1>
-<p>In the definition of qoqo/roqoqo, a quantum program accepts input from a user/calling function, runs operations on a quantum computer and returns an output in the form of expectation values instead of raw output from the quantum computer. 
+                        <h1 id="high-level-interface-quantum-programs"><a class="header" href="#high-level-interface-quantum-programs">High-level interface: quantum programs</a></h1>
+<p>In the definition of qoqo/roqoqo, a quantum program accepts input from a user/calling function and runs operations on a quantum computer. It then returns an output in the form of expectation values, instead of raw output from the quantum computer. 
 To represent quantum programs qoqo/roqoqo provides <code>QuantumProgram</code>.
-It is intended as a high level interface between a complex program and the quantum computer, which can be called (almost) as easily as a normal function and handles variable replacement and the post-processing of the raw output of the quantum computer/simulator.</p>
+It is intended as a high-level interface between a complex program and the quantum computer, which can be called (almost) as easily as a normal function and handles variable replacement and the post-processing of the raw output of the quantum computer/simulator.</p>
 <h2 id="measurements"><a class="header" href="#measurements">Measurements</a></h2>
 <p>Post-processing the raw output is handled by <code>measurements</code>.
 For many applications, the measurement results of several circuits need to be combined to extract the required information.
@@ -155,7 +155,7 @@ The type of <code>measurement</code> and <code>measurement input</code> depends 
 </ul>
 <p>The <code>PauliZProduct</code> measurement is based on measuring the product of PauliZ operators for given qubits. Combined with a basis rotation of the measured qubits, it can be used to measure arbitrary expectation values. It uses projective qubit readouts like <code>MeasureQubit</code> or <code>PragmaRepeatedMeasurement</code>. It can be run on real quantum computer hardware and simulators. For further details please refer to section <a href="pauliz.html">PauliZProduct</a>.</p>
 <p>The <code>ClassicalRegister</code> measurement returns the raw output of the classical registers written during circuit execution.</p>
-<p>The <code>CheatedPauliZProduct</code> measurement directly calculates operator expectation values the from the expectation values of products of Pauli matrices . The Pauli product expectation values are read out by the <code>PragmaGetPauliProduct</code> operation. It can only be used on simulator backends.</p>
+<p>The <code>CheatedPauliZProduct</code> measurement directly calculates operator expectation values from the expectation values of products of Pauli matrices. The Pauli product expectation values are read out by the <code>PragmaGetPauliProduct</code> operation. It can only be used on simulator backends.</p>
 <p>The <code>Cheated</code> measurement calculates expectation values by directly extracting the state vector <code>PragmaGetStateVector</code> or the density matrix <code>PragmaGetDensityMatrix</code> from a simulator and applying matrix multiplication.</p>
 <p>For examples how to construct measurement input and measurements see the pages for the separate measurement types.</p>
 <h2 id="variable-replacement"><a class="header" href="#variable-replacement">Variable replacement</a></h2>

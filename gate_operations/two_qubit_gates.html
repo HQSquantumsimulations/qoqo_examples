@@ -137,21 +137,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="two-qubit-gates"><a class="header" href="#two-qubit-gates">Two-qubit gates</a></h1>
-<p>Two-qubit gates in qoqo/roqoqo represent atomic instructions of any quantum computer that act on a pair of qubits. In two-qubit gates the two qubits are referred to as <code>control</code> and <code>target</code>. When initializing two-qubit gates, the <code>control</code> is always the first argument and <code>target</code> the second argument. For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code>, and is a 4x4-dimensional matrix. This convention corresponds to the little endian encoding as described in chapter <a href="../conventions.html">conventions</a>. The full matrix form of the two-qubit gates implemented in qoqo/roqoqo is documented in this chapter.</p>
+<p>Two-qubit gates in qoqo/roqoqo represent atomic instructions of any quantum computer that act on a pair of qubits. In two-qubit gates the two qubits are referred to as <code>control</code> and <code>target</code>. When initializing two-qubit gates, the <code>control</code> is always the first argument and <code>target</code> the second argument. For two-qubit gates, the created matrix always corresponds to <code>control=1</code>, <code>target=0</code>, and is a 4x4-dimensional matrix. This convention corresponds to the little-endian encoding as described in chapter <a href="../conventions.html">conventions</a>. The full matrix form of the two-qubit gates implemented in qoqo/roqoqo is documented in this chapter.</p>
 <p>The given form of the unitary matrix is consistent with the following ordering of qubit states in a two-qubit state space:</p>
 <p>\[
 \left|00 \right&gt;  =  \textrm{state} 0 \\
 \left|01 \right&gt;  =  \textrm{state} 1 \\
 \left|10 \right&gt;  =  \textrm{state} 2 \\
 \left|11 \right&gt;  =  \textrm{state} 3 \\
-\]</p>
+\].</p>
 <h2 id="bogoliubov"><a class="header" href="#bogoliubov">Bogoliubov</a></h2>
-<p>The Bogoliubov DeGennes gate representing interactions of the form 
+<p>The Bogoliubov DeGennes gate representing interactions of the form:
 \[ 
 e^{-\mathrm{i} \mathrm{Re}(\Delta)\cdot(X_c X_t - Y_c Y_t)/2 + \mathrm{Im}(\Delta)\cdot(X_c Y_t+Y_c X_t)/2},
-\]</p>
+\],</p>
 <p>where \(X_c\) is the Pauli matrix \(\sigma_x\) acting on the control qubit, and \(Y_t\) is the Pauli matrix \(\sigma_y\) acting on the target qubit, and \( \Delta \) is the complex Bogoliubov interaction strength.</p>
-<p>The full matrix form is given by </p>
+<p>The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(|\Delta|) &amp; 0 &amp; 0 &amp; \mathrm{i} \sin(|\Delta|) e^{\mathrm{i} \cdot \varphi(\Delta)} \\
@@ -159,10 +159,10 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 1 &amp; 0 \\
 \mathrm{i} \sin(|\Delta|) e^{-\mathrm{i} \cdot \varphi(\Delta)} &amp; 0 &amp; 0 &amp; \cos(|\Delta|)
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>with the value \(|\Delta|\) of the complex Bogoliubov interaction strength \( \Delta \), and its phase angle \(\varphi(\Delta)\).</p>
 <h2 id="cnot"><a class="header" href="#cnot">CNOT</a></h2>
-<p>The controlled not gate can be used to entangle two qubits. The unitary matrix for the CNOT gate is defined as</p>
+<p>The controlled not gate can be used to entangle two qubits. The unitary matrix for the CNOT gate is defined as:</p>
 <p>\[
 U  = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -170,15 +170,15 @@ U  = \begin{pmatrix}
 0 &amp; 0 &amp; 0 &amp; 1 \\
 0 &amp; 0 &amp; 1 &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="complexpminteraction"><a class="header" href="#complexpminteraction">ComplexPMInteraction</a></h2>
-<p>This gate implements the complex hopping operation of the form</p>
+<p>This gate implements the complex hopping operation of the form:</p>
 <p>\[
 e^{-\mathrm{i} \left[ \mathrm{Re}(\theta) \cdot (X_c X_t + Y_c Y_t) - \mathrm{Im}(\theta) \cdot (X_c Y_t - Y_c X_t) \right] } , 
-\]</p>
+\],</p>
 <p>where \(X_c\) is the Pauli matrix \(\sigma_x\) acting on the control qubit, and \(Y_t\) is the Pauli matrix \(\sigma_y\) acting on the target qubit. The complex parameter \( \theta \) gives the strength of the rotation.</p>
 <h2 id="controlledpauliy"><a class="header" href="#controlledpauliy">ControlledPauliY</a></h2>
-<p>The controlled PauliY gate applies the PauliY gate on the <code>target</code> qubit based on the value of the <code>control</code> qubit. The corresponding unitary matrix reads</p>
+<p>The controlled PauliY gate applies the PauliY gate on the <code>target</code> qubit based on the value of the <code>control</code> qubit. The corresponding unitary matrix reads:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -186,9 +186,9 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 0 &amp; -\mathrm{i} \\
 0 &amp; 0 &amp; \mathrm{i}  &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="controlledpauliz"><a class="header" href="#controlledpauliz">ControlledPauliZ</a></h2>
-<p>The controlled PauliZ gate applies the PauliZ gate on the <code>target</code> qubit controlled by the <code>control</code> qubit. The definition for the unitary matrix is as follows</p>
+<p>The controlled PauliZ gate applies the PauliZ gate on the <code>target</code> qubit controlled by the <code>control</code> qubit. The definition for the unitary matrix is as follows:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -196,9 +196,9 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 1 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; -1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="controlledphaseshift"><a class="header" href="#controlledphaseshift">ControlledPhaseShift</a></h2>
-<p>The controlled phase shift gate implements a phase shift applied on <code>target</code> qubit based on the value of the <code>control</code> qubit. The unitary matrix is given by</p>
+<p>The controlled phase shift gate implements a phase shift applied on <code>target</code> qubit based on the value of the <code>control</code> qubit. The unitary matrix is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -206,9 +206,9 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 1 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} \theta}
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="fsim"><a class="header" href="#fsim">Fsim</a></h2>
-<p>The fermionic qubit simulation gate that can be represented as the following unitary matrix</p>
+<p>The fermionic qubit simulation gate that can be represented as the following unitary matrix:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(\Delta) &amp; 0 &amp; 0 &amp; \mathrm{i} \sin(\Delta) \\
@@ -216,11 +216,11 @@ U = \begin{pmatrix}
 0 &amp; \cos(t) &amp; -\mathrm{i} \sin(t) &amp; 0 \\
 -\sin(\Delta) \cdot e^{-\mathrm{i} U} &amp; 0 &amp; 0 &amp; -\cos(\Delta) \cdot e^{-\mathrm{i} U}
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>where <code>t</code> is the hopping strength, <code>U</code> is the interaction strength and \( \Delta \) is the Bogoliubov interaction strength.</p>
-<p><em>Note</em>: The qubits have to be adjacent, i.e., \( |i-j|=1 \) has to hold. This is the only case in which the gate is valid as a two-qubit gate (due to the Jordan-Wigner transformation).</p>
+<p><em>Note</em>: The qubits have to be adjacent, <em>i.e.</em>, \( |i-j|=1 \) has to hold. This is the only case in which the gate is valid as a two-qubit gate (due to the Jordan-Wigner transformation).</p>
 <h2 id="fswap"><a class="header" href="#fswap">FSwap</a></h2>
-<p>The fermionic SWAP gate can be represented as the following unitary matrix</p>
+<p>The fermionic SWAP gate can be represented as the following unitary matrix:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -228,14 +228,14 @@ U = \begin{pmatrix}
 0 &amp; 1 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; -1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="givensrotation"><a class="header" href="#givensrotation">GivensRotation</a></h2>
 <p>The Givens rotation interaction gate in big endian notation:
 \[
 e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-\mathrm{i} \phi Z_t/2},
-\]</p>
+\],</p>
 <p>where \(X_c\) is the Pauli matrix \(\sigma_x\) acting on the control qubit, \(Y_t\) is the Pauli matrix \(\sigma_y\) acting on the target qubit, and \(Z_t\) is the Pauli matrix \(\sigma_z\) acting on the target qubit.</p>
-<p>The unitary matrix representation is</p>
+<p>The unitary matrix representation is:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -243,15 +243,15 @@ U = \begin{pmatrix}
 0 &amp; -\sin(\theta) \cdot e^{\mathrm{i} \phi} &amp; \cos(\theta)  &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} \phi}
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>Further information on the endianness in context of qoqo can be found in the section <a href="../conventions.html">conventions</a>.</p>
 <h2 id="givensrotationlittleendian"><a class="header" href="#givensrotationlittleendian">GivensRotationLittleEndian</a></h2>
-<p>The Givens rotation interaction gate in little endian notation:
+<p>The Givens rotation interaction gate in little-endian notation:
 \[
 e^{-\mathrm{i} \theta (X_c Y_t - Y_c X_t)}\cdot e^{-\mathrm{i} \phi Z_c/2},
-\]
+\],
 with Pauli matrices \( X := \sigma_x\), \( Y := \sigma_y\), \( Z := \sigma_z\) and indices <code>c</code> for control qubit and <code>t</code> for target qubit.</p>
-<p>The unitary matrix form is given by </p>
+<p>The unitary matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -259,9 +259,9 @@ U = \begin{pmatrix}
 0 &amp; -\sin(\theta) \cdot e^{\mathrm{i} \phi} &amp; \cos(\theta) \cdot e^{\mathrm{i} \phi}  &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} \phi}
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="invsqrtiswap"><a class="header" href="#invsqrtiswap">InvSqrtISwap</a></h2>
-<p>The inverse square root of the ISwap gate has the full matrix form</p>
+<p>The inverse square root of the ISwap gate has the full matrix form:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -269,9 +269,9 @@ U = \begin{pmatrix}
 0 &amp; \frac{-\mathrm{i}}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="iswap"><a class="header" href="#iswap">ISwap</a></h2>
-<p>The unitary matrix of the complex ISwap gate reads</p>
+<p>The unitary matrix of the complex ISwap gate reads:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -279,9 +279,9 @@ U = \begin{pmatrix}
 0 &amp; \mathrm{i} &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="molmersorensenxx"><a class="header" href="#molmersorensenxx">MolmerSorensenXX</a></h2>
-<p>This gate implements the fixed-phase MolmerSorensen XX operation as introduced in this <a href="http://arxiv.org/abs/1705.02771">reference</a>. The MolmerSorensenXX gate can be used to represent global laser-driver entangling operations, for example in the context of quantum computing hardware based on trapped ions. The unitary matrix is given by </p>
+<p>This gate implements the fixed-phase MolmerSorensen XX operation as introduced in this <a href="http://arxiv.org/abs/1705.02771">reference</a>. The MolmerSorensenXX gate can be used to represent global laser-driver entangling operations, for example in the context of quantum computing hardware based on trapped ions. The unitary matrix is given by:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; -\mathrm{i} \\
@@ -289,9 +289,9 @@ U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 0 &amp; -\mathrm{i} &amp; 1 &amp; 0 \\
 -\mathrm{i} &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="phaseshiftedcontrolledz"><a class="header" href="#phaseshiftedcontrolledz">PhaseShiftedControlledZ</a></h2>
-<p>The phase-shifted controlled-Z gate, modified, i.e. phase-shifted ControlledPauliZ two-qubit gate, which corresponds to the equation (1) in the original <a href="https://arxiv.org/pdf/1908.06101.pdf">reference</a>. The full matrix form is defined as</p>
+<p>The phase-shifted controlled-Z gate, modified, <em>i.e.</em> phase-shifted ControlledPauliZ two-qubit gate, which corresponds to the equation (1) in the original <a href="https://arxiv.org/pdf/1908.06101.pdf">reference</a>. The full matrix form is defined as:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -299,16 +299,16 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; e^{\mathrm{i} \phi} &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} (2\cdot\phi - \pi)}
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>with the single-qubit phase \( \phi \).</p>
 <h2 id="pminteraction"><a class="header" href="#pminteraction">PMInteraction</a></h2>
-<p>The transversal interaction gate of the form </p>
+<p>The transversal interaction gate of the form:</p>
 <p>\[
 e^{-\mathrm{i} \theta (X_c X_t + Y_c Y_t)} = e^{-\mathrm{i} \theta (\sigma^+_c \sigma^-_t + \sigma^-_c \sigma^+_t)} , 
-\]</p>
+\],</p>
 <p>where \(X_c\) is the Pauli matrix \(\sigma_x\) acting on the control qubit, and \(Y_t\) is the Pauli matrix \(\sigma_y\) acting on the target qubit. The parameter \( \theta \) gives the strength of the rotation.</p>
 <h2 id="qsim"><a class="header" href="#qsim">Qsim</a></h2>
-<p>The Qsim gate implements a <code>SWAP</code> between two spins and a <code>SpinInteraction</code> simultaneously. In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom. The definition of the Qsim gate in matrix form is given by</p>
+<p>The Qsim gate implements a <code>SWAP</code> between two spins and a <code>SpinInteraction</code> simultaneously. In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom. The definition of the Qsim gate in matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(x-y) \cdot e^{-\mathrm{i} z} &amp; 0 &amp; 0 &amp; -\mathrm{i}\sin(x-y)\cdot e^{-\mathrm{i} z}\\
@@ -316,18 +316,18 @@ U = \begin{pmatrix}
 0 &amp; \cos(x+y)\cdot e^{\mathrm{i} z}&amp; -\mathrm{i} \sin(x+y)\cdot e^{\mathrm{i} z} &amp; 0 \\
 -\sin(x-y)\cdot e^{-\mathrm{i} z} &amp; 0 &amp; 0 &amp; \cos(x-y)\cdot e^{-\mathrm{i} z}
 \end{pmatrix}
-\]</p>
+\],</p>
 <p>where x, y, z are the prefactors of the products of Pauli matrices \(X_c X_t\), \(Y_c Y_t\), \(Z_c Z_t\) acting on the control (<code>c</code>) and target (<code>t</code>) qubits that are part of the spin interaction.</p>
 <h2 id="spininteraction"><a class="header" href="#spininteraction">SpinInteraction</a></h2>
-<p>The gate represents the generalized, anisotropic XYZ Heisenberg interaction between spins of the form</p>
+<p>The gate represents the generalized, anisotropic XYZ Heisenberg interaction between spins of the form:</p>
 <p>\[
 e^{-\mathrm{i} (x \cdot X_c X_t + y \cdot Y_c Y_t + z \cdot Z_c Z_t)} , 
-\]</p>
+\],</p>
 <p>where x, y, z are the prefactors of the products of Pauli matrices \(X_c X_t\), \(Y_c Y_t\), \(Z_c Z_t\) acting on control (<code>c</code>) and target (<code>t</code>) qubit,
 with the underlying definition \(XX \equiv \sigma_x \sigma_x\), \(YY \equiv \sigma_y \sigma_y\) and \(ZZ \equiv \sigma_z \sigma_z\). </p>
 <p>In this context, spins are meant to be localized and therefore have distinguishable degrees of freedom.</p>
 <h2 id="sqrtiswap"><a class="header" href="#sqrtiswap">SqrtISwap</a></h2>
-<p>The square root of the ISwap gate is represented by the matrix</p>
+<p>The square root of the ISwap gate is represented by the matrix:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -335,9 +335,9 @@ U = \begin{pmatrix}
 0 &amp; \frac{\mathrm{i}}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="swap"><a class="header" href="#swap">SWAP</a></h2>
-<p>The SWAP gate is used to change the positions between two qubits. For example, the SWAP gate is used by many compilation routines if the given connectivity on the quantum computing device is limited and the qubits need to be remapped in order to run a quantum program successfully on the quantum computing hardware. The full matrix form is given by</p>
+<p>The SWAP gate is used to change the positions between two qubits. For example, the SWAP gate is used by many compilation routines if the given connectivity on the quantum computing device is limited and the qubits need to be remapped in order to run a quantum program successfully on the quantum computing hardware. The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -345,9 +345,9 @@ U = \begin{pmatrix}
 0 &amp; 1 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="variablesmsxx"><a class="header" href="#variablesmsxx">VariablesMSXX</a></h2>
-<p>The variable-angle MolmerSorensen XX gate as defined by the unitary matrix of the form</p>
+<p>The variable-angle MolmerSorensen XX gate as defined by the unitary matrix of the form:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(\theta/2) &amp; 0 &amp; 0 &amp; -\mathrm{i} \sin(\theta/2) \\
@@ -355,10 +355,10 @@ U = \begin{pmatrix}
 0 &amp; -\mathrm{i} \sin(\theta/2) &amp; \cos(\theta/2) &amp; 0 \\
 -\mathrm{i}\sin(\theta/2) &amp; 0 &amp; 0 &amp; \cos(\theta/2)
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>In general, the MolmerSorensenXX gate can be used to represent global laser-driver entangling operations, for example in the context of quantum computing hardware based on trapped ions, as introduced in this <a href="http://arxiv.org/abs/1705.02771">reference</a>.</p>
 <h2 id="xy"><a class="header" href="#xy">XY</a></h2>
-<p>The definition of the XY gate in matrix form is given by</p>
+<p>The definition of the XY gate in matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 0 \\
@@ -366,7 +366,7 @@ U = \begin{pmatrix}
 0 &amp; \mathrm{i} \sin(\theta/2) &amp; \cos(\theta/2) &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>It implements the same interaction as described by the <code>PMInteraction</code> gate but with a different prefactor.</p>
 
                     </main>

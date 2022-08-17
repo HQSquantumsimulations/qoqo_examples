@@ -144,67 +144,67 @@ U =e^{\mathrm{i} \phi}\begin{pmatrix}
 \alpha_r+\mathrm{i} \alpha_i &amp; -\beta_r+\mathrm{i} \beta_i \\
 \beta_r+\mathrm{i} \beta_i &amp; \alpha_r-\mathrm{i}\alpha_i
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>The parameters \( \alpha_r \), \( \alpha_i \) and \( \beta_r \), \( \beta_i \) can be accessed by the functions <code>alpha_r()</code>, <code>alpha_i()</code>, <code>beta_r()</code> and <code>beta_i()</code>, applied on the particular single-qubit gate. The full matrix form of the single-qubit gates available in qoqo/roqoqo is documented in this chapter.</p>
 <h2 id="hadamard"><a class="header" href="#hadamard">Hadamard</a></h2>
-<p>The Hadamard gate when applied creates a superposition of states, and can therefore be used to change the basis if required. The definition of the gate in matrix form is given by</p>
+<p>The Hadamard gate when applied creates a superposition of states, and can therefore be used to change the basis if required. The definition of the gate in matrix form is given by:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; 1 \\
 1 &amp; -1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="invsqrtpaulix"><a class="header" href="#invsqrtpaulix">InvSqrtPauliX</a></h2>
-<p>The inverse square root of the PauliX gate \( e^{\mathrm{i} \frac{\theta}{4} \sigma_x} \) corresponds to a unitary matrix defined as</p>
+<p>The inverse square root of the PauliX gate \( e^{\mathrm{i} \frac{\theta}{4} \sigma_x} \) corresponds to a unitary matrix defined as:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; \mathrm{i} \\
 \mathrm{i} &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>On some hardware platforms, the gate operation <code>InvSqrtPauliX</code> together with the operation <code>SqrtPauliX</code> are the only available rotation gates. This becomes relevant when it comes to the compilation of a quantum algorithm containing any arbitrary gates to the set of basic gates supported by the hardware device.</p>
 <h2 id="paulix"><a class="header" href="#paulix">PauliX</a></h2>
-<p>The Pauli X gate implements a rotation of \( \frac{\pi}{2} \) about the x-axis that can be used e.g. to flip the qubit state. The full matrix form is given by </p>
+<p>The Pauli X gate implements a rotation of \( \frac{\pi}{2} \) about the x-axis that can be used, for example, to flip the qubit state. The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 0 &amp; 1 \\
 1 &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="pauliy"><a class="header" href="#pauliy">PauliY</a></h2>
-<p>The Pauli Y gate implements a rotation of \( \frac{\pi}{2} \) about the y-axis that can be used e.g. to flip the qubit state. The unitary matrix is defined as</p>
+<p>The Pauli Y gate implements a rotation of \( \frac{\pi}{2} \) about the y-axis that can be used, for example, to flip the qubit state. The unitary matrix is defined as:</p>
 <p>\[
 U = \begin{pmatrix}
 0 &amp; -\mathrm{i} \\
 \mathrm{i} &amp; 0
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="pauliz"><a class="header" href="#pauliz">PauliZ</a></h2>
-<p>The Pauli Z gate implements a rotation of \( \frac{\pi}{2} \) about the z-axis that can be used e.g. to flip the qubit state. The full matrix form is given by</p>
+<p>The Pauli Z gate implements a rotation of \( \frac{\pi}{2} \) about the z-axis that can be used, for example, to flip the qubit state. The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; -1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="phaseshiftstate0"><a class="header" href="#phaseshiftstate0">PhaseShiftState0</a></h2>
-<p>This gate operation corresponds to the phase shift gate applied on state \( \left |0 \right&gt; \) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \(\theta\), also known as AC Stark shift of the state \( \left |0 \right&gt; \). The unitary matrix is given by</p>
+<p>This gate operation corresponds to the phase shift gate applied on state \( \left |0 \right&gt; \) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \(\theta\), also known as AC Stark shift of the state \( \left |0 \right&gt; \). The unitary matrix is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 e^{\mathrm{i} \theta} &amp; 0\\
 0 &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="phaseshiftstate1"><a class="header" href="#phaseshiftstate1">PhaseShiftState1</a></h2>
-<p>This gate operation corresponds to the phase shift gate applied on state \( \left |1 \right&gt; \) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \(\theta\), also known as AC Stark shift of the state \( \left |1 \right&gt; \). The unitary matrix is given by</p>
+<p>This gate operation corresponds to the phase shift gate applied on state \( \left |1 \right&gt; \) compared to RotateZ gate. It implements a rotation around Z-axis by an arbitrary angle \(\theta\), also known as AC Stark shift of the state \( \left |1 \right&gt; \). The unitary matrix is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 1 &amp; 0\\
 0 &amp; e^{\mathrm{i} \theta}
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="rotatearoundsphericalaxis"><a class="header" href="#rotatearoundsphericalaxis">RotateAroundSphericalAxis</a></h2>
-<p>Implements a rotation around an axis in the x-y plane in spherical coordinates. The definition of the gate in matrix form is given by</p>
+<p>Implements a rotation around an axis in the x-y plane in spherical coordinates. The definition of the gate in matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos\left(\frac{\theta}{2}\right) &amp; 0\\
@@ -214,65 +214,65 @@ U = \begin{pmatrix}
 -\mathrm{i} \sin\left(\frac{\theta}{2}\right) v_z  &amp;  \sin\left(\frac{\theta}{2}\right) \left(-i v_x - v_y \right)\\
 \sin\left(\frac{\theta}{2}\right) \left(-\mathrm{i} v_x + v_y \right) &amp; \mathrm{i} \sin\left(\frac{\theta}{2}\right) v_z
 \end{pmatrix}
-\]</p>
-<p>with \[ v_x = \sin\left(\theta_{sph}\right) \cdot \cos\left(\phi_{sph}\right), \quad v_y = \sin\left(\theta_{sph}\right)\cdot\sin\left(\phi_{sph}\right), \quad v_z = \cos\left(\theta_{sph}\right). \]</p>
+\],</p>
+<p>with \[ v_x = \sin\left(\theta_{sph}\right) \cdot \cos\left(\phi_{sph}\right), \quad v_y = \sin\left(\theta_{sph}\right)\cdot\sin\left(\phi_{sph}\right), \quad v_z = \cos\left(\theta_{sph}\right). \].</p>
 <h2 id="rotatex"><a class="header" href="#rotatex">RotateX</a></h2>
-<p>The rotation gate around x-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_x} \). The definition of the unitary matrix is as follows</p>
+<p>The rotation gate around x-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_x} \). The definition of the unitary matrix is as follows:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(\frac{\theta}{2}) &amp; -\mathrm{i} \sin(\frac{\theta}{2})\\
 -\mathrm{i}\sin(\frac{\theta}{2}) &amp; \cos(\frac{\theta}{2})
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="rotatexy"><a class="header" href="#rotatexy">RotateXY</a></h2>
-<p>Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates. The unitary matrix representing the gate is given by</p>
+<p>Implements a rotation around an axis in the x-y plane, where the axis is defined by an angle/spherical coordinates. The unitary matrix representing the gate is given by:</p>
 <p>\[
 U  = \begin{pmatrix}
 \cos \left(\frac{\theta}{2} \right) &amp; -\mathrm{i} e^{-\mathrm{i} \phi} \sin \left(\frac{\theta}{2} \right) \\
 -\mathrm{i} e^{\mathrm{i} \phi} \sin \left( \frac{\theta}{2} \right) &amp; \cos\left( \frac{\theta}{2} \right)
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="rotatey"><a class="header" href="#rotatey">RotateY</a></h2>
-<p>The rotation gate around the y-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_y} \). The full matrix form is given by</p>
+<p>The rotation gate around the y-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_y} \). The full matrix form is given by:</p>
 <p>\[
 U = \begin{pmatrix}
 \cos(\frac{\theta}{2}) &amp;  - \sin(\frac{\theta}{2})\\
 \sin(\frac{\theta}{2})  &amp; \cos(\frac{\theta}{2})
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="rotatez"><a class="header" href="#rotatez">RotateZ</a></h2>
-<p>The rotation gate around the z-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_z} \). The unitary matrix reads</p>
+<p>The rotation gate around the z-axis \( e^{-\mathrm{i} \frac{\theta}{2} \sigma_z} \). The unitary matrix reads:</p>
 <p>\[
-U = \begin{pmatrix} \\ 
+U = \begin{pmatrix}
 \cos(\frac{\theta}{2})  -\mathrm{i} \sin(\frac{\theta}{2}) &amp; 0\\
 0 &amp; \cos(\frac{\theta}{2}) + \mathrm{i} \sin(\frac{\theta}{2})
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="sgate"><a class="header" href="#sgate">SGate</a></h2>
-<p>The unitary matrix of the S gate, which is often used in the theory of error correction, reads</p>
+<p>The unitary matrix of the S gate, which is often used in the theory of error correction, reads:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; \mathrm{i}
 \end{pmatrix}
-\]</p>
+\].</p>
 <h2 id="sqrtpaulix"><a class="header" href="#sqrtpaulix">SqrtPauliX</a></h2>
-<p>The square root of the PauliX gate \( e^{-\mathrm{i} \frac{\theta}{4} \sigma_x} \). The full matrix form is given by</p>
+<p>The square root of the PauliX gate \( e^{-\mathrm{i} \frac{\theta}{4} \sigma_x} \). The full matrix form is given by:</p>
 <p>\[
 U = \frac{1}{\sqrt(2)}\begin{pmatrix}
 1 &amp; -\mathrm{i} \\
 -\mathrm{i} &amp; 1
 \end{pmatrix}
-\]</p>
+\].</p>
 <p>On some hardware platforms, the gate operation <code>SqrtPauliX</code> together with the operation <code>InvSqrtPauliX</code> are the only available rotation gates. This becomes relevant when it comes to the compilation of a quantum algorithm containing any arbitrary gates to the set of basic gates supported by the hardware device.</p>
 <h2 id="tgate"><a class="header" href="#tgate">TGate</a></h2>
-<p>The unitary matrix of the T gate, which is often used in the theory of error correction, is defined as follows</p>
+<p>The unitary matrix of the T gate, which is often used in the theory of error correction, is defined as follows:</p>
 <p>\[
 U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; e^{\mathrm{i} \frac{\pi}{4}}
 \end{pmatrix}
-\]</p>
+\].</p>
 
                     </main>
 

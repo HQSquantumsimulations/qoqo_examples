@@ -137,8 +137,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="cheated-measurement"><a class="header" href="#cheated-measurement">Cheated Measurement</a></h1>
-<p>The <code>Cheated</code> measurement in qoqo/roqoqo reads out the state vector or the density matrix of a quantum computer and obtains expectation values by multiplying the matrix representation of the observable with the state vector or multiplying the operator with the density matrix and taking the trace (respectively).</p>
-<p><code>Cheated</code> measurements are only possible with simulator backends that can return the state vector or the density matrix of the quantum state. The expectation values are defined by a sparse matrix representation of the measured observables. Using <code>Cheated</code> measurements, expectation values can be obtained directly, without decomposing operators into Pauli products and post-processing the raw output of quantum computers.</p>
+<p>A <code>Cheated</code> measurement in qoqo/roqoqo reads out the state vector or the density matrix of a quantum computer and obtains expectation values by multiplying the matrix representation of the observable with the state vector or multiplying the operator with the density matrix and taking the trace (respectively).</p>
+<p><code>Cheated</code> measurements are only possible with simulator backends that can return the state vector or the density matrix of the quantum state. The expectation values are defined by a sparse matrix representation of the measured observables. Using <code>Cheated</code> measurements, expectation values can be obtained directly without decomposing operators into Pauli products and post-processing the raw output of quantum computers.</p>
 <pre><code class="language-python">from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import Cheated, CheatedInput
@@ -205,7 +205,7 @@ circuit += ops::PragmaGetStateVector::new(&quot;state_vec&quot;.to_string(), Non
 // Preparing the measurement input for CheatedPauliZProductInput
 let mut measurement_input = CheatedInput::new(1);
 // Add the measured operator
-measurement_input.add_operator_exp_val(&quot;&lt;H&gt;&quot;.to_string(), operator, &quot;state_vec&quot;.to_string());
+measurement_input.add_operator_exp_val(&quot;&lt;H&gt;&quot;.to_string(), operator, &quot;state_vec&quot;.to_string()).unwrap();
 
 let measurement = Cheated {
    constant_circuit: None,

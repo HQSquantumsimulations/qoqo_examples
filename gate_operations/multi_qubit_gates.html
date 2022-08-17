@@ -139,17 +139,17 @@
                         <h1 id="multi-qubit-gates"><a class="header" href="#multi-qubit-gates">Multi-qubit gates</a></h1>
 <p>Multi-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum computer that act on <code>N</code> number of qubits. In multi-qubit gates the <code>qubits</code> are given as a vector of all involved qubits. The unitary matrix of a multi-qubit gate corresponds to the notation based on <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</p>
 <h2 id="multiqubitms"><a class="header" href="#multiqubitms">MultiQubitMS</a></h2>
-<p>The Molmer-Sorensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms, the gate applies</p>
+<p>The Mølmer–Sørensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms, the gate applies</p>
 <p>\[
 e^{-i * \theta/2 * X_{i0} * X_{i1} * ... * X_{in}},
-\]</p>
-<p>whereas \(\theta\) is the angle parameter of the multi-qubit Molmer-Sorensen gate and <code>i0</code>, <code>i1</code> etc. are the qubits the gate acts on.</p>
+\],</p>
+<p>whereas \(\theta\) is the angle parameter of the multi-qubit Mølmer–Sørensen gate and <code>i0</code>, <code>i1</code> <em>etc.</em> are the qubits the gate acts on.</p>
 <h2 id="multiqubitzz"><a class="header" href="#multiqubitzz">MultiQubitZZ</a></h2>
 <p>The multi-qubit PauliZ-product gate. he gate applies the rotation under the product of PauliZ operators on multiple qubits.</p>
 <p>\[
 e^{-i * \theta/2 * Z_{i0} * Z_{i1} * ... * Z_{in}},
-\]</p>
-<p>whereas \(\theta\) is the angle parameter of the multi-qubit PauliZ-product gate and <code>i0</code>, <code>i1</code> etc. are the qubits the gate acts on.</p>
+\],</p>
+<p>whereas \(\theta\) is the angle parameter of the multi-qubit PauliZ-product gate and <code>i0</code>, <code>i1</code> <em>etc.</em> are the qubits the gate acts on.</p>
 
                     </main>
 
