@@ -74,7 +74,7 @@ circuit += ops.MeasureQubit(qubit=1, readout="bit_register", readout_index=1)
 # Alternatively, define a Complex register to readout the state vector
 circuit += ops.DefinitionComplex("complex_register", 3, is_output = False)
 # Measure the state vector when running the circuit on a simulator
-circuit += ops.PragmaGetStateVector("complex_register")
+circuit += ops.PragmaGetStateVector("complex_register", None)
 ```
 
 Setting up readouts in Rust:

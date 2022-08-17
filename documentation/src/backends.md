@@ -42,7 +42,7 @@ from qoqo import Circuit
 from qoqo import operations as ops
 from qoqo.measurements import PauliZProduct, PauliZProductInput
 from qoqo import QuantumProgram
-from qoqo_quest import SimulatorBackend
+from qoqo_quest import Backend
 # initialize |psi>
 init_circuit = Circuit()
 # Apply a RotateY gate with a symbolic angle
@@ -82,7 +82,7 @@ measurement = PauliZProduct(
 # a single circuit, a measurement, and a quantum program.
 
 # Create a backend simulating one qubit
-backend = SimulatorBackend(1)
+backend = Backend(1)
 
 # a) Run a single circuit
 (bit_registers, float_registers, complex_registers) = backend.run_circuit(z_circuit)

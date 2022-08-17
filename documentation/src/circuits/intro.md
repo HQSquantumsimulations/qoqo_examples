@@ -22,7 +22,7 @@ from qoqo import operations as ops
 # create a new circuit
 circuit = Circuit()
 # Define the readout for two qubits 
-circuit += ops.DefinitionBit(readout="ro", length=2, is_output=True)
+circuit += ops.DefinitionBit(name="ro", length=2, is_output=True)
 # Rotation around Z axis by pi/2 on qubit 0
 circuit += ops.RotateZ(qubit=0, theta=1.57)
 # Entangling qubits 0 and 1 with CNOT gate
