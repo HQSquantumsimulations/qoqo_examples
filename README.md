@@ -11,7 +11,7 @@ What roqoqo/qoqo is:
 * A toolkit to represent quantum programs including circuits and measurement information
 * A thin runtime to run quantum measurements
 * A way to serialize quantum circuits and measurement information
-* A set of optional interfaces to devices, simulators and toolkits (e.g. [qoqo_qest](https://github.com/HQSquantumsimulations/qoqo-quest), [qoqo_mock](https://github.com/HQSquantumsimulations/qoqo_mock), [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm))
+* A set of optional interfaces to devices, simulators and toolkits (e.g. [qoqo_quest](https://github.com/HQSquantumsimulations/qoqo-quest), [qoqo_mock](https://github.com/HQSquantumsimulations/qoqo_mock), [qoqo_qasm](https://github.com/HQSquantumsimulations/qoqo_qasm))
 
 What roqoqo/qoqo is **not**:
 
@@ -29,7 +29,9 @@ Currently the available examples include:
 
 2. An example how to perform expectation value measurements with qoqo/roqoqo ([Python](./qoqo/Measurement_Example.ipynb) | [Rust Program](./roqoqo/standalone/2_Measurement_example/) | [Rust Jupyter](./roqoqo/notebooks/2_Measurement_example.ipynb))
 3. A quantum teleportation example ([Python](./qoqo/3_Teleportation_Example.ipynb) | [Rust Program](./roqoqo/standalone/3_Teleportation_example/) | [Rust Jupyter](./roqoqo/notebook/3_Teleportation_example.ipynb))
-4. A simple Variational Quantum Eigensolver (VQE) using the Variation Hamiltonian Ansatz (VHA) ([Python](./qoqo/Simple_VHA_with_qoqo.ipynb) | [Rust Program](./roqoqo/) | [Rust Jupyter](./roqoqo/))
+4. A half adder example ([Python](./qoqo/4_Half_adder_example.ipynb) | [Rust Program](./roqoqo/standalone/4_Half_adder_example/)
+5. A Deutsch-Josza algorithm example ([Python](./qoqo/5_Deutsch-Josza_example.ipynb) | [Rust Program](./roqoqo/standalone/5_Deutsch-Josza_example/)
+6. A simple Variational Quantum Eigensolver (VQE) using the Variation Hamiltonian Ansatz (VHA) ([Python](./qoqo/Simple_VHA_with_qoqo.ipynb)
 
 ## General Notes
 
