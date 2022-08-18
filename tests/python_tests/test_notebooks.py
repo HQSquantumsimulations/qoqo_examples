@@ -14,8 +14,8 @@ from pathlib import Path
     "2_Measurement_example",
     "3_Teleportation_example",
     "4_Half_adder_example",
-    "5_Simple_VHA_with_qoqo",
-    "6_Deutsch-Josza_example",
+    "5_Deutsch-Josza_example",
+    "6_Simple_VHA_with_qoqo",
 ])
 def test_running_notebook(name):
     src_path = Path(__file__)
