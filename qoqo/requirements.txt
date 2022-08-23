@@ -1,5 +1,5 @@
 qoqo>=1.0.0
-qoqo_quest>=0.8.0
+qoqo_quest>=0.7.4
 qoqo_mock>=0.5
 qoqo_calculator_pyo3>=1.0.0
 numpy

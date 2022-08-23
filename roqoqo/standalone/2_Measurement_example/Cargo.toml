@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 roqoqo = {version="1.0.0"}
-roqoqo-quest = {version="0.8"}
+roqoqo-quest = {version="0.7.4"}
 num-complex = "0.4"
 qoqo_calculator = "1.0.0"
 nalgebra = "0.31"
