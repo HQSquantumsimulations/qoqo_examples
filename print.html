@@ -187,11 +187,21 @@ At the moment, qoqo/roqoqo does not implement generic devices but defines an int
 <p>For pre-built wheels you can install qoqo with a simple pip command</p>
 <pre><code class="language-bash">pip install qoqo
 </code></pre>
-<p>Alternatively, installing from the source distribution is possible. For this, a rust toolchain and the <a href="https://maturin.rs/">maturin</a> Python package need to be already installed. A Rust toolchain can be installed using <a href="https://rustup.rs/">rustup</a>.
-With this Rust toolchain installed, qoqo can be installed using a pip command:</p>
-<pre><code class="language-bash"># After installing the Rust toolchain, execute the following:
-pip install maturin
-pip install qoqo
+<p>If no pre-built python wheel is available for your architecture you can install qoqo from the source distribution using a rust toolchain (for example available via rustup) and maturin (also available via pip). After installing the rust toolchain and maturing run the same pip install command as above. In some cases on macOS it can be necessary to provide specific linker arguments as shown below:</p>
+<pre><code class="language-shell"># can be necessary on macOS
+RUSTFLAGS=&quot;-C link-arg=-undefined -C link-arg=dynamic_lookup&quot; pip install qoqo
+</code></pre>
+<p>When using qoqo in a rust project providing a python interface add</p>
+<pre><code class="language-TOML">qoqo = {version=&quot;1.0&quot;, default-features=false}
+</code></pre>
+<p>to the <code>[dependencies]</code> section of the project Cargo.toml.</p>
+<p>Alternatively one can check out the latest tagged version from github and use the maturin tool to build a python package for qoqo locally and install it via pip. Please note that the package should be built from the top level directory of the workspace selecting the qoqo package with the -m qoqo/Cargo.toml option. </p>
+<pre><code class="language-shell">maturin build -m qoqo/Cargo.toml  --release
+pip install target/wheels/&lt;NAME_OF_WHEEL&gt;
+</code></pre>
+<p>Specifically for macOS on Apple Silicon the following build command should be used:</p>
+<pre><code class="language-shell">RUSTFLAGS=&quot;-C link-arg=-undefined -C link-arg=dynamic_lookup&quot; maturin build -m qoqo/Cargo.toml  --release
+pip install target/wheels/$NAME_OF_WHEEL
 </code></pre>
 <h2 id="roqoqo"><a class="header" href="#roqoqo">roqoqo</a></h2>
 <p>To use roqoqo in a Rust project simply add</p>
