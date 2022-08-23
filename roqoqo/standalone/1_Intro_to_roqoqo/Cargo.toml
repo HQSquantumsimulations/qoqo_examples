@@ -4,8 +4,8 @@ version = "0.1.1"
 edition = "2021"
 
 [dependencies]
-roqoqo = {version="1.0.0-beta.2"}
-roqoqo-quest = {version="0.7"}
+roqoqo = {version="1.0.0"}
+roqoqo-quest = {version="0.8"}
 num-complex = "0.4"
 qoqo_calculator = "1.0.0"
 ndarray = { version = "0.15" }
