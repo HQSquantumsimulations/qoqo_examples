@@ -35,7 +35,7 @@ qoqo/roqoqo provide three simple devices
 * `AllToAllDevice`
 * `SquareLatticeDevice`
 
-The `GenericDevice` is the most basic device. It simply contains all available gate operations, the corresponding gate times and the decoherence rate for each qubit in internal HashMaps. It can be used to create custom devices and as a device interchange format. As part of the `Device` interface each device can be exported as a `GenericDevice` with the `to_generic_device` function.
+The `GenericDevice` is the most basic device. It simply contains all available gate operations, the corresponding gate times and the decoherence rate for each qubit in internal HashMaps. It can be used to create custom devices and as a device interchange format. As part of the `Device` interface, each device can be exported as a `GenericDevice` with the `to_generic_device` function.
 
 ```rust
 use roqoqo::devices::Device;
@@ -50,12 +50,12 @@ generic_device.set_single_qubit_gate_time("RotateZ", 0, 1.0).unwrap();
 generic_device.set_single_qubit_gate_time("RotateZ", 1, 1.0).unwrap();
 generic_device.set_two_qubit_gate_time("CNOT", 0, 1, 1.0).unwrap();
 generic_device.set_two_qubit_gate_time("CNOT", 1, 0, 1.0).unwrap();
-// setting the decoherence rates directly
+// Set the decoherence rates directly
 generic_device.set_qubit_decoherence_rates(0, array![[0.0, 0.0, 0.0],[0.0, 0.0, 0.0],[0.0, 0.0, 0.0]]).unwrap();
 generic_device.set_qubit_decoherence_rates(1, array![[0.0, 0.0, 0.0],[0.0, 0.0, 0.0],[0.0, 0.0, 0.0]]).unwrap();
 assert_eq!(generic_device, all_to_all.to_generic_device());
 
-// adding damping to the decoherence rates (also works for dephasing and depolarising)
+// Add damping to the decoherence rates (also works for dephasing and depolarising)
 generic_device.add_damping(0, 1.0);
 ```
 
@@ -63,7 +63,7 @@ generic_device.add_damping(0, 1.0);
 from qoqo import devices
 import numpy as np
 
-#Create a two-qubit device
+# Create a two-qubit device
 generic_device = devices.GenericDevice(2)
 # Create a comparison two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
 all_to_all = devices.AllToAllDevice(2, ["RotateZ"], ["CNOT"], 1.0)
@@ -72,16 +72,16 @@ generic_device.set_single_qubit_gate_time("RotateZ", 0, 1.0)
 generic_device.set_single_qubit_gate_time("RotateZ", 1, 1.0)
 generic_device.set_two_qubit_gate_time("CNOT", 0, 1, 1.0)
 generic_device.set_two_qubit_gate_time("CNOT", 1, 0, 1.0)
-# setting the decoherence rates directly
+# Set the decoherence rates directly
 generic_device.set_qubit_decoherence_rates(0, np.array([[0.0, 0.0, 0.0],[0.0, 0.0, 0.0],[0.0, 0.0, 0.0]]))
 generic_device.set_qubit_decoherence_rates(1, np.array([[0.0, 0.0, 0.0],[0.0, 0.0, 0.0],[0.0, 0.0, 0.0]]))
 assert generic_device == all_to_all.generic_device()
 
-#adding damping to the decoherence rates (also works for dephasing and depolarising)
+# Add damping to the decoherence rates (also works for dephasing and depolarising)
 generic_device.add_damping(0,1.0)
 ```
 
-The `AllToAllDevice` can be used to quickly create a device with all to all connectivity. It provides functions to set the gate time on all gates of a certain type and to set the decoherence rates of all qubits. Contrary to the functions operating on single gates (`set_single_qubit_gate` etc.) those functions to not change the device but return a copy with these changes.
+The `AllToAllDevice` can be used to quickly create a device with all-to-all connectivity. It provides functions to set the gate time on all gates of a certain type and set the decoherence rates of all qubits. Contrary to the functions operating on single gates (`set_single_qubit_gate` etc.) those functions do not change the device but return a copy with these changes.
 The single gate methods of the `GenericDevice` (e.g. `set_single_qubit_gate`) are also available.
 
 ```rust
@@ -89,15 +89,15 @@ use roqoqo::devices::Device;
 use roqoqo::devices::{GenericDevice, AllToAllDevice};
 use ndarray::array;
 
-// Create a comparison two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+// Create a two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
 let mut all_to_all = AllToAllDevice::new(2, &["RotateZ".to_string()], &["CNOT".to_string()], 1.0);
 // Set a new time for all RotateZ gates
 let mut all_to_all = all_to_all.set_all_single_qubit_gate_times("RotateZ", 2.0);
 // Set a new time for all CNOT gates
 let mut all_to_all = all_to_all.set_all_two_qubit_gate_times("CNOT", 0.1);
-// setting the decoherence rates directly for all qubits
+// Set the decoherence rates directly for all qubits
 let mut all_to_all = all_to_all.set_all_qubit_decoherence_rates(array![[0.0, 0.0, 0.0],[0.0, 0.0, 0.0],[0.0, 0.0, 1.0]]).unwrap();
-// adding damping to the decoherence rates (also works for dephasing and depolarising)
+// Add damping to the decoherence rates (also works for dephasing and depolarising)
 let all_to_all = all_to_all.add_damping_all(1.0);
 ```
 
@@ -105,20 +105,20 @@ let all_to_all = all_to_all.add_damping_all(1.0);
 from qoqo import devices
 import numpy as np
 
-# Create a comparison two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+# Create a two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
 all_to_all = devices.AllToAllDevice(2, ["RotateZ"], ["CNOT"], 1.0)
 
 # Set a new time for all RotateZ gates
 all_to_all = all_to_all.set_all_single_qubit_gate_times("RotateZ", 2.0)
 # Set a new time for all CNOT gates
 all_to_all = all_to_all.set_all_two_qubit_gate_times("CNOT", 0.1)
-# setting the decoherence rates directly for all qubits
+# Set the decoherence rates directly for all qubits
 all_to_all = all_to_all.set_all_qubit_decoherence_rates(np.array([[0.0, 0.0, 0.0],[0.0, 0.0, 0.0],[0.0, 0.0, 1.0]]))
-# adding damping to the decoherence rates (also works for dephasing and depolarising)
+# Add damping to the decoherence rates (also works for dephasing and depolarising)
 all_to_all = all_to_all.add_damping_all(1.0)
 ```
 
-The `SquareLatticeDevice` can be used to quickly initialize a device with two qubit operations available between next-neighbours on a square lattice. The same methods as for an `AllToAllDevice` are available.
+The `SquareLatticeDevice` can be used to quickly initialize a device with two-qubit operations available between next-neighbours on a square lattice. The same methods as `AllToAllDevice` are available.
 
 ```rust
 use roqoqo::devices::Device;
@@ -135,6 +135,6 @@ from qoqo import devices
 rows = 1
 columns = 2
 
-# Create  two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+# Create a two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
 square_lattice = devices.SquareLatticeDevice(rows, columns, ["RotateZ"], ["CNOT"], 1.0)
 ```
