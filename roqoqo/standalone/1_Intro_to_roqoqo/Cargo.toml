@@ -4,10 +4,10 @@ version = "0.1.1"
 edition = "2021"
 
 [dependencies]
-roqoqo = {version="1.0.0"}
-roqoqo-quest = {version="0.7.4"}
+roqoqo = {version="1.1.0-beta.1"}
+roqoqo-quest = {version="0.8.0-beta.1"}
 num-complex = "0.4"
-qoqo_calculator = "1.0.0"
+qoqo_calculator = "1.1.0"
 ndarray = { version = "0.15" }
 eigenvalues = "0.4"
 nalgebra = "0.31"
