@@ -25,13 +25,12 @@ One version in the form of a standalone rust program and one experimental versio
 
 Currently the available examples include:
 
-1. An introduction to qoqo/roqoqo ([Python](./qoqo/Intro_to_qoqo.ipynb) | [Rust Program](./roqoqo/standaloe/1_Intro_to_roqoqo/) | [Rust Jupyter](./roqoqo/notebooks/1_Intro_to_roqoqo.ipynb))
-
-2. An example how to perform expectation value measurements with qoqo/roqoqo ([Python](./qoqo/Measurement_Example.ipynb) | [Rust Program](./roqoqo/standalone/2_Measurement_example/) | [Rust Jupyter](./roqoqo/notebooks/2_Measurement_example.ipynb))
-3. A quantum teleportation example ([Python](./qoqo/3_Teleportation_Example.ipynb) | [Rust Program](./roqoqo/standalone/3_Teleportation_example/) | [Rust Jupyter](./roqoqo/notebook/3_Teleportation_example.ipynb))
-4. A half adder example ([Python](./qoqo/4_Half_adder_example.ipynb) | [Rust Program](./roqoqo/standalone/4_Half_adder_example/)
-5. A Deutsch-Josza algorithm example ([Python](./qoqo/5_Deutsch-Josza_example.ipynb) | [Rust Program](./roqoqo/standalone/5_Deutsch-Josza_example/)
-6. A simple Variational Quantum Eigensolver (VQE) using the Variation Hamiltonian Ansatz (VHA) ([Python](./qoqo/Simple_VHA_with_qoqo.ipynb)
+1. An introduction to qoqo/roqoqo ([Python](./qoqo/1_Intro_to_qoqo.ipynb) | [Rust Program](./roqoqo/standalone/1_Intro_to_roqoqo/) | [Rust Jupyter](./roqoqo/notebooks/1_Intro_to_roqoqo.ipynb))
+2. An example how to perform expectation value measurements with qoqo/roqoqo ([Python](./2_qoqo/Measurement_Example.ipynb) | [Rust Program](./roqoqo/standalone/2_Measurement_example/) | [Rust Jupyter](./roqoqo/notebooks/2_Measurement_example.ipynb))
+3. A quantum teleportation example ([Python](./qoqo/3_Teleportation_Example.ipynb) | [Rust Program](./roqoqo/standalone/3_Teleportation_example/) | [Rust Jupyter](./roqoqo/notebooks/3_Teleportation_example.ipynb))
+4. A half adder example ([Python](./qoqo/4_Half_adder_example.ipynb) | [Rust Program](./roqoqo/standalone/4_Half_adder_example/))
+5. A Deutsch-Josza algorithm example ([Python](./qoqo/5_Deutsch-Josza_example.ipynb) | [Rust Program](./roqoqo/standalone/5_Deutsch-Josza_example/))
+6. A simple Variational Quantum Eigensolver (VQE) using the Variation Hamiltonian Ansatz (VHA) ([Python](./qoqo/6_Simple_VHA_with_qoqo.ipynb))
 
 ## General Notes
 
