@@ -43,7 +43,7 @@ pip install target/wheels/$NAME_OF_WHEEL
 To use roqoqo in a Rust project simply add
 
 ```toml
-roqoqo = "1.0"
+roqoqo = "1.4"
 ```
 
 to the `[dependencies]` section in your Cargo.toml.

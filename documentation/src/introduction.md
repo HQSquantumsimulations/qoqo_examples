@@ -51,7 +51,7 @@ qoqo/roqoqo does not directly implement these backends. To minimize dependencies
 In the `backends` module roqoqo provides an interface description for backends with the `EvaluatingBackend` Rust trait.
 
 When compiling quantum circuits, it is often necessary to know the topology of a target quantum device. Device properties can also be used by backends, for example to accurately simulate a given quantum device.
-At the moment, qoqo/roqoqo does not implement generic devices but defines an interface for obtaining the device topology and the noise properties. The interface is defined by roqoqo's `Device` trait.
+qoqo/roqoqo defines an interface for obtaining the device topology and the noise properties. The interface is defined by roqoqo's `Device` trait. Additionally qoqo/roqoqo provides some simple devices that can be used to quickly define simple device topologies.
 
 The following schematic shows how the different components are related when running a quantum program:
 
