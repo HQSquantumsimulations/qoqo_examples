@@ -95,6 +95,32 @@ The controlled phase shift gate implements a phase shift applied on `target` qub
  \end{pmatrix}
 \\].
 
+## ControlledRotateX
+
+The controlled RotateX implements a RotateX gate applied on `target` qubit based on the value of the `control` qubit. The unitary matrix is given by:
+
+\\[
+ U = \begin{pmatrix}
+ 1 & 0 & 0 & 0 \\\\
+ 0 & 1 & 0 & 0 \\\\
+ 0 & 0 & \cos(\frac{\theta}{2}) & -i \sin(\frac{\theta}{2}) \\\\
+ 0 & 0 & -i \sin(\frac{\theta}{2}) & \cos(\frac{\theta}{2})
+ \end{pmatrix}
+\\].
+
+## ControlledRotateXY
+
+The controlled RotateXY implements a RotateXY gate applied on `target` qubit based on the value of the `control` qubit. The unitary matrix is given by:
+
+\\[
+ U = \begin{pmatrix}
+ 1 & 0 & 0 & 0 \\\\
+ 0 & 1 & 0 & 0 \\\\
+ 0 & 0 & \cos(\frac{\theta}{2}) & -i e^{-i \phi} \sin(\frac{\theta}{2}) \\\\
+ 0 & 0 & -i e^{-i \phi} \sin(\frac{\theta}{2}) & \cos(\frac{\theta}{2})
+ \end{pmatrix}
+\\].
+
 ## Fsim
 
 The fermionic qubit simulation gate that can be represented as the following unitary matrix:
@@ -205,6 +231,21 @@ This gate implements the fixed-phase MolmerSorensen XX operation as introduced i
  -\mathrm{i} & 0 & 0 & 1
  \end{pmatrix}
 \\].
+
+## PhaseShiftedControlledPhase
+
+The phase-shifted controlled PhaseShift gate of the form:
+
+\\[
+ U = \begin{pmatrix}
+ 1 & 0 & 0 & 0 \\\\
+ 0 & e^{\mathrm{i} \phi} & 0 & 0 \\\\
+ 0 & 0 & e^{\mathrm{i} \phi} & 0 \\\\
+ 0 & 0 & 0 & e^{\mathrm{i} (2\cdot\phi - \pi)}
+ \end{pmatrix}
+\\],
+
+with the single-qubit phase \\( \phi \\).
 
 ## PhaseShiftedControlledZ
 

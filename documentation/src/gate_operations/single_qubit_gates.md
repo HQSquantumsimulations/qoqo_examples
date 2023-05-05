@@ -12,6 +12,28 @@ The most general unitary operation acting on one qubit is of the form
 
 The parameters \\( \alpha_r \\), \\( \alpha_i \\) and \\( \beta_r \\), \\( \beta_i \\) can be accessed by the functions `alpha_r()`, `alpha_i()`, `beta_r()` and `beta_i()`, applied on the particular single-qubit gate. The full matrix form of the single-qubit gates available in qoqo/roqoqo is documented in this chapter.
 
+## GPi
+
+The unitary matrix of the GPi gate, which is often used in the context of ion traps, is defined as follows:
+
+\\[
+ U = \begin{pmatrix}
+ 0 & e^{-i \theta}\\\\
+ e^{i \theta} & 0
+ \end{pmatrix}
+\\].
+
+## GPi2
+
+The unitary matrix of the GPi2 gate, which is often used in the context of ion traps, is defined as follows:
+
+\\[
+ U = \frac{1}{\sqrt{2}} \begin{pmatrix}
+ 1 & -i e^{-i \theta}\\\\
+ -i e^{i \theta} & 1
+ \end{pmatrix}
+\\].
+
 ## Hadamard
 
 The Hadamard gate when applied creates a superposition of states, and can therefore be used to change the basis if required. The definition of the gate in matrix form is given by:
