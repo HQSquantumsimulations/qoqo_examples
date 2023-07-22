@@ -6,3 +6,4 @@ numpy
 scipy
 jupyter
 matplotlib
+qoqo_strawberry_fields>=0.1
