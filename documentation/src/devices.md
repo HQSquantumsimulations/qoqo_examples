@@ -28,7 +28,7 @@ qoqo/roqoqo provide three simple devices
 * `AllToAllDevice`
 * `SquareLatticeDevice`
 
-The `GenericDevice` is the most basic device. It simply contains all available gate operations, the corresponding gate times and the decoherence rate for each qubit in internal HashMaps. It can be used to create custom devices and as a device interchange format. As part of the `Device` interface, each device can be exported as a `GenericDevice` with the `to_generic_device` function.
+The `GenericDevice` is the most basic device. It simply contains all available gate operations, the corresponding gate times and the decoherence rate for each qubit in internal HashMaps. It can be used to create custom devices and as a device interchange format. As part of the `Device` interface, each device can be exported as a `GenericDevice` with the `to_generic_device` function. The `GenericDevice` is also used to exchange device data via JSON files or REST API calls.
 
 ```rust
 use roqoqo::devices::Device;
@@ -62,8 +62,7 @@ generic_device.set_two_qubit_gate_time("CNOT", 1, 0, 1.0)
 assert generic_device == all_to_all.generic_device()
 ```
 
-The `AllToAllDevice` can be used to quickly create a device with all-to-all connectivity. It provides functions to set the gate time on all gates of a certain type and set the decoherence rates of all qubits. Contrary to the functions operating on single gates (`set_single_qubit_gate` etc.) those functions do not change the device but return a copy with these changes.
-The single gate methods of the `GenericDevice` (e.g. `set_single_qubit_gate`) are also available.
+The `AllToAllDevice` can be used to quickly create a device with all-to-all connectivity. Additionally to the `set_single_qubit_time` type functions which are identical to the `GenericDevice`, it provides functions to set the gate time on *all* gates of a certain type and set the decoherence rates of *all* qubits. When setting these attributes for *all* of the qubits on the device, the `AllToAllDevice` uses a builder pattern, in order for the user to be able to chain such calls. This is demonstrated below.
 
 ```rust
 use roqoqo::devices::Device;
@@ -85,10 +84,8 @@ import numpy as np
 # Create a two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
 all_to_all = devices.AllToAllDevice(2, ["RotateZ"], ["CNOT"], 1.0)
 
-# Set a new time for all RotateZ gates
-all_to_all = all_to_all.set_all_single_qubit_gate_times("RotateZ", 2.0)
-# Set a new time for all CNOT gates
-all_to_all = all_to_all.set_all_two_qubit_gate_times("CNOT", 0.1)
+# Set a new time for all RotateZ gates and CNOT gates
+all_to_all = all_to_all.set_all_single_qubit_gate_times("RotateZ", 2.0).set_all_two_qubit_gate_times("CNOT", 0.1)
 ```
 
 The `SquareLatticeDevice` can be used to quickly initialize a device with two-qubit operations available between next-neighbours on a square lattice. The same methods as `AllToAllDevice` are available.
