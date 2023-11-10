@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>qoqo/roqoqo User Guide</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex">
+
+
         <!-- Custom HTML head -->
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        
         <meta name="description" content="User guide for the qoqo/roqoqo quantum computing toolkit.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -17,27 +19,31 @@
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
         <link rel="stylesheet" href="css/print.css" media="print">
+
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="fonts/fonts.css">
+
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+
         <!-- MathJax -->
-        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -53,27 +59,34 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -83,20 +96,42 @@
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -113,6 +148,7 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+
                     </div>
                 </div>
 
@@ -126,8 +162,9 @@
                         </ul>
                     </div>
                 </div>
+
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -176,7 +213,7 @@ qoqo is the Python interface to roqoqo and provides operations, Circuit, measure
 qoqo/roqoqo does not directly implement these backends. To minimize dependencies, backends are implemented in separate packages (e.g. <code>qoqo-quest</code>).
 In the <code>backends</code> module roqoqo provides an interface description for backends with the <code>EvaluatingBackend</code> Rust trait.</p>
 <p>When compiling quantum circuits, it is often necessary to know the topology of a target quantum device. Device properties can also be used by backends, for example to accurately simulate a given quantum device.
-At the moment, qoqo/roqoqo does not implement generic devices but defines an interface for obtaining the device topology and the noise properties. The interface is defined by roqoqo's <code>Device</code> trait.</p>
+qoqo/roqoqo defines an interface for obtaining the device topology and the noise properties. The interface is defined by roqoqo's <code>Device</code> trait. Additionally qoqo/roqoqo provides some simple devices that can be used to quickly define simple device topologies.</p>
 <p>The following schematic shows how the different components are related when running a quantum program:</p>
 <p><img src="images/qoqo_program_schematics.png" alt="Relation between qoqo/roqoqo components" /></p>
 <p>The circuit compilation use cases can be visualized in a similar way:</p>
@@ -205,7 +242,7 @@ pip install target/wheels/$NAME_OF_WHEEL
 </code></pre>
 <h2 id="roqoqo"><a class="header" href="#roqoqo">roqoqo</a></h2>
 <p>To use roqoqo in a Rust project simply add</p>
-<pre><code class="language-toml">roqoqo = &quot;1.0&quot;
+<pre><code class="language-toml">roqoqo = &quot;1.4&quot;
 </code></pre>
 <p>to the <code>[dependencies]</code> section in your Cargo.toml.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quantum-circuit"><a class="header" href="#quantum-circuit">Quantum circuit</a></h1>
@@ -250,8 +287,7 @@ circuit += RotateZ::new(0, 1.57.into());
 circuit += CNOT::new(0, 1);
 // Measuring the qubits
 circuit += MeasureQubit::new(0, &quot;ro&quot;.to_string(), 0);
-circuit += MeasureQubit::new(1, &quot;ro&quot;.to_string(), 1);
-</code></pre>
+circuit += MeasureQubit::new(1, &quot;ro&quot;.to_string(), 1);</code></pre>
 <p>For details on the <strong>available methods</strong> of a <code>Circuit</code> please refer to the <strong>API documentation</strong> of <a href="https://docs.rs/roqoqo/latest/roqoqo/struct.Circuit.html">roqoqo</a> and <a href="https://hqsquantumsimulations.github.io/qoqo/generated/qoqo.html#qoqo.Circuit">qoqo</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="unitary-operations"><a class="header" href="#unitary-operations">Unitary Operations</a></h1>
 <p>Unitary operations or gate operations are operations that can be executed on all universal quantum computers. The operations correspond to unitary transformations of the state of a quantum computer.</p>
@@ -299,8 +335,7 @@ circuit += operations::DefinitionBit::new(&quot;bit_register&quot;.to_string(), 
 circuit += operations::DefinitionFloat::new(&quot;float_register&quot;.to_string(), 2, true);
 // A complex register of length 3 that is not returned as an output
 circuit += operations::DefinitionComplex::new(&quot;complex_register&quot;.to_string(), 3, false);
-}
-</code></pre>
+}</code></pre>
 <h2 id="writing-to-registers"><a class="header" href="#writing-to-registers">Writing to registers</a></h2>
 <p>Information is written to registers by the <code>MeasureQubit</code> operation or Pragma operations in a quantum circuit.</p>
 <ul>
@@ -346,8 +381,7 @@ circuit += operations::DefinitionComplex::new(
 // Measure the state vector when running the circuit on a simulator
 circuit += operations::PragmaGetStateVector::new(
     &quot;complex_register&quot;.to_string(), None,
-);
-</code></pre>
+);</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pragma-operations"><a class="header" href="#pragma-operations">Pragma Operations</a></h1>
 <p>Pragma operations in qoqo/roqoqo are operations that are <em>not</em> part of the set of operations that can run on all universal quantum computers.</p>
 <p>Pragma operations can be used to:</p>
@@ -389,8 +423,7 @@ circuit += operations::CNOT::new(0,1);
 // Adding dephasing noise acting on gate 0 with gate_time 1.0 and rate 1e-3
 circuit += operations::PragmaDephasing::new(0, 1.0, 1e-3.into());
 circuit += operations::PragmaDamping::new(1, 1.0, 2e-3.into());
-circuit += operations::PragmaDepolarising::new(3, 1.0, 5e-3.into());
-</code></pre>
+circuit += operations::PragmaDepolarising::new(3, 1.0, 5e-3.into());</code></pre>
 <h2 id="superoperator-representation"><a class="header" href="#superoperator-representation">Superoperator representation</a></h2>
 <p>All noise operations in qoqo/roqoqo provide a <code>superoperator()</code> method that returns the definition of the noise operation in superoperator matrix form.
 In the superoperator formalism, the density matrix of the system is rewritten as a vector in row-major form. Applying the noise to the quantum computer then corresponds to multiplying the vector with the superoperator matrix.
@@ -571,8 +604,7 @@ let measurement = PauliZProduct {
     constant_circuit: Some(init_circuit.clone()),
 
 println!(&quot;{:?}&quot;, measurement);
-};
-</code></pre>
+};</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quantumprogram-and-variable-replacement"><a class="header" href="#quantumprogram-and-variable-replacement">QuantumProgram and Variable-Replacement</a></h1>
 <p>A <code>QuantumProgram</code> allows the user to call it with a list of free <code>float</code> parameters. 
 It contains a <code>measurement</code> with quantum circuits that contain symbolic parameters. Circuits with symbolic parameters cannot be simulated or executed on real hardware. The symbolic parameters need to be replaced with real floating point numbers first. A <code>QuantumProgram</code> contains a list of the free parameters (<code>input_parameter_names</code>) and can automatically replace the parameters when it is executed. It replaces the parameters by its <code>run</code> methods and returns the result.</p>
@@ -710,8 +742,7 @@ let program = QuantumProgram::PauliZProduct {
 let backend = Backend::new(1);
 
 // Run QuantumProgram on the backend by setting the parameter value.
-let expectation_values = program.run(backend, &amp;[0.785]).unwrap();
-</code></pre>
+let expectation_values = program.run(backend, &amp;[0.785]).unwrap();</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="classicalregister-measurement"><a class="header" href="#classicalregister-measurement">ClassicalRegister Measurement</a></h1>
 <p>A <code>ClassicalRegister</code> measurement returns the unprocessed register readouts of <code>Circuits</code>. 
 A <code>ClassicalRegister</code> measurement can be used when end-users want to perform their own post-processing, for instance when working with external tools that expect full measurement records. </p>
@@ -924,7 +955,6 @@ let backend = Backend::new(3);
 
 let res = program.run(backend, &amp;[]);
 println!(&quot;{:?}&quot;, res);
-
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cheated-measurement"><a class="header" href="#cheated-measurement">Cheated Measurement</a></h1>
 <p>A <code>Cheated</code> measurement in qoqo/roqoqo reads out the state vector or the density matrix of a quantum computer and obtains expectation values by multiplying the matrix representation of the observable with the state vector or multiplying the operator with the density matrix and taking the trace (respectively).</p>
@@ -1005,8 +1035,7 @@ let measurement = Cheated {
 let backend = Backend::new(1);
 
 let result = backend.run_measurement(&amp;measurement);
-println!(&quot;{:?}&quot;, result);
-</code></pre>
+println!(&quot;{:?}&quot;, result);</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="backends"><a class="header" href="#backends">Backends</a></h1>
 <p>Backends in qoqo/roqoqo are used for two things:</p>
 <ul>
@@ -1171,28 +1200,92 @@ println!(&quot;{:?}&quot;, expectation_values);
 let program = QuantumProgram::PauliZProduct{ measurement, input_parameter_names: vec![&quot;angle&quot;.to_string()]};
 // Run the program with 0.1 substituting `angle`
 let expectation_values = program.run(backend, &amp;[0.1]).unwrap();
-println!(&quot;{:?}&quot;, expectation_values);
-</code></pre>
+println!(&quot;{:?}&quot;, expectation_values);</code></pre>
 <h2 id="translating-to-other-quantum-computing-frameworks"><a class="header" href="#translating-to-other-quantum-computing-frameworks">Translating to other quantum computing frameworks</a></h2>
 <p>There are many open- and closed-source quantum frameworks. For some use cases, it may be advantageous to interface between qoqo and another quantum computing framework. Depending on the target framework, circuits containing an available subset of qoqo operations can be translated to other frameworks by backends. Backends that translate qoqo/roqoqo objects (for example Circuits) to other frameworks or representations do not implement the <code>EvaluatingBackend</code>.</p>
 <p>At the moment, we have implemented one translating backend, from qoqo/roqoqo <code>Circuits</code> to qasm: <a href="https://github.com/HQSquantumsimulations/qoqo_qasm">qoqo_qasm</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="devices"><a class="header" href="#devices">Devices</a></h1>
 <p>When working with quantum circuits it is often necessary to know the topology of a target quantum device. Device properties can also be used by backends, for example to accurately simulate a given quantum device.
-At the moment, qoqo/roqoqo does not implement devices but defines an interface for obtaining the device topology and the noise properties. The interface is defined by roqoqo's <code>Device</code> trait.</p>
+qoqo/roqoqo defines an interface for obtaining the device topology. The interface is defined by roqoqo's <code>Device</code> trait. Additionally qoqo/roqoqo provides some simple devices that can be used to quickly define simple device topologies.</p>
 <p>Devices based on the roqoqo <code>Device</code> trait can be abstract devices or backend devices.</p>
-<p><strong>Abstract devices</strong> contain abstract information about the device topology, the available gates and the noise model.</p>
+<p><strong>Abstract devices</strong> contain abstract information about the device topology and the available gates.</p>
 <p><strong>Backend devices</strong> are devices that are implemented by a roqoqo <a href="backends.html">backend</a>. They can specify additional information for accessing the device on the backend and can contain additional information. The devices also contain all the information of the abstract devices.</p>
 <p>A typical example for abstract devices are linear chains of square lattices in which two-qubit gate operations are only available between neighboring qubits.</p>
-<p>The noise model of the <code>Device</code> trait is based on the continuous-time Lindblad equation:
-\[
-\frac{d}{dt}\rho = \sum_{i,j=0}^{2} M_{i,j} L_{i} \rho L_{j}^{\dagger} - \frac{1}{2} { L_{j}^{\dagger} L_i \rho },
-\],</p>
-<p>with \( L_0 = \sigma^{+}\), \( L_1 = \sigma^{-}\) and \(L_3 = \sigma^{z}\).</p>
 <p>It is defined by the decoherence rates <code>M</code> and the (pseudo-)time needed to execute a quantum operation.</p>
 <p>The matrix representation of the decoherence rates of the Lindblad equation can be obtained by calling the method <code>qubit_decoherence_rates()</code> of a device.</p>
-<p>The time required for a gate operation can be obtained from the methods <code>single_qubit_gate_time()</code>, <code>two_qubit_gate_time()</code>, and <code>multi_qubit_gate_time()</code> for a specific type of gate (defined by its name) and the qubits the gate should act on. 
+<p>The time required for a gate operation can be obtained from the methods <code>single_qubit_gate_time()</code>, <code>two_qubit_gate_time()</code>, and <code>multi_qubit_gate_time()</code> for a specific type of gate (defined by its name) and the qubits the gate should act on.
 The gate time method can also be used to query the topology and available gate operations on a device. If a specific type of gate operation is not available on the given qubits, the gate time method will return <code>None</code>.</p>
 <p>For further details of the <code>Device</code> trait please refer to the API documentation of <a href="https://docs.rs/roqoqo/latest/roqoqo/devices/index.html">roqoqo::devices</a> (Rust core)</p>
+<h2 id="simple-devices"><a class="header" href="#simple-devices">Simple Devices</a></h2>
+<p>qoqo/roqoqo provide three simple devices</p>
+<ul>
+<li><code>GenericDevice</code></li>
+<li><code>AllToAllDevice</code></li>
+<li><code>SquareLatticeDevice</code></li>
+</ul>
+<p>The <code>GenericDevice</code> is the most basic device. It simply contains all available gate operations, the corresponding gate times and the decoherence rate for each qubit in internal HashMaps. It can be used to create custom devices and as a device interchange format. As part of the <code>Device</code> interface, each device can be exported as a <code>GenericDevice</code> with the <code>to_generic_device</code> function. The <code>GenericDevice</code> is also used to exchange device data via JSON files or REST API calls.</p>
+<pre><code class="language-rust">use roqoqo::devices::Device;
+use roqoqo::devices::{GenericDevice, AllToAllDevice};
+use ndarray::array;
+// Create a two-qubit device
+let mut generic_device = GenericDevice::new(2);
+// Create a comparison two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+let all_to_all = AllToAllDevice::new(2, &amp;[&quot;RotateZ&quot;.to_string()], &amp;[&quot;CNOT&quot;.to_string()], 1.0);
+
+generic_device.set_single_qubit_gate_time(&quot;RotateZ&quot;, 0, 1.0).unwrap();
+generic_device.set_single_qubit_gate_time(&quot;RotateZ&quot;, 1, 1.0).unwrap();
+generic_device.set_two_qubit_gate_time(&quot;CNOT&quot;, 0, 1, 1.0).unwrap();
+generic_device.set_two_qubit_gate_time(&quot;CNOT&quot;, 1, 0, 1.0).unwrap();
+assert_eq!(generic_device, all_to_all.to_generic_device());</code></pre>
+<pre><code class="language-python">from qoqo import devices
+import numpy as np
+
+# Create a two-qubit device
+generic_device = devices.GenericDevice(2)
+# Create a comparison two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+all_to_all = devices.AllToAllDevice(2, [&quot;RotateZ&quot;], [&quot;CNOT&quot;], 1.0)
+
+generic_device.set_single_qubit_gate_time(&quot;RotateZ&quot;, 0, 1.0)
+generic_device.set_single_qubit_gate_time(&quot;RotateZ&quot;, 1, 1.0)
+generic_device.set_two_qubit_gate_time(&quot;CNOT&quot;, 0, 1, 1.0)
+generic_device.set_two_qubit_gate_time(&quot;CNOT&quot;, 1, 0, 1.0)
+assert generic_device == all_to_all.generic_device()
+</code></pre>
+<p>The <code>AllToAllDevice</code> can be used to quickly create a device with all-to-all connectivity. Additionally to the <code>set_single_qubit_time</code> type functions which are identical to the <code>GenericDevice</code>, it provides functions to set the gate time on <em>all</em> gates of a certain type and set the decoherence rates of <em>all</em> qubits. When setting these attributes for <em>all</em> of the qubits on the device, the <code>AllToAllDevice</code> uses a builder pattern, in order for the user to be able to chain such calls. This is demonstrated below.</p>
+<pre><code class="language-rust">use roqoqo::devices::Device;
+use roqoqo::devices::{GenericDevice, AllToAllDevice};
+use ndarray::array;
+
+// Create a two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+let mut all_to_all = AllToAllDevice::new(2, &amp;[&quot;RotateZ&quot;.to_string()], &amp;[&quot;CNOT&quot;.to_string()], 1.0);
+// Set a new time for all RotateZ gates
+let mut all_to_all = all_to_all.set_all_single_qubit_gate_times(&quot;RotateZ&quot;, 2.0);
+// Set a new time for all CNOT gates
+let mut all_to_all = all_to_all.set_all_two_qubit_gate_times(&quot;CNOT&quot;, 0.1);</code></pre>
+<pre><code class="language-python">from qoqo import devices
+import numpy as np
+
+# Create a two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+all_to_all = devices.AllToAllDevice(2, [&quot;RotateZ&quot;], [&quot;CNOT&quot;], 1.0)
+
+# Set a new time for all RotateZ gates and CNOT gates
+all_to_all = all_to_all.set_all_single_qubit_gate_times(&quot;RotateZ&quot;, 2.0).set_all_two_qubit_gate_times(&quot;CNOT&quot;, 0.1)
+</code></pre>
+<p>The <code>SquareLatticeDevice</code> can be used to quickly initialize a device with two-qubit operations available between next-neighbours on a square lattice. The same methods as <code>AllToAllDevice</code> are available.</p>
+<pre><code class="language-rust">use roqoqo::devices::Device;
+use roqoqo::devices::{SquareLatticeDevice};
+let rows = 1;
+let columns = 2;
+// Create a two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+let square_lattice = SquareLatticeDevice::new(rows, columns, &amp;[&quot;RotateZ&quot;.to_string()], &amp;[&quot;CNOT&quot;.to_string()], 1.0);</code></pre>
+<pre><code class="language-python">from qoqo import devices
+
+rows = 1
+columns = 2
+
+# Create a two-qubit device with `RotateZ` and `CNOT` as the only gates and 1.0 as the default gate time
+square_lattice = devices.SquareLatticeDevice(rows, columns, [&quot;RotateZ&quot;], [&quot;CNOT&quot;], 1.0)
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="conventions"><a class="header" href="#conventions">Conventions</a></h1>
 <p>This section gives a quick overview of some of the conventions used in qoqo/roqoqo.</p>
 <h2 id="definitions"><a class="header" href="#definitions">Definitions</a></h2>
@@ -1329,6 +1422,22 @@ U =e^{\mathrm{i} \phi}\begin{pmatrix}
 \end{pmatrix}
 \].</p>
 <p>The parameters \( \alpha_r \), \( \alpha_i \) and \( \beta_r \), \( \beta_i \) can be accessed by the functions <code>alpha_r()</code>, <code>alpha_i()</code>, <code>beta_r()</code> and <code>beta_i()</code>, applied on the particular single-qubit gate. The full matrix form of the single-qubit gates available in qoqo/roqoqo is documented in this chapter.</p>
+<h2 id="gpi"><a class="header" href="#gpi">GPi</a></h2>
+<p>The unitary matrix of the GPi gate, which is often used in the context of ion traps, is defined as follows:</p>
+<p>\[
+U = \begin{pmatrix}
+0 &amp; e^{-i \theta}\\
+e^{i \theta} &amp; 0
+\end{pmatrix}
+\].</p>
+<h2 id="gpi2"><a class="header" href="#gpi2">GPi2</a></h2>
+<p>The unitary matrix of the GPi2 gate, which is often used in the context of ion traps, is defined as follows:</p>
+<p>\[
+U = \frac{1}{\sqrt{2}} \begin{pmatrix}
+1 &amp; -i e^{-i \theta}\\
+-i e^{i \theta} &amp; 1
+\end{pmatrix}
+\].</p>
 <h2 id="hadamard"><a class="header" href="#hadamard">Hadamard</a></h2>
 <p>The Hadamard gate when applied creates a superposition of states, and can therefore be used to change the basis if required. The definition of the gate in matrix form is given by:</p>
 <p>\[
@@ -1527,6 +1636,26 @@ U = \begin{pmatrix}
 0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} \theta}
 \end{pmatrix}
 \].</p>
+<h2 id="controlledrotatex"><a class="header" href="#controlledrotatex">ControlledRotateX</a></h2>
+<p>The controlled RotateX implements a RotateX gate applied on <code>target</code> qubit based on the value of the <code>control</code> qubit. The unitary matrix is given by:</p>
+<p>\[
+U = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; \cos(\frac{\theta}{2}) &amp; -i \sin(\frac{\theta}{2}) \\
+0 &amp; 0 &amp; -i \sin(\frac{\theta}{2}) &amp; \cos(\frac{\theta}{2})
+\end{pmatrix}
+\].</p>
+<h2 id="controlledrotatexy"><a class="header" href="#controlledrotatexy">ControlledRotateXY</a></h2>
+<p>The controlled RotateXY implements a RotateXY gate applied on <code>target</code> qubit based on the value of the <code>control</code> qubit. The unitary matrix is given by:</p>
+<p>\[
+U = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; \cos(\frac{\theta}{2}) &amp; -i e^{-i \phi} \sin(\frac{\theta}{2}) \\
+0 &amp; 0 &amp; -i e^{-i \phi} \sin(\frac{\theta}{2}) &amp; \cos(\frac{\theta}{2})
+\end{pmatrix}
+\].</p>
 <h2 id="fsim"><a class="header" href="#fsim">Fsim</a></h2>
 <p>The fermionic qubit simulation gate that can be represented as the following unitary matrix:</p>
 <p>\[
@@ -1610,6 +1739,17 @@ U = \frac{1}{\sqrt{2}} \begin{pmatrix}
 -\mathrm{i} &amp; 0 &amp; 0 &amp; 1
 \end{pmatrix}
 \].</p>
+<h2 id="phaseshiftedcontrolledphase"><a class="header" href="#phaseshiftedcontrolledphase">PhaseShiftedControlledPhase</a></h2>
+<p>The phase-shifted controlled PhaseShift gate of the form:</p>
+<p>\[
+U = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; e^{\mathrm{i} \phi} &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; e^{\mathrm{i} \phi} &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; e^{\mathrm{i} (2\cdot\phi - \pi)}
+\end{pmatrix}
+\],</p>
+<p>with the single-qubit phase \( \phi \).</p>
 <h2 id="phaseshiftedcontrolledz"><a class="header" href="#phaseshiftedcontrolledz">PhaseShiftedControlledZ</a></h2>
 <p>The phase-shifted controlled-Z gate, modified, <em>i.e.</em> phase-shifted ControlledPauliZ two-qubit gate, which corresponds to the equation (1) in the original <a href="https://arxiv.org/pdf/1908.06101.pdf">reference</a>. The full matrix form is defined as:</p>
 <p>\[
@@ -1690,6 +1830,34 @@ U = \begin{pmatrix}
 <p>It implements the same interaction as described by the <code>PMInteraction</code> gate but with a different prefactor.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="multi-qubit-gates-1"><a class="header" href="#multi-qubit-gates-1">Multi-qubit gates</a></h1>
 <p>Multi-qubit gates in qoqo/roqoqo represent atomic instructions in any quantum computer that act on <code>N</code> number of qubits. In multi-qubit gates the <code>qubits</code> are given as a vector of all involved qubits. The unitary matrix of a multi-qubit gate corresponds to the notation based on <code>qubits=[0..N]</code> where <code>N</code> is the number of qubits in the qubit vector of the multi-qubit gate.</p>
+<h2 id="controlledcontrolledpauliz"><a class="header" href="#controlledcontrolledpauliz">ControlledControlledPauliZ</a></h2>
+<p>Implements the double-controlled PauliZ gate, with two control qubits and one target qubit. The unitary matrix is given by:</p>
+<p>\[
+U = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1
+\end{pmatrix}
+\].</p>
+<h2 id="controlledcontrolledphaseshift"><a class="header" href="#controlledcontrolledphaseshift">ControlledControlledPhaseShift</a></h2>
+<p>Implements the double-controlled PhaseShift gate, with two control qubits and one target qubit. The unitary matrix is given by:</p>
+<p>\[
+U = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; e^{i \theta}
+\end{pmatrix}
+\].</p>
 <h2 id="multiqubitms"><a class="header" href="#multiqubitms">MultiQubitMS</a></h2>
 <p>The Mølmer–Sørensen gate between multiple qubits. The gate applies the rotation under the product of PauliX operators on multiple qubits. In mathematical terms, the gate applies</p>
 <p>\[
@@ -1702,38 +1870,64 @@ e^{-i * \theta/2 * X_{i0} * X_{i1} * ... * X_{in}},
 e^{-i * \theta/2 * Z_{i0} * Z_{i1} * ... * Z_{in}},
 \],</p>
 <p>whereas \(\theta\) is the angle parameter of the multi-qubit PauliZ-product gate and <code>i0</code>, <code>i1</code> <em>etc.</em> are the qubits the gate acts on.</p>
+<h2 id="toffoli"><a class="header" href="#toffoli">Toffoli</a></h2>
+<p>Implements the Toffoli, with two control qubits and one target qubit. The unitary matrix is given by:</p>
+<p>\[
+U = \begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0
+\end{pmatrix}
+\].</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+
+
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
             </nav>
 
         </div>
 
-        <script type="text/javascript">
+
+
+
+        <script>
             window.playground_copyable = true;
         </script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript">
+
+        <script>
         window.addEventListener('load', function() {
             MathJax.Hub.Register.StartupHook('End', function() {
                 window.setTimeout(window.print, 100);
             });
         });
         </script>
+
+    </div>
     </body>
 </html>
