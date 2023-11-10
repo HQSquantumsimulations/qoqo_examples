@@ -6,6 +6,8 @@ When working with quantum computers it is often necessary to know the physical n
 * `DecoherenceOnGateModel`
 * `ImperfectReadout`
 
+All of the noise models use builder patterns for the setting and adding functions, in order to be easier to chain for the user.
+
 ## ContinuousDecoherenceModel
 
 The `ContinuousDecoherenceModel` is the noise model representing a continuous decoherence process on qubits. This noise model assumes that all qubits are constantly experiencing decoherence over time (e.g. due to coupling to the environment). The noise for each qubit can be different but only single qubit noise is included in the model.
