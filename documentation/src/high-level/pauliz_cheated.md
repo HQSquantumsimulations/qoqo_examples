@@ -25,10 +25,10 @@ circuit = Circuit()
 circuit += ops.Hadamard(0)
 
 # Add definition for z-Basis readout
-circuit += ops.DefinitionBit("ro_z", 1, is_output=True)
+circuit += ops.DefinitionFloat("ro_z", 1, is_output=True)
 
 # Add definition for x-Basis readout
-circuit += ops.DefinitionBit("ro_x", 1, is_output=True)
+circuit += ops.DefinitionFloat("ro_x", 1, is_output=True)
 
 # The dictionary of the pauli matrix to measure for each qubit in the product in the form {qubit: pauli}.
 # Allowed values to be provided for 'pauli' are: 1 = PauliX, 2 = PauliY, 3 = PauliZ.
