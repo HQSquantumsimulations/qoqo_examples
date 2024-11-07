@@ -42,13 +42,13 @@ circuit += ops.PragmaGetPauliProduct(qubit_paulis=paulix_products, readout="ro_x
 # Preparing the measurement input for CheatedPauliZProductInput
 measurement_input = CheatedPauliZProductInput()
 # Next, pauli products are added to the CheatedPauliZProductInput
-x_basis_index = measurement_input.add_pauliz_product("ro_x")
 z_basis_index = measurement_input.add_pauliz_product("ro_z")
+x_basis_index = measurement_input.add_pauliz_product("ro_x")
 
 # Add a result (the expectation value of H) that is a combination of
 # the PauliProduct expectation values.
 measurement_input.add_linear_exp_val(
-    "<H>", {x_basis_index: 0.1, z_basis_index: 0.2},
+    "<H>", {z_basis_index: 0.1, x_basis_index: 0.2},
 )
 
 measurement = CheatedPauliZProduct(
