@@ -46,12 +46,11 @@ result = backend.run_circuit(circuit)
 print(result)
 
 # To visualise the results better, we can convert them into averages:
-(number_shots, number_modes) = result[0]["ro"].shape
-converted_results = np.zeros(number_modes, dtype=float)
-for line in result[0]["ro"]:
-    for i, mode in np.ndenumerate(line):
-        if mode is True:
-            converted_results[i] += 1
+(number_shots, number_modes) = result[1]['ro'].shape
 
-converted_results /= number_shots
-print(converted_results)
+converted_results = np.zeros(number_modes, dtype=float)
+for line in result[1]["ro"]:
+    converted_results += line
+
+converted_results /= float(number_shots)
+print(f"{number_shots:8d} {converted_results}")
