@@ -1,4 +1,4 @@
-# High-level interface: quantum programs
+# Quantum programs : High-Level Interface
 
 In the definition of qoqo/roqoqo, a quantum program accepts input from a user/calling function and runs operations on a quantum computer. It then returns an output in the form of expectation values, instead of raw output from the quantum computer. 
 To represent quantum programs qoqo/roqoqo provides `QuantumProgram`.

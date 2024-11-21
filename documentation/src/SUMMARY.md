@@ -8,7 +8,7 @@
   - [Readout](circuits/readout.md)
   - [Pragma Operations](circuits/pragma.md)
   - [Noise Operations](circuits/noise.md)
-- [High-Level Interface: Quantum Programs](high-level/intro.md)
+- [Quantum Programs: High-Level Interface](high-level/intro.md)
   - [PauliZProduct Measurement](high-level/pauliz.md)
   - [QuantumProgram and Variable-Replacement](high-level/program.md)
   - [ClassicalRegister Measurement](high-level/classical.md)
