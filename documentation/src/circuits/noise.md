@@ -1,8 +1,11 @@
 # Noise Operations
 
+
+[Comment: Perhaps it would be helpful to mention that there are two types of errors- noise operations and non-operations and  emphasize a bit more that `gate_time` is a dimensionless quantity, and that it is used in non-noise operation errors.]
+
 qoqo/roqoqo enables the user to construct finely controlled noise models. Noise acting on the quantum computer is modeled as noise operations acting on individual qubits in between each unitary gate applied on the quantum computer.
 
-The noise operations can be directly added to a quantum circuit and can be simulated by compatible backends. Since noise cannot be actively controlled on a quantum computer normally, the noise operations are defined as [Pragma](pragma.md) operations in qoqo/roqoqo. The strength of the noise is determined by defining a `gate_time` and a `rate`. The noise Pragma operation affects the system as a Lindblad type noise acting on the system with the rate `rate` for the time `gate_time`.
+The noise operations can be directly added to a quantum circuit and can be simulated by compatible backends. Since noise cannot be actively controlled on a quantum computer normally, the noise operations are defined as [Pragma](pragma.md) operations in qoqo/roqoqo. The strength of the noise is determined by defining a `gate_time` and a `rate`. The noise Pragma operation affects the system as a Lindblad type noise acting on the system with the rate, `rate`, for the time, `gate_time`.
 
 _Note_: as long as gate times and rates are scaled inversely any kind of units can be used.
 
@@ -67,13 +70,13 @@ The most general noise can be modeled in qoqo by the PragmaGeneralNoise operatio
  a & b & c \\\\
  d & e & f \\\\
  g & h & j \\\\
- \end{pmatrix}
-\\],
+ \end{pmatrix},
+\\]
 
 where the coefficients correspond to the following summands expanded from the first term of the non-coherent part of the Lindblad equation:
 \\[
- \frac{d}{dt}\rho = \sum_{i,j=0}^{2} M_{i,j} L_{i} \rho L_{j}^{\dagger} - \frac{1}{2} \{ L_{j}^{\dagger} L_i, \rho \}
-\\],
+ \frac{d}{dt}\rho = \sum_{i,j=0}^{2} M_{i,j} L_{i} \rho L_{j}^{\dagger} - \frac{1}{2} \{ L_{j}^{\dagger} L_i, \rho \},
+\\]
 
 with \\( L_0 = \sigma^{+} \\), \\( L_1 = \sigma^{-} \\) and \\( L_3 = \sigma_{z} \\).
 

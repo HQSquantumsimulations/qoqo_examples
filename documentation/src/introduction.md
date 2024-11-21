@@ -12,8 +12,8 @@ Like many quantum toolkits, qoqo and roqoqo are circuit-based toolkits, at the c
 
 In the majority of quantum computing applications, the output of several quantum circuits needs to be collected and processed using additional classical measurement input, in order to construct a usable measurement result (e.g. when using a quantum computer to simulate physical quantum systems).
 
-qoqo and roqoqo also provide tools to group quantum circuits and measurement input into a [QuantumProgram](high-level/intro.md). QuantumPrograms are designed as a high-level interface to quantum computations that can be used similar to standard function calls.
-QuantumPrograms accept floating point inputs, can be serialized, and only need qoqo/roqoqo and a simulator or a hardware backend to be executed.
+qoqo and roqoqo also provide tools to group quantum circuits and measurement input into a [QuantumProgram](high-level/intro.md). A `QuantumProgram` is a high-level interface to quantum computations that can be used like standard function calls.
+`QuantumProgram`s accept floating point inputs, support serialization, and only need qoqo/roqoqo and a simulator or a hardware backend to be executed.
 
 ### What roqoqo/qoqo is
 

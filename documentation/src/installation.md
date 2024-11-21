@@ -10,7 +10,7 @@ For pre-built wheels you can install qoqo with a simple pip command
 pip install qoqo
 ```
 
-If no pre-built python wheel is available for your architecture you can install qoqo from the source distribution using a rust toolchain (for example available via rustup) and maturin (also available via pip). After installing the rust toolchain and maturing run the same pip install command as above. In some cases on macOS it can be necessary to provide specific linker arguments as shown below:
+If no pre-built python wheel is available for your architecture you can install qoqo from the source distribution using a rust toolchain (for example available via rustup) and maturin (also available via pip). After installing the rust toolchain and maturin, run the same `pip install` command as above. Alternatively, `maturin develop` can be run during debugging and testing. In some cases on macOS it can be necessary to provide specific linker arguments as shown below:
 
 ```shell
 # can be necessary on macOS
