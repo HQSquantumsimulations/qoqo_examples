@@ -31,7 +31,15 @@ For examples how to construct measurement input and measurements see the pages f
 
 ## Variable replacement
 
-qoqo/roqoqo supports symbolic parameters in Operations, for example the rotation angles \\( \theta \\) in a `RotateX` gate operation. A `Circuit` with symbolic parameters cannot be executed on real hardware or simulated. The symbolic parameters need to be replaced with real floating point numbers first. A QuantumProgram contains a list of the free parameters (`input_parameter_names`).
+qoqo/roqoqo supports symbolic parameters in `Operations`, for example the rotation angles `"theta"` in a `RotateX` gate operation. 
+
+```python
+from qoqo import Circuit, operations as ops 
+circuit = Circuit()
+circuit += ops.RotateX(0, "theta")
+```
+
+A `Circuit` with symbolic parameters cannot be executed on real hardware or simulated. The symbolic parameters need to be replaced with real floating point numbers first. A `QuantumProgram` contains a list of the free parameters (`input_parameter_names`).
 When calling its `run` method, it replaces the free parameters with the given input, executes the measurement on the given backend and returns the result.
 
 For an example how to `run` a `QuantumProgram` [see here](program.md).

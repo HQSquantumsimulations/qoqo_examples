@@ -17,15 +17,15 @@ For the two basis states of a single qubit we define
  \left\| 0 \right>  =  \left|\textrm{false} \right> =  \left| \uparrow \right> = \begin{pmatrix}
  1 \\\\
  0
- \end{pmatrix} \\\\
- \\].
+ \end{pmatrix}\\:. \\\\
+ \\]
 
  \\[
  \left \|1 \right>  =  \left|\textrm{true} \right> =  \left| \downarrow \right> = \begin{pmatrix}
  0 \\\\
  1
- \end{pmatrix} \\\\
- \\].
+ \end{pmatrix} \\:.\\\\
+ \\]
 
 Before  any operations are applied in a circuit a quantum computer is always assumed to be in the zero state (all qubits in state `|0>`).
 
@@ -44,8 +44,8 @@ For a two-qubit state space we write the states of the qubits in the following o
  \left|00 \right>  =  \textrm{state} 0 \\\\
  \left|01 \right>  =  \textrm{state} 1 \\\\
  \left|10 \right>  =  \textrm{state} 2 \\\\
- \left|11 \right>  =  \textrm{state} 3 \\\\
- \\].
+ \left|11 \right>  =  \textrm{state} 3 \\:.\\\\
+ \\]
 
 ## Operation order
 
@@ -60,8 +60,8 @@ For a two-qubit state space we write the states of the qubits in the following o
  \end{pmatrix}  \begin{pmatrix}
  0 & 1 \\\\
  1 & 0
- \end{pmatrix}
- \\].
+ \end{pmatrix} \\:.
+ \\]
 
 ## Qubit naming
 
